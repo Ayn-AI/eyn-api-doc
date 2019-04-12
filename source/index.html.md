@@ -1,15 +1,12 @@
 ---
-title: API Reference
+title: EYN API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
   - python
-  - javascript
+  - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='mailto:sales@eyn.vision'>Request a Developer Key</a>
 
 includes:
   - errors
@@ -19,221 +16,143 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the EYN Developer API! You can use our API to access EYN's API endpoints, which can get information on enrolments in our database.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+We have language bindings in Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
+from warrant_lite import WarrantLite
+wl = WarrantLite(username=<username>, password=<password>, 
+                 pool_id=<cognito_pool_id>, client_id=<cognito_client_id>, 
+                 client_secret=None)
+tokens = wl.authenticate_user()
+headers = {'Accept': '*/*',
+           'Content-Type': 'application/json; charset=UTF-8',
+           'Authorization': tokens['AuthenticationResult']['IdToken']}
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+> Make sure to replace `username` and `password` with your AWS Cognito credentials. Replace `<cognito_pool_id>` with `eu-west-2_8ZNdnSazL` and `<cognito_client_id>` with `4sn0g6boc405tspau0lfl0aiba`.
 
-```javascript
-const kittn = require('kittn');
+EYN uses API keys to allow access to the API. Request a EYN API key [here](mailto:sales@eyn.vision).
 
-let api = kittn.authorize('meowmeowmeow');
-```
+<a href="#" onClick="MyWindow=window.open('http://www.google.com','MyWindow',width=600,height=300); return false;">Click Here</a>
 
-> Make sure to replace `meowmeowmeow` with your API key.
+ENY expects a API key to be included in all API requests to the server. Further, EYN API uses AWS Cognito to authenticate a user. EYN API expects a header to all API requests that looks like the following:
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`'Accept': '*/*'` <br>
+`'Content-Type': 'application/json; charset=UTF-8'` <br>
+`'Authorization': <Cognito Id Token>`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token</code> response when authenticating to AWS Cognito.
 </aside>
 
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
+# Enrolments
+## Get Enrolments
 ```python
-import kittn
+import requests
+parameters = {'start_time': 0,
+              'end_time': 1554389124,
+              'eyn_api_key': <your eyn api key>}
+headers = {'Accept': '*/*',
+           'Content-Type': 'application/json; charset=UTF-8',
+           'Authorization': <Cognito Id Token>}
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+response = requests.get('https://api.eyn-api.com/api/dev/v1/enrolments',
+                        params=parameters, headers=headers)
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "https://api.eyn-api.com/api/dev/v1/enrolments?
+    eyn_api_key=<your eyn api key>&
+    start_time=<start time>&
+    end_time=<end time>" 
+    -H "Authorization: <Cognito Id Token>"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{"enrolment_ids": [{"enrolment_id": <enrolment_id_1>},
+                   {"enrolment_id": <enrolment_id_2>},
+                   ...
+                   {"enrolment_id": <enrolment_id_n>}]}
 ```
 
-This endpoint retrieves all kittens.
+This endpoint returns a list of enrolment ids.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://api.eyn-api.com/api/dev/v1/enrolments`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+eyn_api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
+start_time | 0 | Optional | If ***start_time*** is set, then the response contains all enrolments from this point in time.
+end_time | request time | Optional | If ***end_time*** is set, then the response contains all enrolments up to this point in time.
 
+<!---
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+-->
 
-### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+## Get Information about a Specific Enrolment
 
 ```python
-import kittn
+import requests
+parameters = {'eyn_api_key': <your eyn api key>}
+headers = {'Accept': '*/*',
+           'Content-Type': 'application/json; charset=UTF-8',
+           'Authorization': <Cognito Id Token>}
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+response = requests.get('https://api.eyn-api.com/api/dev/v1/enrolments/<enrolment_id>',
+                        params=parameters, headers=headers)
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+curl "https://api.eyn-api.com/api/dev/v1/enrolments/<enrolment_id>?
+    eyn_api_key=<your eyn api key>" 
+    -H "Authorization: <Cognito Id Token>"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
+{"other_names" : "John",
+ "family_name" : "Doe",
+ "date_of_birth": "19700101",
+ "images" : {
+    "link_identity_document_chip_face": <link>, 
+    "link_identity_document_image_front": <link>,
+    "link_identity_document_image_mrz": <link>,
+    "link_user_selfie": <link>},
+  "right_to_work_status": "warn",
+  "mrz_verified": true, 
+  "is_biometric": true}
 ```
-
-This endpoint deletes a specific kitten.
+This endpoint returns information about a specific enrolment.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`GET https://api.eyn-api.com/api/dev/v1/enrolments/{enrolment_id}`
 
-### URL Parameters
+<aside class="notice">
+You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>).
+</aside>
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+### Query Parameters
 
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+eyn_api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
+enrolment_id | - | Required | The ***enrolment_id*** for that specific information is requested. An 'enrolment_id' can be retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>.
