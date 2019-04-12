@@ -39,8 +39,6 @@ headers = {'Accept': '*/*',
 
 EYN uses API keys to allow access to the API. Request a EYN API key [here](mailto:sales@eyn.vision).
 
-<a href="#" onClick="MyWindow=window.open('http://www.google.com','MyWindow',width=600,height=300); return false;">Click Here</a>
-
 ENY expects a API key to be included in all API requests to the server. Further, EYN API uses AWS Cognito to authenticate a user. EYN API expects a header to all API requests that looks like the following:
 
 `'Accept': '*/*'` <br>
