@@ -39,10 +39,10 @@ if __name__ == '__main__':
     print('[eyn-api-demo] Demo Get Enrolments')
 
     # Demo parameters - replace with your eyn credentials
-    username = "robin@eyn.vision" #"demo@eyn-api.com"   # replace with your username
-    password = "Thisisjusta#t3st" #"Def4ultP4ssw0rd!"   # replace with your password
-    cognito_pool_id = "eu-west-2_C949RROW5"             # replace with your cognito pool id
-    cognito_client_id = "2t8ltq7ecpfmr1snoah8d22bha"    # replace with your cognito client id
+    username = "demo@eyn-api.com"   # replace with your username
+    password = "Def4ultP4ssw0rd!"   # replace with your password
+    cognito_pool_id = ""            # replace with your cognito pool id
+    cognito_client_id = ""          # replace with your cognito client id
     
     # First, we have to authenticate to AWS Cognito
     tokens = do_authentication(username, password, cognito_pool_id, cognito_client_id)
