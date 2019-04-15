@@ -95,13 +95,11 @@ eyn_api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
 start_time | 0 | Optional | If ***start_time*** is set, then the response contains all enrolments from this point in time.
 end_time | request time | Optional | If ***end_time*** is set, then the response contains all enrolments up to this point in time.
 
-<!---
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+### Response Parameters
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
--->
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+enrolment_id |  uuid | An ***enrolment_id*** uniquely identifies an enrolment. 
 
 
 ## Get Information about a Specific Enrolment
@@ -154,3 +152,19 @@ Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 eyn_api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
 enrolment_id | - | Required | The ***enrolment_id*** for that specific information is requested. An 'enrolment_id' can be retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+other_names | string | The ***other_names*** parameter contains the given names of an enrolee  (including middle names).
+family_name | string | The ***family_name*** parameter contains the family name of an enrolee.
+date_of_birth | string | The ***date_of_birth*** parameter contains the date of birth of an enrolee. The returned value has a format of yyyymmdd.
+images | dict | The ***images*** parameter contains a list of public links to (a) the face of an enrolee extracted from the identity document's chip, (b) the front view of the identity document, (c) the MRZ of the identity document and (d) the selfie of an enrolee. Not all values must be present.
+right_to_work_status | string | The ***right_to_work_status*** parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {ok, warn, bad}.
+mrz_verified | Boolean | The ***mrz_verified*** parameter asserts if the scanned MRZ code is correct.
+is_biometric | Boolean | The ***is_biometric*** parameter asserts if the chip of the identity document has been read successfully.
+
+
+
+
