@@ -334,14 +334,20 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 <td>If <strong><em>end_time</em></strong> is set, then the response contains all enrolments up to this point in time.</td>
 </tr>
 </tbody></table>
-
-<!---
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
--->
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>enrolment_id</td>
+<td style="text-align: center">uuid</td>
+<td>An <strong><em>enrolment_id</em></strong> uniquely identifies an enrolment.</td>
+</tr>
+</tbody></table>
 <h2 id='get-information-about-a-specific-enrolment'>Get Information about a Specific Enrolment</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'eyn_api_key'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">eyn</span> <span class="n">api</span> <span class="n">key</span><span class="o">&gt;</span><span class="p">}</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
@@ -396,6 +402,50 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>enrolment_id</em></strong> for that specific information is requested. An &#39;enrolment_id&#39; can be retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-2'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>other_names</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>other_names</em></strong> parameter contains the given names of an enrolee  (including middle names).</td>
+</tr>
+<tr>
+<td>family_name</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>family_name</em></strong> parameter contains the family name of an enrolee.</td>
+</tr>
+<tr>
+<td>date_of_birth</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>date_of_birth</em></strong> parameter contains the date of birth of an enrolee. The returned value has a format of yyyymmdd.</td>
+</tr>
+<tr>
+<td>images</td>
+<td style="text-align: center">dict</td>
+<td>The <strong><em>images</em></strong> parameter contains a list of public links to (a) the face of an enrolee extracted from the identity document&#39;s chip, (b) the front view of the identity document, (c) the MRZ of the identity document and (d) the selfie of an enrolee. Not all values must be present.</td>
+</tr>
+<tr>
+<td>right_to_work_status</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>right_to_work_status</em></strong> parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {ok, warn, bad}.</td>
+</tr>
+<tr>
+<td>mrz_verified</td>
+<td style="text-align: center">Boolean</td>
+<td>The <strong><em>mrz_verified</em></strong> parameter asserts if the scanned MRZ code is correct.</td>
+</tr>
+<tr>
+<td>is_biometric</td>
+<td style="text-align: center">Boolean</td>
+<td>The <strong><em>is_biometric</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
