@@ -6,10 +6,11 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='mailto:sales@eyn.vision'>Request a Developer Key</a>
+  - <a href="mailto:sales@eyn.vision">Request a Developer Key</a>
 
 includes:
   - errors
+  - demos/demos
 
 search: true
 ---
@@ -60,12 +61,12 @@ headers = {'Accept': '*/*',
            'Content-Type': 'application/json; charset=UTF-8',
            'Authorization': <Cognito Id Token>}
 
-response = requests.get('https://api.eyn-api.com/api/dev/v1/enrolments',
+response = requests.get('https://api.eyn-api.com/api/v1/dev/enrolments',
                         params=parameters, headers=headers)
 ```
 
 ```shell
-curl "https://api.eyn-api.com/api/dev/v1/enrolments?
+curl "https://api.eyn-api.com/api/v1/dev/enrolments?
     eyn_api_key=<your eyn api key>&
     start_time=<start time>&
     end_time=<end time>" 
@@ -85,15 +86,15 @@ This endpoint returns a list of enrolment ids.
 
 ### HTTP Request
 
-`GET https://api.eyn-api.com/api/dev/v1/enrolments`
+`GET https://api.eyn-api.com/api/v1/dev/enrolments`
 
 ### Query Parameters
 
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 eyn_api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
-start_time | 0 | Optional | If ***start_time*** is set, then the response contains all enrolments from this point in time.
-end_time | request time | Optional | If ***end_time*** is set, then the response contains all enrolments up to this point in time.
+start_time | 0 | Optional | If ***start_time*** is set, then the response contains all enrolments from this point in time. ***start_time*** should be supplied as a *string* in UTC format in milliseconds.
+end_time | request time | Optional | If ***end_time*** is set, then the response contains all enrolments up to this point in time. ***end_time*** should be supplied as a *string* in UTC format in milliseconds.
 
 ### Response Parameters
 
@@ -111,12 +112,12 @@ headers = {'Accept': '*/*',
            'Content-Type': 'application/json; charset=UTF-8',
            'Authorization': <Cognito Id Token>}
 
-response = requests.get('https://api.eyn-api.com/api/dev/v1/enrolments/<enrolment_id>',
+response = requests.get('https://api.eyn-api.com/api/v1/dev/enrolments/<enrolment_id>',
                         params=parameters, headers=headers)
 ```
 
 ```shell
-curl "https://api.eyn-api.com/api/dev/v1/enrolments/<enrolment_id>?
+curl "https://api.eyn-api.com/api/v1/dev/enrolments/<enrolment_id>?
     eyn_api_key=<your eyn api key>" 
     -H "Authorization: <Cognito Id Token>"
 ```
@@ -140,7 +141,7 @@ This endpoint returns information about a specific enrolment.
 
 ### HTTP Request
 
-`GET https://api.eyn-api.com/api/dev/v1/enrolments/{enrolment_id}`
+`GET https://api.eyn-api.com/api/v1/dev/enrolments/{enrolment_id}`
 
 <aside class="notice">
 You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>).
