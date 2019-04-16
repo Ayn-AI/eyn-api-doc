@@ -239,9 +239,20 @@
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
+          <li>
+            <a href="#demos" class="toc-h1 toc-link" data-title="Demos">Demos</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#demo-get-enrolments" class="toc-h2 toc-link" data-title="Demo Get Enrolments">Demo Get Enrolments</a>
+                  </li>
+                  <li>
+                    <a href="#demo-get-information-about-a-specific-enrolment" class="toc-h2 toc-link" data-title="Demo Get Information about a Specific Enrolment">Demo Get Information about a Specific Enrolment</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='mailto:sales@eyn.vision'>Request a Developer Key</a></li>
+            <li><a href="mailto:sales@eyn.vision">Request a Developer Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -287,9 +298,9 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
            <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn-api.com/api/dev/v1/enrolments'</span><span class="p">,</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn-api.com/api/v1/dev/enrolments'</span><span class="p">,</span>
                         <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn-api.com/api/dev/v1/enrolments?
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn-api.com/api/v1/dev/enrolments?
     eyn_api_key=&lt;your eyn api key&gt;&amp;
     start_time=&lt;start time&gt;&amp;
     end_time=&lt;end time&gt;"</span> 
@@ -305,7 +316,7 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 </span></code></pre>
 <p>This endpoint returns a list of enrolment ids.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://api.eyn-api.com/api/dev/v1/enrolments</code></p>
+<p><code>GET https://api.eyn-api.com/api/v1/dev/enrolments</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -325,13 +336,13 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 <td>start_time</td>
 <td style="text-align: center">0</td>
 <td>Optional</td>
-<td>If <strong><em>start_time</em></strong> is set, then the response contains all enrolments from this point in time.</td>
+<td>If <strong><em>start_time</em></strong> is set, then the response contains all enrolments from this point in time. <strong><em>start_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
 </tr>
 <tr>
 <td>end_time</td>
 <td style="text-align: center">request time</td>
 <td>Optional</td>
-<td>If <strong><em>end_time</em></strong> is set, then the response contains all enrolments up to this point in time.</td>
+<td>If <strong><em>end_time</em></strong> is set, then the response contains all enrolments up to this point in time. <strong><em>end_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters'>Response Parameters</h3>
@@ -354,9 +365,9 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
            <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn-api.com/api/dev/v1/enrolments/&lt;enrolment_id&gt;'</span><span class="p">,</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn-api.com/api/v1/dev/enrolments/&lt;enrolment_id&gt;'</span><span class="p">,</span>
                         <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn-api.com/api/dev/v1/enrolments/&lt;enrolment_id&gt;?
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn-api.com/api/v1/dev/enrolments/&lt;enrolment_id&gt;?
     eyn_api_key=&lt;your eyn api key&gt;"</span> 
     -H <span class="s2">"Authorization: &lt;Cognito Id Token&gt;"</span>
 </code></pre>
@@ -377,7 +388,7 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 </span></code></pre>
 <p>This endpoint returns information about a specific enrolment.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://api.eyn-api.com/api/dev/v1/enrolments/{enrolment_id}</code></p>
+<p><code>GET https://api.eyn-api.com/api/v1/dev/enrolments/{enrolment_id}</code></p>
 
 <aside class="notice">
 You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. retrieved via <a href="#get-enrolments" style="text-decoration: none"><code>/enrolment</code></a>).
@@ -470,6 +481,134 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+<h1 id='demos'>Demos</h1>
+<p>The EYN API includes the following demos:</p>
+
+<p><a href="#demo-get-enrolments" style="text-decoration: none"><code>Demo Get Enrolments</code></a><br>
+<a href="#Demo-get-information-about-a-specific-enrolment" style="text-decoration: none"><code>Demo Get Information about a Specific Enrolment</code></a></p>
+<h2 id='demo-get-enrolments'>Demo Get Enrolments</h2><pre class="highlight python tab-python"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Demo Get Enrolments'</span><span class="p">)</span>
+
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@eyn-api.com"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>   <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>          <span class="c"># replace with your cognito client id</span>
+
+    <span class="c"># First, we have to authenticate to AWS Cognito</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">)</span>
+</code></pre>
+<p>You can download the demo file <a href="/includes/demos/demo_get_enrolments.py">demo_get_enrolments.py</a>.
+This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Enrolments</a> endpoint. </p>
+
+<p>The entry point of the demo is <code>if __name__ == &#39;__main__&#39;:</code></p>
+
+<aside class="notice">
+Make sure that you replace <code>username</code>,  <code>password</code>,  <code>cognito_pool_id</code> and  <code>cognito_client_id</code> with the credentials supplied by EYN.
+</aside>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">):</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">WarrantLite</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                     <span class="n">pool_id</span><span class="o">=</span><span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">cognito_client_id</span><span class="p">,</span>
+                     <span class="n">client_secret</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+</code></pre>
+<p>For every call to EYN&#39;s API you have to authenticate to AWS Cognito. In the demo this is done via
+<code>do_authentication(username, password, cognito_pool_id, cognito_client_id)</code></p>
+
+<p>Authentication can be done via <code>warrant-lite</code>. (To install run <code>pip install warrant-lite</code>.) After successful authentication, warrent-lite returns the authentication tokens.</p>
+<pre class="highlight python tab-python"><code><span class="n">req_auth_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+                    <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+                    <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
+<span class="c"># Now, we can query EYN API to get a list of enrolments</span>
+<span class="n">enrolment_ids</span> <span class="o">=</span> <span class="n">get_enrolments</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">)</span>
+</code></pre>
+<p>You can create the autorisation headers using the authentication tokens. Then, we can query EYN&#39;s API endpoint <a href="#get-enrolments" style="text-decoration: none">/enrolments</a> via <code>get_enrolments(req_auth_headers)</code>.</p>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">get_enrolments</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">):</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                  <span class="s">'end_time'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">s'</span><span class="p">))</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span>
+                  <span class="s">'eyn_api_key'</span><span class="p">:</span> <span class="s">'4f37a768-887f-427c-a784-95a818e60319'</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/dev/enrolments'</span><span class="p">,</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">req_auth_headers</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">enrolment_ids</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">"enrolment_ids"</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">enrolment_ids</span>
+</code></pre>
+<p>You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>start_time = 0</code> and <code>end_time = &lt;current_time_stamp&gt;</code> to retrieve a list of all enrolments.</p>
+<pre class="highlight python tab-python"><code><span class="c"># Let's print the list of enrolments that we retrieved</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">enrolment_id</span> <span class="ow">in</span> <span class="n">enrolment_ids</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'enrolment_id :'</span> <span class="o">+</span> <span class="n">enrolment_id</span><span class="p">[</span><span class="s">"enrolment_id"</span><span class="p">])</span>
+</code></pre>
+<p>Finally, you can use the returned enrolment_ids in your application. (The demo solely prints the retrieved list of enrolment ids.)</p>
+<h2 id='demo-get-information-about-a-specific-enrolment'>Demo Get Information about a Specific Enrolment</h2><pre class="highlight python tab-python"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Demo Get Enrolments'</span><span class="p">)</span>
+
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@eyn-api.com"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>   <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>          <span class="c"># replace with your cognito client id</span>
+
+    <span class="c"># First, we have to authenticate to AWS Cognito</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">)</span>
+</code></pre>
+<p>You can download the demo file <a href="/includes/demos/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>.
+This demo will show you how to query the <a href="#get-information-about-a-specific-enrolment" style="text-decoration: none">Get Information about a Specific Enrolment</a> endpoint. </p>
+
+<p>The entry point of the demo is <code>if __name__ == &#39;__main__&#39;:</code></p>
+
+<aside class="notice">
+Make sure that you replace <code>username</code>,  <code>password</code>,  <code>cognito_pool_id</code> and  <code>cognito_client_id</code> with the credentials supplied by EYN.
+</aside>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">):</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">WarrantLite</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                     <span class="n">pool_id</span><span class="o">=</span><span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">cognito_client_id</span><span class="p">,</span>
+                     <span class="n">client_secret</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+</code></pre>
+<p>For every call to EYN&#39;s API you have to authenticate to AWS Cognito. In the demo this is done via
+<code>do_authentication(username, password, cognito_pool_id, cognito_client_id)</code></p>
+
+<p>Authentication can be done via <code>warrant-lite</code>. (To install run <code>pip install warrant-lite</code>.) After successful authentication, warrent-lite returns the authentication tokens.</p>
+<pre class="highlight python tab-python"><code><span class="n">req_auth_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+                    <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+                    <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
+<span class="c"># Now, we can query EYN API to get specific information about an enrolment</span>
+<span class="n">enrolment_info</span> <span class="o">=</span> <span class="n">get_specific_enrolment_info</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="s">'d7bd8751-ea88-4e82-94d8-4940cc07eea8'</span><span class="p">)</span>
+</code></pre>
+<p>You can create the autorisation headers using the authentication tokens. Then, we can query EYN&#39;s API endpoint <a href="#get-information-about-a-specific-enrolment" style="text-decoration: none">/enrolments/{id}</a> via <code>get_specific_enrolment_info(req_auth_headers, &#39;d7bd8751-ea88-4e82-94d8-4940cc07eea8&#39;)</code>.</p>
+
+<aside class="notice">
+Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrieved via <a href="#get-enrolments" style="text-decoration: none">/enrolments</a>).
+</aside>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">get_specific_enrolment_info</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">enrolment_id</span><span class="p">):</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'eyn_api_key'</span><span class="p">:</span> <span class="s">'4f37a768-887f-427c-a784-95a818e60319'</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/dev/enrolments'</span> <span class="o">+</span> <span class="n">enrolment_id</span><span class="p">,</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">req_auth_headers</span><span class="p">)</span>
+    <span class="n">enrolment_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">enrolment_info</span>
+</code></pre>
+<p>You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>enrolment_id = &lt;a valid enrolment id&gt;</code> to retrieve specific information about that enrolment.</p>
+<pre class="highlight python tab-python"><code><span class="c"># Let's print the information that we retrieved</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments/d7bd8751-ea88-4e82-94d8-4940cc07eea8:'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'other_names: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"other_names"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'family_name: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"family_name"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'date_of_birth: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"date_of_birth"</span><span class="p">])</span>
+<span class="k">if</span> <span class="s">"link_identity_document_chip_face"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_chip_face: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_chip_face"</span><span class="p">])</span>
+<span class="k">if</span> <span class="s">"link_identity_document_image_front"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_front: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_front"</span><span class="p">])</span>
+<span class="k">if</span> <span class="s">"link_identity_document_image_mrz"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_mrz: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_mrz"</span><span class="p">])</span>
+<span class="k">if</span> <span class="s">"link_user_selfie"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'link_user_selfie: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_user_selfie"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'right_to_work_status: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"right_to_work_status"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'mrz_verified: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"mrz_verified"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'is_biometric: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"is_biometric"</span><span class="p">]))</span>
+</code></pre>
+<p>Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)</p>
 
       </div>
       <div class="dark-box">
