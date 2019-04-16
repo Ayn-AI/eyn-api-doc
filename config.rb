@@ -1,6 +1,8 @@
 # Unique header generation
 require './lib/unique_head.rb'
 
+ignore "/includes/demos/venv"
+
 # Markdown
 set :markdown_engine, :redcarpet
 set :markdown,

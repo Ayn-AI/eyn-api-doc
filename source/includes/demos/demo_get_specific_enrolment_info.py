@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 #
 # Demo Get Specific Enrolment Info
@@ -8,7 +7,8 @@
 #   Requirements:
 #       * warrant-lite (pip install warrant-lite)
 #
-# Eyn API is available at https://api.eyn.ninja. Documentation of the API is available at xxx
+# Eyn API is available at https://api.eyn.ninja. Documentation of the API is
+# available at xxx.
 # (c) 2019 eyn ltd
 
 from warrant_lite import WarrantLite
@@ -16,6 +16,18 @@ import requests
 import json
 
 def do_authentication(username, password, cognito_pool_id, cognito_client_id):
+    """ authenticates to AWS Cognito via eyn's credentials and returns
+        authentication tokens
+
+        params:
+            username (str): username to authenticate (supplied by EYN)
+            password (str): password to authenticate (supplied by EYN)
+            cognito_pool_id (str): AWS cognito user pool id
+            cognito_client_id (str): AWS cognito app client id
+
+        returns:
+            (dict): authentication tokens
+    """
     wl = WarrantLite(username=username, password=password,
                      pool_id=cognito_pool_id, client_id=cognito_client_id,
                      client_secret=None)
@@ -23,6 +35,18 @@ def do_authentication(username, password, cognito_pool_id, cognito_client_id):
     return tokens
 
 def get_specific_enrolment_info(req_auth_headers, enrolment_id):
+    """ queries the EYN API's /enrolments/{id} endpoint to retrieve specific
+        information about an enrolment with id = {id}
+
+        params:
+            req_auth_headers (dict): authentication headers containing
+                                     autorisation token
+            enrolment_id (str): id of the specific enrolment we want to extract
+                                information from
+
+        returns:
+            (dict): specific enrolment information
+    """
     parameters = {'eyn_api_key': '4f37a768-887f-427c-a784-95a818e60319'}
     # 'https://api.eyn.ninja/api/v1/dev/enrolments',
     response = requests.get('https://api.eyn-api.com/api/v1/dev/enrolments/' + enrolment_id,
@@ -34,7 +58,7 @@ def get_specific_enrolment_info(req_auth_headers, enrolment_id):
 if __name__ == '__main__':
     print('[eyn-api-demo] Demo Get Specific Enrolment Info.')
 
-    # Demo parameters - replace with your eyn credentials
+    # TODO: Demo parameters - replace with your eyn credentials
     username = "demo@eyn-api.com"   # replace with your username
     password = "Def4ultP4ssw0rd!"   # replace with your password
     cognito_pool_id = ""            # replace with your cognito pool id
