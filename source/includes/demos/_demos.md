@@ -120,6 +120,10 @@ enrolment_info = get_specific_enrolment_info(req_auth_headers, 'd7bd8751-ea88-4e
 ```
 You can create the autorisation headers using the authentication tokens. Then, we can query EYN's API endpoint <a href="#get-information-about-a-specific-enrolment" style="text-decoration: none">/enrolments/{id}</a> via `get_specific_enrolment_info(req_auth_headers, 'd7bd8751-ea88-4e82-94d8-4940cc07eea8')`.
 
+<aside class="notice">
+Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrieved via <a href="#get-enrolments" style="text-decoration: none">/enrolments</a>).
+</aside>
+
 ```python
 def get_specific_enrolment_info(req_auth_headers, enrolment_id):
     parameters = {'eyn_api_key': '4f37a768-887f-427c-a784-95a818e60319'}
