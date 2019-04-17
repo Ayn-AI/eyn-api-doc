@@ -33,12 +33,12 @@ This demo will show you how to query the <a href="#get-enrolments" style="text-d
 
 (3) You shall see a demo response like this.
 
-```json
+```python
 (3)
-{"enrolment_ids": [{"enrolment_id": "e59fd87e-de87-48d8-9c5d-3ca99efb846f"},
-                   {"enrolment_id": "007b77f9-06e1-4bf2-ae3c-9dd3c937bbe5"}
-                    ...
-                  ]}
+enrolment_id :a987259c-bbbb-4b26-926e-b3e6ab64620d
+enrolment_id :64897f67-c798-40c6-8ba6-fbf888892b3a
+enrolment_id :764a4755-79e5-4678-9b11-268b0136fcb6
+enrolment_id :a62749cd-5a5b-4723-a8b4-e18a674489c3
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
@@ -158,19 +158,18 @@ python demo_get_specific_enrolment_info.py
 
 (3) You shall see a demo response like this:
 
-```json
+```python
 (3)
-{"other_names" : "John",
- "family_name" : "Doe",
- "date_of_birth": "19700101",
- "images" : {
-    "link_identity_document_chip_face": <link>, 
-    "link_identity_document_image_front": <link>,
-    "link_identity_document_image_mrz": <link>,
-    "link_user_selfie": <link>},
-  "right_to_work_status": "warn",
-  "mrz_verified": true, 
-  "is_biometric": true}
+other_names: MOHAMED
+family_name: BEN ARBIA
+date_of_birth: 19910205
+link_identity_document_chip_face: <link>
+link_identity_document_image_front: <link>
+link_identity_document_image_mrz: <link>
+link_user_selfie: <link>
+right_to_work_status: warn
+mrz_verified: True
+is_biometric: False
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
