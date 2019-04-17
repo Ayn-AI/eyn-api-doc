@@ -20,7 +20,7 @@ if __name__ == '__main__':
     tokens = do_authentication(username, password, cognito_pool_id, cognito_client_id)
 ```
 
-You can download the demo file <a href="/includes/demos/demo_get_enrolments.py">demo_get_enrolments.py</a>.
+You can download the demo file <a href="demo_get_enrolments.py">demo_get_enrolments.py</a>.
 This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Enrolments</a> endpoint. 
 
 The entry point of the demo is `if __name__ == '__main__':`
