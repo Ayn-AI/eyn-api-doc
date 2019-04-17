@@ -512,12 +512,12 @@ This demo will show you how to query the <a href="#get-enrolments" style="text-d
  <span class="n">python</span> <span class="n">demo_get_enrolments</span><span class="o">.</span><span class="n">py</span>
 </code></pre>
 <p>(3) You shall see a demo response like this.</p>
-<pre class="highlight json tab-json"><code><span class="err">(</span><span class="mi">3</span><span class="err">)</span><span class="w">
-</span><span class="p">{</span><span class="s2">"enrolment_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e59fd87e-de87-48d8-9c5d-3ca99efb846f"</span><span class="p">},</span><span class="w">
-                   </span><span class="p">{</span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007b77f9-06e1-4bf2-ae3c-9dd3c937bbe5"</span><span class="p">}</span><span class="w">
-                    </span><span class="err">...</span><span class="w">
-                  </span><span class="p">]}</span><span class="w">
-</span></code></pre>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">enrolment_id</span> <span class="p">:</span><span class="n">a987259c</span><span class="o">-</span><span class="n">bbbb</span><span class="o">-</span><span class="mi">4</span><span class="n">b26</span><span class="o">-</span><span class="mi">926</span><span class="n">e</span><span class="o">-</span><span class="n">b3e6ab64620d</span>
+<span class="n">enrolment_id</span> <span class="p">:</span><span class="mi">64897</span><span class="n">f67</span><span class="o">-</span><span class="n">c798</span><span class="o">-</span><span class="mi">40</span><span class="n">c6</span><span class="o">-</span><span class="mi">8</span><span class="n">ba6</span><span class="o">-</span><span class="n">fbf888892b3a</span>
+<span class="n">enrolment_id</span> <span class="p">:</span><span class="mi">764</span><span class="n">a4755</span><span class="o">-</span><span class="mf">79e5</span><span class="o">-</span><span class="mi">4678</span><span class="o">-</span><span class="mi">9</span><span class="n">b11</span><span class="o">-</span><span class="mi">268</span><span class="n">b0136fcb6</span>
+<span class="n">enrolment_id</span> <span class="p">:</span><span class="n">a62749cd</span><span class="o">-</span><span class="mi">5</span><span class="n">a5b</span><span class="o">-</span><span class="mi">4723</span><span class="o">-</span><span class="n">a8b4</span><span class="o">-</span><span class="n">e18a674489c3</span>
+</code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
 the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_enrolments.py">demo_get_enrolments.py</a>.</p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -607,19 +607,18 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 <span class="n">python</span> <span class="n">demo_get_specific_enrolment_info</span><span class="o">.</span><span class="n">py</span>
 </code></pre>
 <p>(3) You shall see a demo response like this:</p>
-<pre class="highlight json tab-json"><code><span class="err">(</span><span class="mi">3</span><span class="err">)</span><span class="w">
-</span><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
-    </span><span class="s2">"link_identity_document_image_front"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"link_identity_document_image_mrz"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"link_user_selfie"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">},</span><span class="w">
-  </span><span class="s2">"right_to_work_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mrz_verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"is_biometric"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">other_names</span><span class="p">:</span> <span class="n">MOHAMED</span>
+<span class="n">family_name</span><span class="p">:</span> <span class="n">BEN</span> <span class="n">ARBIA</span>
+<span class="n">date_of_birth</span><span class="p">:</span> <span class="mi">19910205</span>
+<span class="n">link_identity_document_chip_face</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
+<span class="n">link_identity_document_image_front</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
+<span class="n">link_identity_document_image_mrz</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
+<span class="n">link_user_selfie</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
+<span class="n">right_to_work_status</span><span class="p">:</span> <span class="n">warn</span>
+<span class="n">mrz_verified</span><span class="p">:</span> <span class="bp">True</span>
+<span class="n">is_biometric</span><span class="p">:</span> <span class="bp">False</span>
+</code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
 the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
