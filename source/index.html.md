@@ -35,7 +35,7 @@ Got more time? Continue exploring the API documentation below. In the following,
 from warrant_lite import WarrantLite
 wl = WarrantLite(username=<username>, password=<password>, 
                  pool_id=<cognito_pool_id>, client_id=<cognito_client_id>, 
-                 client_secret=None)
+                 client_secret=None, pool_region="eu-west-2")
 tokens = wl.authenticate_user()
 headers = {'Accept': '*/*',
            'Content-Type': 'application/json; charset=UTF-8',
