@@ -266,7 +266,7 @@
 
 <p>We have language bindings in Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='quickstart'>Quickstart</h1>
-<p>TLDR;? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.</p>
+<p>TL;DR? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.</p>
 
 <p>Got more time? Continue exploring the API documentation below. In the following, we&#39;ll explain every API endpoint, the query and response parameters and give code examples how to query our endpoints and sample responses. As mentioned above, we provide demos which you can run to see how to query the endpoints in more detail. Any more questions --- let us know at <a href="mailto:developers@eyn.vision">developers@eyn.vision</a>.</p>
 <h1 id='authentication'>Authentication</h1>
@@ -390,8 +390,9 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
     </span><span class="s2">"link_identity_document_image_mrz"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
     </span><span class="s2">"link_user_selfie"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">},</span><span class="w">
   </span><span class="s2">"right_to_work_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"mrz_verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-  </span><span class="s2">"is_biometric"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+  </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns information about a specific enrolment.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -456,14 +457,9 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>right_to_work_status</em></strong> parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {ok, warn, bad}.</td>
 </tr>
 <tr>
-<td>mrz_verified</td>
-<td style="text-align: center">Boolean</td>
-<td>The <strong><em>mrz_verified</em></strong> parameter asserts if the scanned MRZ code is correct.</td>
-</tr>
-<tr>
-<td>is_biometric</td>
-<td style="text-align: center">Boolean</td>
-<td>The <strong><em>is_biometric</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
+<td>document_checks</td>
+<td style="text-align: center">dict</td>
+<td>The <strong><em>document_checks</em></strong> parameter contains a list of boolean document checks where (a) <strong><em>mrz_check</em></strong> parameter asserts if the scanned MRZ code is correct and (b) <strong><em>is_biometric</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
@@ -608,16 +604,17 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 </code></pre>
 <p>(3) You shall see a demo response like this:</p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">other_names</span><span class="p">:</span> <span class="n">MOHAMED</span>
-<span class="n">family_name</span><span class="p">:</span> <span class="n">BEN</span> <span class="n">ARBIA</span>
-<span class="n">date_of_birth</span><span class="p">:</span> <span class="mi">19910205</span>
-<span class="n">link_identity_document_chip_face</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
-<span class="n">link_identity_document_image_front</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
-<span class="n">link_identity_document_image_mrz</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
-<span class="n">link_user_selfie</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span>
-<span class="n">right_to_work_status</span><span class="p">:</span> <span class="n">warn</span>
-<span class="n">mrz_verified</span><span class="p">:</span> <span class="bp">True</span>
-<span class="n">is_biometric</span><span class="p">:</span> <span class="bp">False</span>
+<span class="p">{</span><span class="s">"other_names"</span><span class="p">:</span> <span class="s">"MOHAMED"</span><span class="p">,</span>
+<span class="s">"family_name"</span><span class="p">:</span> <span class="s">"BEN ARBIA"</span><span class="p">,</span>
+<span class="s">"date_of_birth"</span><span class="p">:</span> <span class="s">"19910205"</span><span class="p">,</span>
+<span class="s">"images"</span> <span class="p">:</span> <span class="p">{</span><span class="s">"link_identity_document_chip_face"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
+<span class="s">"link_identity_document_image_front"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
+<span class="s">"link_identity_document_image_mrz"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
+<span class="s">"link_user_selfie"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
+<span class="s">"right_to_work_status"</span><span class="p">:</span> <span class="s">"warn"</span><span class="p">,</span> 
+  <span class="s">"document_checks"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"mrz_check"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> 
+    <span class="s">"chip_check"</span><span class="p">:</span> <span class="n">true</span><span class="p">}}</span>
 </code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
 the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
@@ -695,8 +692,8 @@ Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrie
 <span class="k">if</span> <span class="s">"link_user_selfie"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'link_user_selfie: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_user_selfie"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'right_to_work_status: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"right_to_work_status"</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'mrz_verified: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"mrz_verified"</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'is_biometric: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"is_biometric"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'mrz_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"mrz_check"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'chip_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"chip_check"</span><span class="p">]))</span>
 </code></pre>
 <p>(5) Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)</p>
 
