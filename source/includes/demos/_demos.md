@@ -160,16 +160,17 @@ python demo_get_specific_enrolment_info.py
 
 ```python
 (3)
-other_names: MOHAMED
-family_name: BEN ARBIA
-date_of_birth: 19910205
-link_identity_document_chip_face: <link>
-link_identity_document_image_front: <link>
-link_identity_document_image_mrz: <link>
-link_user_selfie: <link>
-right_to_work_status: warn
-mrz_verified: True
-is_biometric: False
+{"other_names": "MOHAMED",
+"family_name": "BEN ARBIA",
+"date_of_birth": "19910205",
+"images" : {"link_identity_document_chip_face": "<link>",
+"link_identity_document_image_front": "<link>",
+"link_identity_document_image_mrz": "<link>",
+"link_user_selfie": "<link>",
+"right_to_work_status": "warn", 
+  "document_checks": {
+    "mrz_check": true, 
+    "chip_check": true}}
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
@@ -266,8 +267,8 @@ if "link_identity_document_image_mrz" in enrolment_info["images"]:
 if "link_user_selfie" in enrolment_info["images"]:
     print('link_user_selfie: ' + enrolment_info["images"]["link_user_selfie"])
 print('right_to_work_status: ' + enrolment_info["right_to_work_status"])
-print('mrz_verified: ' + str(enrolment_info["mrz_verified"]))
-print('is_biometric: ' + str(enrolment_info["is_biometric"]))
+print('mrz_check: ' + str(enrolment_info["document_checks"]["mrz_check"]))
+print('chip_check: ' + str(enrolment_info["document_checks"]["chip_check"]))
 ```
 
 (5) Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)

@@ -23,7 +23,7 @@ We have language bindings in Python! You can view code examples in the dark area
 
 # Quickstart
 
-TLDR;? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.
+TL;DR? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.
 
 Got more time? Continue exploring the API documentation below. In the following, we'll explain every API endpoint, the query and response parameters and give code examples how to query our endpoints and sample responses. As mentioned above, we provide demos which you can run to see how to query the endpoints in more detail. Any more questions --- let us know at <a href="mailto:developers@eyn.vision">developers@eyn.vision</a>.
 
@@ -140,8 +140,9 @@ curl "https://api.eyn-api.com/api/v1/dev/enrolments/<enrolment_id>?
     "link_identity_document_image_mrz": <link>,
     "link_user_selfie": <link>},
   "right_to_work_status": "warn",
-  "mrz_verified": true, 
-  "is_biometric": true}
+  "document_checks": {
+    "mrz_check": true, 
+    "chip_check": true}}
 ```
 This endpoint returns information about a specific enrolment.
 
@@ -169,9 +170,4 @@ family_name | string | The ***family_name*** parameter contains the family name 
 date_of_birth | string | The ***date_of_birth*** parameter contains the date of birth of an enrolee. The returned value has a format of yyyymmdd.
 images | dict | The ***images*** parameter contains a list of public links to (a) the face of an enrolee extracted from the identity document's chip, (b) the front view of the identity document, (c) the MRZ of the identity document and (d) the selfie of an enrolee. Not all values must be present.
 right_to_work_status | string | The ***right_to_work_status*** parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {ok, warn, bad}.
-mrz_verified | Boolean | The ***mrz_verified*** parameter asserts if the scanned MRZ code is correct.
-is_biometric | Boolean | The ***is_biometric*** parameter asserts if the chip of the identity document has been read successfully.
-
-
-
-
+document_checks | dict | The ***document_checks*** parameter contains a list of boolean document checks where (a) ***mrz_check*** parameter asserts if the scanned MRZ code is correct and (b) ***is_biometric*** parameter asserts if the chip of the identity document has been read successfully.
