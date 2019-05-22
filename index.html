@@ -454,12 +454,12 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <tr>
 <td>right_to_work_status</td>
 <td style="text-align: center">string</td>
-<td>The <strong><em>right_to_work_status</em></strong> parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {ok, warn, bad}.</td>
+<td>The <strong><em>right_to_work_status</em></strong> parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {passed, warn, failed}.</td>
 </tr>
 <tr>
 <td>document_checks</td>
 <td style="text-align: center">dict</td>
-<td>The <strong><em>document_checks</em></strong> parameter contains a list of boolean document checks where (a) <strong><em>mrz_check</em></strong> parameter asserts if the scanned MRZ code is correct and (b) <strong><em>is_biometric</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
+<td>The <strong><em>document_checks</em></strong> parameter contains a list of boolean document checks where (a) <strong><em>mrz_check</em></strong> parameter asserts if the scanned MRZ code is correct and (b) <strong><em>chip_check</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
