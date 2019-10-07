@@ -164,7 +164,9 @@ python demo_get_specific_enrolment_info.py
 (3)
 {"other_names": "MOHAMED",
 "family_name": "BEN ARBIA",
-"date_of_birth": "19910205",
+"date_of_birth": "<date>",
+"nationality": "TUN",
+"document_expiry_date": "<date>",
 "images" : {"link_identity_document_chip_face": "<link>",
 "link_identity_document_image_front": "<link>",
 "link_identity_document_image_mrz": "<link>",
@@ -262,6 +264,8 @@ print('[eyn-api-demo] Results of querying /enrolments/d7bd8751-ea88-4e82-94d8-49
 print('other_names: ' + enrolment_info["other_names"])
 print('family_name: ' + enrolment_info["family_name"])
 print('date_of_birth: ' + enrolment_info["date_of_birth"])
+print('nationality: ' + enrolment_info["nationality"])
+print('document_expiry_date: ' + enrolment_info["document_expiry_date"])
 if "link_identity_document_chip_face" in enrolment_info["images"]:
     print('link_identity_document_chip_face: ' + enrolment_info["images"]["link_identity_document_chip_face"])
 if "link_identity_document_image_front" in enrolment_info["images"]:
