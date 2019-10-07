@@ -384,6 +384,8 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUT"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20420101"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"link_identity_document_image_front"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
@@ -445,6 +447,16 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>date_of_birth</td>
 <td style="text-align: center">string</td>
 <td>The <strong><em>date_of_birth</em></strong> parameter contains the date of birth of an enrolee. The returned value has a format of yyyymmdd.</td>
+</tr>
+<tr>
+<td>nationality</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>nationality</em></strong> parameter contains the nationality of an enrolee.</td>
+</tr>
+<tr>
+<td>document_expiry_date</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>document_expiry_date</em></strong> parameter contains the expiration date of the enrolee&#39;s identity document. The returned value has a format of yyyymmdd.</td>
 </tr>
 <tr>
 <td>images</td>
@@ -608,7 +620,9 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">{</span><span class="s">"other_names"</span><span class="p">:</span> <span class="s">"MOHAMED"</span><span class="p">,</span>
 <span class="s">"family_name"</span><span class="p">:</span> <span class="s">"BEN ARBIA"</span><span class="p">,</span>
-<span class="s">"date_of_birth"</span><span class="p">:</span> <span class="s">"19910205"</span><span class="p">,</span>
+<span class="s">"date_of_birth"</span><span class="p">:</span> <span class="s">"&lt;date&gt;"</span><span class="p">,</span>
+<span class="s">"nationality"</span><span class="p">:</span> <span class="s">"TUN"</span><span class="p">,</span>
+<span class="s">"document_expiry_date"</span><span class="p">:</span> <span class="s">"&lt;date&gt;"</span><span class="p">,</span>
 <span class="s">"images"</span> <span class="p">:</span> <span class="p">{</span><span class="s">"link_identity_document_chip_face"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
 <span class="s">"link_identity_document_image_front"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
 <span class="s">"link_identity_document_image_mrz"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
@@ -687,6 +701,8 @@ Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrie
 <span class="k">print</span><span class="p">(</span><span class="s">'other_names: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"other_names"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'family_name: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"family_name"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'date_of_birth: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"date_of_birth"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'nationality: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"nationality"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'document_expiry_date: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_expiry_date"</span><span class="p">])</span>
 <span class="k">if</span> <span class="s">"link_identity_document_chip_face"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_chip_face: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_chip_face"</span><span class="p">])</span>
 <span class="k">if</span> <span class="s">"link_identity_document_image_front"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
