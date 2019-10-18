@@ -135,6 +135,7 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
  "family_name" : "Doe",
  "date_of_birth": "19700101",
  "nationality": "AUT",
+ "document_type": "P",
  "document_expiry_date": "20420101",
  "images" : {
     "link_identity_document_chip_face": <link>, 
@@ -142,9 +143,17 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
     "link_identity_document_image_mrz": <link>,
     "link_user_selfie": <link>},
   "right_to_work_status": "warn",
+  "biometric_checks": {
+    "face_matching_score": 92.33,
+    "face_matching_status": "passed",
+    "model_used": "torch"},
   "document_checks": {
     "mrz_check": true, 
-    "chip_check": true}}
+    "chip_check": true},
+  "checked_by": "user1@companydomain.com"
+  "checked_at: {
+    "site_id": "site_id_<number>"
+    "site_name":"site_name" }}
 ```
 This endpoint returns information about a specific enrolment.
 
@@ -171,7 +180,11 @@ other_names | string | The ***other_names*** parameter contains the given names 
 family_name | string | The ***family_name*** parameter contains the family name of an enrolee.
 date_of_birth | string | The ***date_of_birth*** parameter contains the date of birth of an enrolee. The returned value has a format of yyyymmdd.
 nationality | string | The ***nationality*** parameter contains the nationality of an enrolee.
+document_type | string | The ***document_type*** parameter contains the document type of the identity document.
 document_expiry_date | string | The ***document_expiry_date*** parameter contains the expiration date of the enrolee's identity document. The returned value has a format of yyyymmdd.
 images | dict | The ***images*** parameter contains a list of public links to (a) the face of an enrolee extracted from the identity document's chip, (b) the front view of the identity document, (c) the MRZ of the identity document and (d) the selfie of an enrolee. Not all values must be present.
 right_to_work_status | string | The ***right_to_work_status*** parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {passed, warn, failed}.
+biometric_checks | dict | The ***biometric_checks*** parameter contains a list of biometric checks where (a) ***face_matching_score*** parameter represents a confidence value of the face matching between the selfie and the document image,  (b) ***face_matching_status*** parameter represents the status of the face matching (either *passed* or *failed*), and (c) ***model_used*** parameter represents the model that was used to do the face matching.
 document_checks | dict | The ***document_checks*** parameter contains a list of boolean document checks where (a) ***mrz_check*** parameter asserts if the scanned MRZ code is correct and (b) ***chip_check*** parameter asserts if the chip of the identity document has been read successfully.
+checked_by | string | The ***checked_by*** parameter contains the email address of the user who did the enrolment.
+checked_at | dict | The ***checked_at*** parameter contains location information where (a) ***site_id*** parameter is a unique id for the enrolment site, and (b) ***site_name*** parameter is a (changeable) name for the *site*.
