@@ -385,6 +385,7 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
  </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUT"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20420101"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
@@ -392,9 +393,17 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
     </span><span class="s2">"link_identity_document_image_mrz"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
     </span><span class="s2">"link_user_selfie"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">},</span><span class="w">
   </span><span class="s2">"right_to_work_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"biometric_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"face_matching_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">92.33</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"face_matching_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passed"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_used"</span><span class="p">:</span><span class="w"> </span><span class="s2">"torch"</span><span class="p">},</span><span class="w">
   </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-    </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}}</span><span class="w">
+    </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
+  </span><span class="s2">"checked_at: {
+    "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
+    "</span><span class="err">site_name</span><span class="s2">":"</span><span class="err">site_name</span><span class="s2">" }}
 </span></code></pre>
 <p>This endpoint returns information about a specific enrolment.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -454,6 +463,11 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>nationality</em></strong> parameter contains the nationality of an enrolee.</td>
 </tr>
 <tr>
+<td>document_type</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>document_type</em></strong> parameter contains the document type of the identity document.</td>
+</tr>
+<tr>
 <td>document_expiry_date</td>
 <td style="text-align: center">string</td>
 <td>The <strong><em>document_expiry_date</em></strong> parameter contains the expiration date of the enrolee&#39;s identity document. The returned value has a format of yyyymmdd.</td>
@@ -469,9 +483,24 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>right_to_work_status</em></strong> parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {passed, warn, failed}.</td>
 </tr>
 <tr>
+<td>biometric_checks</td>
+<td style="text-align: center">dict</td>
+<td>The <strong><em>biometric_checks</em></strong> parameter contains a list of biometric checks where (a) <strong><em>face_matching_score</em></strong> parameter represents a confidence value of the face matching between the selfie and the document image,  (b) <strong><em>face_matching_status</em></strong> parameter represents the status of the face matching (either <em>passed</em> or <em>failed</em>), and (c) <strong><em>model_used</em></strong> parameter represents the model that was used to do the face matching.</td>
+</tr>
+<tr>
 <td>document_checks</td>
 <td style="text-align: center">dict</td>
 <td>The <strong><em>document_checks</em></strong> parameter contains a list of boolean document checks where (a) <strong><em>mrz_check</em></strong> parameter asserts if the scanned MRZ code is correct and (b) <strong><em>chip_check</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
+</tr>
+<tr>
+<td>checked_by</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>checked_by</em></strong> parameter contains the email address of the user who did the enrolment.</td>
+</tr>
+<tr>
+<td>checked_at</td>
+<td style="text-align: center">dict</td>
+<td>The <strong><em>checked_at</em></strong> parameter contains location information where (a) <strong><em>site_id</em></strong> parameter is a unique id for the enrolment site, and (b) <strong><em>site_name</em></strong> parameter is a (changeable) name for the <em>site</em>.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
@@ -617,21 +646,31 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 <span class="n">python</span> <span class="n">demo_get_specific_enrolment_info</span><span class="o">.</span><span class="n">py</span>
 </code></pre>
 <p>(3) You shall see a demo response like this:</p>
-<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="p">{</span><span class="s">"other_names"</span><span class="p">:</span> <span class="s">"MOHAMED"</span><span class="p">,</span>
-<span class="s">"family_name"</span><span class="p">:</span> <span class="s">"BEN ARBIA"</span><span class="p">,</span>
-<span class="s">"date_of_birth"</span><span class="p">:</span> <span class="s">"&lt;date&gt;"</span><span class="p">,</span>
-<span class="s">"nationality"</span><span class="p">:</span> <span class="s">"TUN"</span><span class="p">,</span>
-<span class="s">"document_expiry_date"</span><span class="p">:</span> <span class="s">"&lt;date&gt;"</span><span class="p">,</span>
-<span class="s">"images"</span> <span class="p">:</span> <span class="p">{</span><span class="s">"link_identity_document_chip_face"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
-<span class="s">"link_identity_document_image_front"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
-<span class="s">"link_identity_document_image_mrz"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
-<span class="s">"link_user_selfie"</span><span class="p">:</span> <span class="s">"&lt;link&gt;"</span><span class="p">,</span>
-<span class="s">"right_to_work_status"</span><span class="p">:</span> <span class="s">"warn"</span><span class="p">,</span> 
-  <span class="s">"document_checks"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s">"mrz_check"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> 
-    <span class="s">"chip_check"</span><span class="p">:</span> <span class="n">true</span><span class="p">}}</span>
-</code></pre>
+<pre class="highlight json tab-json"><code><span class="err">(</span><span class="mi">3</span><span class="err">)</span><span class="w">
+</span><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUT"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20420101"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"link_identity_document_image_front"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"link_identity_document_image_mrz"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"link_user_selfie"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"right_to_work_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"biometric_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"face_matching_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">92.33</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"face_matching_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"passed"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"model_used"</span><span class="p">:</span><span class="w"> </span><span class="s2">"torch"</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
+  </span><span class="s2">"checked_at: {
+    "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
+    "</span><span class="err">site_name</span><span class="s2">":"</span><span class="err">site_name</span><span class="s2">" }}
+</span></code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
 the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -697,23 +736,41 @@ Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrie
 <p>(4) You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>enrolment_id = &lt;a valid enrolment id&gt;</code> to retrieve specific information about that enrolment.</p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="c"># Let's print the information that we retrieved</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments/d7bd8751-ea88-4e82-94d8-4940cc07eea8:'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments/a987259c-bbbb-4b26-926e-b3e6ab64620d:'</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'other_names: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"other_names"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'family_name: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"family_name"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'date_of_birth: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"date_of_birth"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'nationality: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"nationality"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'document_type: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_type"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="s">'document_expiry_date: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_expiry_date"</span><span class="p">])</span>
-<span class="k">if</span> <span class="s">"link_identity_document_chip_face"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_chip_face: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_chip_face"</span><span class="p">])</span>
-<span class="k">if</span> <span class="s">"link_identity_document_image_front"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_front: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_front"</span><span class="p">])</span>
-<span class="k">if</span> <span class="s">"link_identity_document_image_mrz"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_mrz: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_mrz"</span><span class="p">])</span>
-<span class="k">if</span> <span class="s">"link_user_selfie"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'link_user_selfie: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_user_selfie"</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'right_to_work_status: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"right_to_work_status"</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'mrz_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"mrz_check"</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'chip_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"chip_check"</span><span class="p">]))</span>
+<span class="k">if</span> <span class="s">"images"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">"link_identity_document_chip_face"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_chip_face: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_chip_face"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"link_identity_document_image_front"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_front: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_front"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"link_identity_document_image_mrz"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'link_identity_document_image_mrz: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_identity_document_image_mrz"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"link_user_selfie"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'link_user_selfie: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"images"</span><span class="p">][</span><span class="s">"link_user_selfie"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'right_to_work_status: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"right_to_work_status"</span><span class="p">]))</span>
+<span class="k">if</span> <span class="s">"biometric_checks"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">"face_matching_score"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'face_matching_score: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">][</span><span class="s">"face_matching_score"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"face_matching_status"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'face_matching_status: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">][</span><span class="s">"face_matching_status"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"model_used"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'model_used: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"biometric_checks"</span><span class="p">][</span><span class="s">"model_used"</span><span class="p">]))</span>
+<span class="k">if</span> <span class="s">"document_checks"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">"mrz_check"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'mrz_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"mrz_check"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"chip_check"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'chip_check: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"document_checks"</span><span class="p">][</span><span class="s">"chip_check"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'checked_by: '</span> <span class="o">+</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"checked_by"</span><span class="p">])</span>
+<span class="k">if</span> <span class="s">"checked_at"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s">"site_id"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"checked_at"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'site_id: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"checked_at"</span><span class="p">][</span><span class="s">"site_id"</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">"site_name"</span> <span class="ow">in</span> <span class="n">enrolment_info</span><span class="p">[</span><span class="s">"checked_at"</span><span class="p">]:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'site_name: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">enrolment_info</span><span class="p">[</span><span class="s">"checked_at"</span><span class="p">][</span><span class="s">"site_name"</span><span class="p">]))</span>
 </code></pre>
 <p>(5) Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)</p>
 
