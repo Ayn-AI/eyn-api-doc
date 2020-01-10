@@ -237,9 +237,11 @@
                   <li>
                     <a href="#get-information-about-a-specific-enrolment" class="toc-h2 toc-link" data-title="Get Information about a Specific Enrolment">Get Information about a Specific Enrolment</a>
                   </li>
-                  <li>
-                    <a href="#ocr-object-character-recognition" class="toc-h2 toc-link" data-title="OCR (Object Character Recognition)">OCR (Object Character Recognition)</a>
-                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#ocr-object-character-recognition" class="toc-h1 toc-link" data-title="OCR (Object Character Recognition)">OCR (Object Character Recognition)</a>
+              <ul class="toc-list-h2">
                   <li>
                     <a href="#get-ocr-information" class="toc-h2 toc-link" data-title="Get OCR Information">Get OCR Information</a>
                   </li>
@@ -509,7 +511,7 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>checked_at</em></strong> parameter contains location information where (a) <strong><em>site_id</em></strong> parameter is a unique id for the enrolment site, and (b) <strong><em>site_name</em></strong> parameter is a (changeable) name for the <em>site</em>.</td>
 </tr>
 </tbody></table>
-<h2 id='ocr-object-character-recognition'>OCR (Object Character Recognition)</h2><h2 id='get-ocr-information'>Get OCR Information</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h1 id='ocr-object-character-recognition'>OCR (Object Character Recognition)</h1><h2 id='get-ocr-information'>Get OCR Information</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
               <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
