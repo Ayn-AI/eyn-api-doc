@@ -189,7 +189,7 @@ document_checks | dict | The ***document_checks*** parameter contains a list of 
 checked_by | string | The ***checked_by*** parameter contains the email address of the user who did the enrolment.
 checked_at | dict | The ***checked_at*** parameter contains location information where (a) ***site_id*** parameter is a unique id for the enrolment site, and (b) ***site_name*** parameter is a (changeable) name for the *site*.
 
-## OCR (Object Character Recognition)
+# OCR (Object Character Recognition)
 
 ## Get OCR Information
 ```python
