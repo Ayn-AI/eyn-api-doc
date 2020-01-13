@@ -196,14 +196,14 @@ checked_at | dict | The ***checked_at*** parameter contains location information
 import requests
 data = {'image_base64_encoded': <image in base64 encoding>,
         'eyn_ocr_token': <EYN OCR TOKEN>}
-response = requests.post('https://api.eyn.vision/documentcheck',
+response = requests.post('https://api.eyn.ninja/api/v1/prod/documentcheck',
                          json=data)
 ```
 
 ```shell
 curl --data "image_base64_encoded=<image in base64 encoding>"
      --data "eyn_ocr_token=<EYN OCR TOKEN>"
-     https://api.eyn.vision/documentcheck
+     https://api.eyn.ninja/api/v1/prod/documentcheck
 ```
 
 > The above command returns JSON structured like this:
@@ -245,7 +245,7 @@ This endpoint processes the images and returns the read information.
 
 ### HTTP Request
 
-`POST https://api.eyn.vision/documentcheck`
+`POST https://api.eyn.ninja/api/v1/prod/documentcheck`
 
 ### Payload
 
