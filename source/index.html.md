@@ -189,29 +189,27 @@ document_checks | dict | The ***document_checks*** parameter contains a list of 
 checked_by | string | The ***checked_by*** parameter contains the email address of the user who did the enrolment.
 checked_at | dict | The ***checked_at*** parameter contains location information where (a) ***site_id*** parameter is a unique id for the enrolment site, and (b) ***site_name*** parameter is a (changeable) name for the *site*.
 
-# OCR (Object Character Recognition)
+# Document Checks
 
-## Get OCR Information
+## Perform a Document Check
 ```python
 import requests
-parameters = {'image_base64_encoded': <image in base64 encoding>,
-              'eyn_ocr_token': <EYN OCR TOKEN>}
-headers = {'Accept': '*/*',
-           'Content-Type': 'application/json; charset=UTF-8'}
-response = requests.get('https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz',
-                        params=parameters, headers=headers)
+data = {'image_base64_encoded': <image in base64 encoding>,
+        'eyn_ocr_token': <EYN OCR TOKEN>}
+response = requests.post('https://api.eyn.vision/documentcheck',
+                         json=data)
 ```
 
 ```shell
-curl "https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz?
-    image_base64_encoded=<image in base64 encoding>&
-    eyn_ocr_token=<EYN OCR TOKEN>"
+curl --data "image_base64_encoded=<image in base64 encoding>"
+     --data "eyn_ocr_token=<EYN OCR TOKEN>"
+     https://api.eyn.vision/documentcheck
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-"age": {
+{ "age": {
     "days": 11358,
     "seconds": 85250,
     "total_seconds": 981416450.424303
@@ -240,16 +238,16 @@ curl "https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz?
     "optional_data_hash": "0",
     "sex": "F",
     "surname": "UK SPECIMEN"
-}
+}}
 ```
 
 This endpoint processes the images and returns the read information.
 
 ### HTTP Request
 
-`GET https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz`
+`POST https://api.eyn.vision/documentcheck`
 
-### Query Parameters
+### Payload
 
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
