@@ -240,10 +240,10 @@
               </ul>
           </li>
           <li>
-            <a href="#ocr-object-character-recognition" class="toc-h1 toc-link" data-title="OCR (Object Character Recognition)">OCR (Object Character Recognition)</a>
+            <a href="#document-checks" class="toc-h1 toc-link" data-title="Document Checks">Document Checks</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-ocr-information" class="toc-h2 toc-link" data-title="Get OCR Information">Get OCR Information</a>
+                    <a href="#perform-a-document-check" class="toc-h2 toc-link" data-title="Perform a Document Check">Perform a Document Check</a>
                   </li>
               </ul>
           </li>
@@ -511,21 +511,19 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>checked_at</em></strong> parameter contains location information where (a) <strong><em>site_id</em></strong> parameter is a unique id for the enrolment site, and (b) <strong><em>site_name</em></strong> parameter is a (changeable) name for the <em>site</em>.</td>
 </tr>
 </tbody></table>
-<h1 id='ocr-object-character-recognition'>OCR (Object Character Recognition)</h1><h2 id='get-ocr-information'>Get OCR Information</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
-              <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
-           <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz'</span><span class="p">,</span>
-                        <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz?
-    image_base64_encoded=&lt;image in base64 encoding&gt;&amp;
-    eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
+<h1 id='document-checks'>Document Checks</h1><h2 id='perform-a-document-check'>Perform a Document Check</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.vision/documentcheck'</span><span class="p">,</span>
+                         <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"image_base64_encoded=&lt;image in base64 encoding&gt;"</span>
+     --data <span class="s2">"eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
+     https://api.eyn.vision/documentcheck
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">11358</span><span class="p">,</span><span class="w">
     </span><span class="s2">"seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">85250</span><span class="p">,</span><span class="w">
     </span><span class="s2">"total_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">981416450.424303</span><span class="w">
@@ -554,12 +552,12 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
     </span><span class="s2">"optional_data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"surname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+</span><span class="p">}}</span><span class="w">
 </span></code></pre>
 <p>This endpoint processes the images and returns the read information.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET https://eyn-ocr-prod.eyn.ninja/ocr_the_mrz</code></p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<p><code>POST https://api.eyn.vision/documentcheck</code></p>
+<h3 id='payload'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
