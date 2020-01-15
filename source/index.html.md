@@ -254,7 +254,13 @@ Identity documents supported:
   <li>Passports</li>
   <li>Identity cards</li>
   <li>Biometric residence permits (Visas)</li>
+  <li>Romanian ID (Next version)</li>
+  <li>Right to work status (Next version)</li>
 </ol>
+
+### Drag and Drop Testing
+
+Easy testing by uploading images and identity document examples <a href="https://app-staging.eyn.vision/documentcheck">here.</a>
 
 ### HTTP Request
 
