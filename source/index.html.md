@@ -246,6 +246,7 @@ This API endpoint processes an identity document and returns:
   <li>The text on the document (First Name , Last name, Date of Birth, etc)</li>
   <li>Several document checks like data validation and consistency </li>
   <li>Age </li>
+  <li>Right to work status (Next version)</li>
 </ol>
 
 Identity documents supported:
@@ -255,7 +256,6 @@ Identity documents supported:
   <li>Identity cards</li>
   <li>Biometric residence permits (Visas)</li>
   <li>Romanian ID (Next version)</li>
-  <li>Right to work status (Next version)</li>
 </ol>
 
 ### Drag and Drop Testing
