@@ -242,13 +242,19 @@ curl --data "image_base64_encoded=<image in base64 encoding>"
 ```
 
 This API endpoint processes an identity document and returns:
-1. The text on the document (First Name , Last name, Date of Birth, etc)
-2. Several document checks like data validation and consistency 
-3. Age 
+<ol>
+  <li>The text on the document (First Name , Last name, Date of Birth, etc)</li>
+  <li>Several document checks like data validation and consistency </li>
+  <li>Age </li>
+</ol>
+
 Identity documents supported:
-1. Passports 
-2. Identity cards
-3. Biometric residence permits (Visas)
+
+<ol>
+  <li>Passports</li>
+  <li>Identity cards</li>
+  <li>Biometric residence permits (Visas)</li>
+</ol>
 
 ### HTTP Request
 
