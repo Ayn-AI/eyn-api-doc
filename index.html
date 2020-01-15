@@ -554,7 +554,14 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
     </span><span class="s2">"surname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="w">
 </span><span class="p">}}</span><span class="w">
 </span></code></pre>
-<p>This endpoint processes the images and returns the read information.</p>
+<p>This API endpoint processes an identity document and returns:
+1. The text on the document (First Name , Last name, Date of Birth, etc)
+2. Several document checks like data validation and consistency 
+3. Age 
+Identity documents supported:
+1. Passports 
+2. Identity cards
+3. Biometric residence permits (Visas)</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.eyn.ninja/api/v1/prod/documentcheck</code></p>
 <h3 id='payload'>Payload</h3>
