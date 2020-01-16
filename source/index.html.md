@@ -302,3 +302,126 @@ optional_data  |  String | The ***optional_data*** is any optional data containt
 optional_data_hash  |  String | The ***optional_data_hash***  is the hash of the optional data used to verify the validity of the same.
 sex  |  String | The ***sex*** is the sex of document holder. This could be either F for female of M for male.
 surname  |  String | The ***surname***  is the last name of the document holder.
+
+# Identity Checks
+
+## Perform a Identity Check
+```python
+import requests
+data = {'document_base64_encoded': <document image in base64 encoding>,
+        'selfie_base64_encoded': <selfie image in base64 encoding>,
+        'eyn_ocr_token': <EYN OCR TOKEN>}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
+                         json=data)
+```
+
+```shell
+curl --data "document_base64_encoded=<document image in base64 encoding>"
+     --data "selfie_base64_encoded=<selfie image in base64 encoding>"
+     --data "eyn_ocr_token=<EYN OCR TOKEN>"
+     https://api.eyn.ninja/api/v1/prod/identitycheck
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{ "face_checks" : {
+    "face_matched": True,
+    "face_similarity": 90.26
+},
+"age": {
+    "days": 11358,
+    "seconds": 85250,
+    "total_seconds": 981416450.424303
+},
+"dob_doe_dn_hash_present": true,
+"document_checks": {
+    "is_birth_date_valid": true,
+    "is_document_expired": false,
+    "is_document_number_valid": true,
+    "is_expiry_date_valid": true
+},
+"full_mrz_text": "P<GBRUK<SPECIMEN<<ANGELA<ZOE<<<<<<<<<<<<<<<<\n5334013720GBR8812049F2509286<<<<<<<<<<<<<<00",
+"mrz_fields": {
+    "birth_date": "881204",
+    "birth_date_hash": "9",
+    "country": "GBR",
+    "document_number": "533401372",
+    "document_number_hash": "0",
+    "document_type": "P",
+    "expiry_date": "250928",
+    "expiry_date_hash": "6",
+    "final_hash": "0",
+    "name": "ANGELA ZOE",
+    "nationality": "GBR",
+    "optional_data": "",
+    "optional_data_hash": "0",
+    "sex": "F",
+    "surname": "UK SPECIMEN"
+}}
+```
+
+This API endpoint processes an identity document and a selfie image and returns: 
+<ol>
+  <li>The text on the document (First Name , Last name, Date of Birth, etc)</li>
+  <li>Several document checks like data validation and consistency </li>
+  <li>Age </li>
+  <li>Face Checks </li>
+  <li>Right to work status (Next version)</li>
+</ol>
+
+Identity documents supported:
+
+<ol>
+  <li>Passports</li>
+  <li>Identity cards</li>
+  <li>Biometric residence permits (Visas)</li>
+  <li>Romanian ID (Next version)</li>
+</ol>
+
+### HTTP Request
+
+`POST https://api.eyn.ninja/api/v1/prod/identitycheck`
+
+### Payload
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+document_base64_encoded | - | Required | The ***document_base64_encoded*** is the document image that should be processed in base64 encoding.
+selfie_base64_encoded | - | Required | The ***selfie_base64_encoded*** is the selfie image that should be processed in base64 encoding.
+eyn_ocr_token | - | Required |  The ***eyn_ocr_token*** is the token supplied by EYN for authentication.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+face_checks |  - | The ***face_checks*** performed on the document and selfie image.
+face_matched | Boolean | The ***face_matched*** indicates if the face between the document image and the selfie image match.
+face_similarity | Double | The ***face_similarity*** indicates the similarity score of the face match.
+age |  - | The ***age*** of the document holder.
+days | Integer | The ***days*** is the age of the document holder in days. You need to add the ***seconds*** to this parameter to get the full age.
+seconds | Integer | The ***seconds*** is the age of the document holder in seconds. You need to add the ***days*** to this parameter to get the full age.
+total_seconds | Double | The ***total_seconds*** is the age of the document holder in seconds. 
+dob_doe_dn_hash_present  | Boolean | The ***dob_doe_dn_hash_present*** checks if the date of birth, date of expiry and document number hash of the MRZ is present.
+document_checks |  - | The ***document_checks*** performed on the document.
+is_birth_date_valid |  Boolean | The ***is_birth_date_valid*** verifies if the birth date of the document holder is valid.
+is_document_expired |  Boolean | The ***is_document_expired*** verifies if the document is expired.
+is_document_number_valid |  Boolean | The ***is_document_number_valid*** verifies if the document number of the document is valid.
+is_expiry_date_valid |  Boolean | The ***is_expiry_date_valid*** verifies if the expiry date of the document holder is valid.
+full_mrz_text  |  String | The ***full_mrz_text*** is the full  MRZ as a string.
+mrz_fields |  - | The ***mrz_fields*** are the specific field contained in the MRZ of the document.
+birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYMMDD.
+birth_date_hash  |  String | The ***birth_date_hash*** is the hash of the birth date used to verify the validity of the same.
+country  |  String | The ***country*** is the issuing country of the document in ISO alpha3 format.
+document_number  |  String | The ***document_number*** is the document number of the document.
+document_number_hash  |  String | The ***document_number_hash*** is the hash of the document number used to verify the validity of the same.
+document_type  |  String | The ***document_type*** is the document type of the document. This could be either P for passports, Ix for ids, or V for visas.
+expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYMMDD.
+expiry_date_hash  |  String | The ***expiry_date_hash*** is the hash of the expiry date used to verify the validity of the same.
+final_hash  |  String | The ***final_hash*** is the hash over all other validation hashes.
+optional_data  |  String | The ***optional_data*** is any optional data containted in the MRZ.
+optional_data_hash  |  String | The ***optional_data_hash***  is the hash of the optional data used to verify the validity of the same.
+sex  |  String | The ***sex*** is the sex of document holder. This could be either F for female of M for male.
+surname  |  String | The ***surname***  is the last name of the document holder.
+
+
