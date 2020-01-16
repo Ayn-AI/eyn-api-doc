@@ -221,6 +221,7 @@ curl --data "image_base64_encoded=<image in base64 encoding>"
     "is_document_number_valid": true,
     "is_expiry_date_valid": true
 },
+"right_to_work_status": "passed",
 "full_mrz_text": "P<GBRUK<SPECIMEN<<ANGELA<ZOE<<<<<<<<<<<<<<<<\n5334013720GBR8812049F2509286<<<<<<<<<<<<<<00",
 "mrz_fields": {
     "birth_date": "881204",
@@ -246,7 +247,7 @@ This API endpoint processes an identity document and returns:
   <li>The text on the document (First Name , Last name, Date of Birth, etc)</li>
   <li>Several document checks like data validation and consistency </li>
   <li>Age </li>
-  <li>Right to work status (Next version)</li>
+  <li>Right to work status</li>
 </ol>
 
 Identity documents supported:
@@ -287,6 +288,7 @@ is_birth_date_valid |  Boolean | The ***is_birth_date_valid*** verifies if the b
 is_document_expired |  Boolean | The ***is_document_expired*** verifies if the document is expired.
 is_document_number_valid |  Boolean | The ***is_document_number_valid*** verifies if the document number of the document is valid.
 is_expiry_date_valid |  Boolean | The ***is_expiry_date_valid*** verifies if the expiry date of the document holder is valid.
+right_to_work_status |  String | The ***right_to_work_status*** indicates the right to work of the document holder in the UK. Possible values are `passed`, `failed` or `passed_with_possible_limitation`.
 full_mrz_text  |  String | The ***full_mrz_text*** is the full  MRZ as a string.
 mrz_fields |  - | The ***mrz_fields*** are the specific field contained in the MRZ of the document.
 birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYMMDD.
@@ -367,7 +369,7 @@ This API endpoint processes an identity document and a selfie image and returns:
   <li>Several document checks like data validation and consistency </li>
   <li>Age </li>
   <li>Face Checks </li>
-  <li>Right to work status (Next version)</li>
+  <li>Right to work status </li>
 </ol>
 
 Identity documents supported:
@@ -408,6 +410,7 @@ is_birth_date_valid |  Boolean | The ***is_birth_date_valid*** verifies if the b
 is_document_expired |  Boolean | The ***is_document_expired*** verifies if the document is expired.
 is_document_number_valid |  Boolean | The ***is_document_number_valid*** verifies if the document number of the document is valid.
 is_expiry_date_valid |  Boolean | The ***is_expiry_date_valid*** verifies if the expiry date of the document holder is valid.
+right_to_work_status |  String | The ***right_to_work_status*** indicates the right to work of the document holder in the UK. Possible values are `passed`, `failed` or `passed_with_possible_limitation`.
 full_mrz_text  |  String | The ***full_mrz_text*** is the full  MRZ as a string.
 mrz_fields |  - | The ***mrz_fields*** are the specific field contained in the MRZ of the document.
 birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYMMDD.
