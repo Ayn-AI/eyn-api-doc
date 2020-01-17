@@ -580,7 +580,7 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
   <li>Romanian ID (Next version)</li>
 </ol>
 <h3 id='drag-and-drop-testing'>Drag and Drop Testing</h3>
-<p>Easy testing by uploading images and identity document examples <a href="https://app-staging.eyn.vision/documentcheck">here.</a></p>
+<p>Easy testing by uploading images and identity document examples <a href="https://app.eyn.vision/documentcheck">here.</a></p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.eyn.ninja/api/v1/prod/documentcheck</code></p>
 <h3 id='payload'>Payload</h3>
@@ -745,12 +745,14 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 </tr>
 </tbody></table>
 <h1 id='identity-checks'>Identity Checks</h1><h2 id='perform-a-identity-check'>Perform a Identity Check</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'document_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">document</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'document_front_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">document</span> <span class="n">front</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="s">'document_back_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">document</span> <span class="n">back</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'selfie_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">selfie</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/identitycheck'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"document_base64_encoded=&lt;document image in base64 encoding&gt;"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"document_front_base64_encoded=&lt;document front image in base64 encoding&gt;"</span>
+     --data <span class="s2">"document_back_base64_encoded=&lt;document back image in base64 encoding&gt;"</span>
      --data <span class="s2">"selfie_base64_encoded=&lt;selfie image in base64 encoding&gt;"</span>
      --data <span class="s2">"eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
      https://api.eyn.ninja/api/v1/prod/identitycheck
@@ -822,10 +824,16 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 </tr>
 </thead><tbody>
 <tr>
-<td>document_base64_encoded</td>
+<td>document_front_base64_encoded</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
-<td>The <strong><em>document_base64_encoded</em></strong> is the document image that should be processed in base64 encoding.</td>
+<td>The <strong><em>document_front_base64_encoded</em></strong> is the document front side image that should be processed in base64 encoding.</td>
+</tr>
+<tr>
+<td>document_back_base64_encoded</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>document_back_base64_encoded</em></strong> is the document back image (in case of an identity card) that should be processed in base64 encoding.</td>
 </tr>
 <tr>
 <td>selfie_base64_encoded</td>
