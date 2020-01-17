@@ -247,7 +247,12 @@ This API endpoint processes an identity document and returns:
   <li>The text on the document (First Name , Last name, Date of Birth, etc)</li>
   <li>Several document checks like data validation and consistency </li>
   <li>Age </li>
-  <li>Right to work status</li>
+  <li>UK right to work</li>
+  <ol>
+    <li>Right to work status</li>
+    <li>Right to work remarks (For BRPs)</li>
+    <li>Right to work share status (For BRPs)</li>
+    </ol>
 </ol>
 
 Identity documents supported:
@@ -371,7 +376,12 @@ This API endpoint processes an identity document and a selfie image and returns:
   <li>Several document checks like data validation and consistency </li>
   <li>Age </li>
   <li>Face Checks </li>
-  <li>Right to work status </li>
+  <li>UK right to work</li>
+  <ol>
+    <li>Right to work status</li>
+    <li>Right to work remarks (For BRPs)</li>
+    <li>Right to work share status (For BRPs)</li>
+    </ol>
 </ol>
 
 Identity documents supported:
