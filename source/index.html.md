@@ -261,7 +261,6 @@ Identity documents supported:
   <li>Passports</li>
   <li>Identity cards</li>
   <li>Biometric residence permits (Visas)</li>
-  <li>Romanian ID (Next version)</li>
 </ol>
 
 ### Drag and Drop Testing
@@ -391,7 +390,6 @@ Identity documents supported:
   <li>Passports</li>
   <li>Identity cards</li>
   <li>Biometric residence permits (Visas)</li>
-  <li>Romanian ID (Next version)</li>
 </ol>
 
 ### Testing
