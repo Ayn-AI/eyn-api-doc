@@ -394,6 +394,10 @@ Identity documents supported:
   <li>Romanian ID (Next version)</li>
 </ol>
 
+### Testing
+
+Easy testing with our webflow <a href="https://app-staging.eyn.vision/identitycheck">here.</a>
+
 ### HTTP Request
 
 `POST https://api.eyn.ninja/api/v1/prod/identitycheck`
