@@ -435,7 +435,7 @@ country  |  String | The ***country*** is the issuing country of the document in
 document_number  |  String | The ***document_number*** is the document number of the document.
 document_number_hash  |  String | The ***document_number_hash*** is the hash of the document number used to verify the validity of the same.
 document_type  |  String | The ***document_type*** is the document type of the document. This could be either P for passports, Ix for ids, or V for visas.
-expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYMMDD.
+expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYMMDD. For `French` documents, this field will display an exeption string `SEE-BACK-OF-ID`, since those id's do not contain an expiry date.
 expiry_date_hash  |  String | The ***expiry_date_hash*** is the hash of the expiry date used to verify the validity of the same.
 final_hash  |  String | The ***final_hash*** is the hash over all other validation hashes.
 optional_data  |  String | The ***optional_data*** is any optional data containted in the MRZ.
