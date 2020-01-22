@@ -3,7 +3,9 @@
 The EYN API includes the following demos:
 
 <a href="#demo-get-enrolments" style="text-decoration: none"><code>Demo Get Enrolments</code></a><br>
-<a href="#Demo-get-information-about-a-specific-enrolment" style="text-decoration: none"><code>Demo Get Information about a Specific Enrolment</code></a>
+<a href="#demo-get-information-about-a-specific-enrolment" style="text-decoration: none"><code>Demo Get Information about a Specific Enrolment</code></a><br>
+<a href="#demo-document-check" style="text-decoration: none"><code>Demo Document Check</code></a><br>
+<a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a>
 
 Download and follow the quickstart sections to immediately run the demos. For more details, read the demo guides.
 
@@ -309,4 +311,10 @@ if "checked_at" in enrolment_info:
 
 (5) Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)
 
+## Demo Document Check
 
+Easy testing by uploading images and identity document examples <a href="https://app.eyn.vision/documentcheck">here.</a>
+
+## Demo Identity Check
+
+Easy testing with our webflow <a href="https://app-staging.eyn.vision/identitycheck">here.</a>
