@@ -224,13 +224,13 @@ curl --data "image_base64_encoded=<image in base64 encoding>"
 "right_to_work_uk_status": "passed",
 "full_mrz_text": "P<GBRUK<SPECIMEN<<ANGELA<ZOE<<<<<<<<<<<<<<<<\n5334013720GBR8812049F2509286<<<<<<<<<<<<<<00",
 "mrz_fields": {
-    "birth_date": "881204",
+    "birth_date": "19881204",
     "birth_date_hash": "9",
     "country": "GBR",
     "document_number": "533401372",
     "document_number_hash": "0",
     "document_type": "P",
-    "expiry_date": "250928",
+    "expiry_date": "20250928",
     "expiry_date_hash": "6",
     "final_hash": "0",
     "name": "ANGELA ZOE",
@@ -295,13 +295,13 @@ is_expiry_date_valid |  Boolean | The ***is_expiry_date_valid*** verifies if the
 right_to_work_uk_status |  String | The ***right_to_work_status*** indicates the right to work of the document holder in the UK. Possible values are `passed`, `failed` or `passed_with_possible_limitation`.
 full_mrz_text  |  String | The ***full_mrz_text*** is the full  MRZ as a string.
 mrz_fields |  - | The ***mrz_fields*** are the specific field contained in the MRZ of the document.
-birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYMMDD.
+birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYYYMMDD.
 birth_date_hash  |  String | The ***birth_date_hash*** is the hash of the birth date used to verify the validity of the same.
 country  |  String | The ***country*** is the issuing country of the document in ISO alpha3 format.
 document_number  |  String | The ***document_number*** is the document number of the document.
 document_number_hash  |  String | The ***document_number_hash*** is the hash of the document number used to verify the validity of the same.
 document_type  |  String | The ***document_type*** is the document type of the document. This could be either P for passports, Ix for ids, or V for visas.
-expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYMMDD.  For `French` documents, this field will display an exeption string `SEE-BACK-OF-ID`, since those id's do not contain an expiry date.
+expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYYYMMDD.  For `French` documents, this field will display an exeption string `SEE-BACK-OF-ID`, since those id's do not contain an expiry date.
 expiry_date_hash  |  String | The ***expiry_date_hash*** is the hash of the expiry date used to verify the validity of the same.
 final_hash  |  String | The ***final_hash*** is the hash over all other validation hashes.
 optional_data  |  String | The ***optional_data*** is any optional data containted in the MRZ.
@@ -352,13 +352,13 @@ curl --data "document_front_base64_encoded=<document front image in base64 encod
 "right_to_work_uk_status": "passed",
 "full_mrz_text": "P<GBRUK<SPECIMEN<<ANGELA<ZOE<<<<<<<<<<<<<<<<\n5334013720GBR8812049F2509286<<<<<<<<<<<<<<00",
 "mrz_fields": {
-    "birth_date": "881204",
+    "birth_date": "19881204",
     "birth_date_hash": "9",
     "country": "GBR",
     "document_number": "533401372",
     "document_number_hash": "0",
     "document_type": "P",
-    "expiry_date": "250928",
+    "expiry_date": "20250928",
     "expiry_date_hash": "6",
     "final_hash": "0",
     "name": "ANGELA ZOE",
@@ -429,13 +429,13 @@ is_expiry_date_valid |  Boolean | The ***is_expiry_date_valid*** verifies if the
 right_to_work_uk_status |  String | The ***right_to_work_status*** indicates the right to work of the document holder in the UK. Possible values are `passed`, `failed` or `passed_with_possible_limitation`.
 full_mrz_text  |  String | The ***full_mrz_text*** is the full  MRZ as a string.
 mrz_fields |  - | The ***mrz_fields*** are the specific field contained in the MRZ of the document.
-birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYMMDD.
+birth_date  |  String | The ***birth_date*** is the birth date of the document holder in format YYYYMMDD.
 birth_date_hash  |  String | The ***birth_date_hash*** is the hash of the birth date used to verify the validity of the same.
 country  |  String | The ***country*** is the issuing country of the document in ISO alpha3 format.
 document_number  |  String | The ***document_number*** is the document number of the document.
 document_number_hash  |  String | The ***document_number_hash*** is the hash of the document number used to verify the validity of the same.
 document_type  |  String | The ***document_type*** is the document type of the document. This could be either P for passports, Ix for ids, or V for visas.
-expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYMMDD. For `French` documents, this field will display an exeption string `SEE-BACK-OF-ID`, since those id's do not contain an expiry date.
+expiry_date  |  String | The ***expiry_date*** is the birth date of the document holder in format YYYYMMDD. For `French` documents, this field will display an exeption string `SEE-BACK-OF-ID`, since those id's do not contain an expiry date.
 expiry_date_hash  |  String | The ***expiry_date_hash*** is the hash of the expiry date used to verify the validity of the same.
 final_hash  |  String | The ***final_hash*** is the hash over all other validation hashes.
 optional_data  |  String | The ***optional_data*** is any optional data containted in the MRZ.
