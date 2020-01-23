@@ -538,9 +538,9 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">11358</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">85250</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"total_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">981416450.424303</span><span class="w">
+    </span><span class="s2">"years"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"months"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="s2">"dob_doe_dn_hash_present"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
 </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -629,19 +629,19 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>age</em></strong> of the document holder.</td>
 </tr>
 <tr>
+<td>years</td>
+<td style="text-align: center">Integer</td>
+<td>The <strong><em>years</em></strong> indicates the age of the document holder in years.</td>
+</tr>
+<tr>
+<td>months</td>
+<td style="text-align: center">Integer</td>
+<td>The <strong><em>months</em></strong> indicates the age of the document holder in months substracted by the years.</td>
+</tr>
+<tr>
 <td>days</td>
 <td style="text-align: center">Integer</td>
-<td>The <strong><em>days</em></strong> is the age of the document holder in days. You need to add the <strong><em>seconds</em></strong> to this parameter to get the full age.</td>
-</tr>
-<tr>
-<td>seconds</td>
-<td style="text-align: center">Integer</td>
-<td>The <strong><em>seconds</em></strong> is the age of the document holder in seconds. You need to add the <strong><em>days</em></strong> to this parameter to get the full age.</td>
-</tr>
-<tr>
-<td>total_seconds</td>
-<td style="text-align: center">Double</td>
-<td>The <strong><em>total_seconds</em></strong> is the age of the document holder in seconds.</td>
+<td>The <strong><em>days</em></strong>  indicates the age of the document holder in days substracted by the months.</td>
 </tr>
 <tr>
 <td>dob_doe_dn_hash_present</td>
@@ -775,9 +775,9 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
     </span><span class="s2">"face_similarity"</span><span class="p">:</span><span class="w"> </span><span class="mf">90.26</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">11358</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"seconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">85250</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"total_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">981416450.424303</span><span class="w">
+    </span><span class="s2">"years"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"months"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="s2">"dob_doe_dn_hash_present"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
 </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -894,19 +894,19 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>age</em></strong> of the document holder.</td>
 </tr>
 <tr>
+<td>years</td>
+<td style="text-align: center">Integer</td>
+<td>The <strong><em>years</em></strong> indicates the age of the document holder in years.</td>
+</tr>
+<tr>
+<td>months</td>
+<td style="text-align: center">Integer</td>
+<td>The <strong><em>months</em></strong> indicates the age of the document holder in months substracted by the years.</td>
+</tr>
+<tr>
 <td>days</td>
 <td style="text-align: center">Integer</td>
-<td>The <strong><em>days</em></strong> is the age of the document holder in days. You need to add the <strong><em>seconds</em></strong> to this parameter to get the full age.</td>
-</tr>
-<tr>
-<td>seconds</td>
-<td style="text-align: center">Integer</td>
-<td>The <strong><em>seconds</em></strong> is the age of the document holder in seconds. You need to add the <strong><em>days</em></strong> to this parameter to get the full age.</td>
-</tr>
-<tr>
-<td>total_seconds</td>
-<td style="text-align: center">Double</td>
-<td>The <strong><em>total_seconds</em></strong> is the age of the document holder in seconds.</td>
+<td>The <strong><em>days</em></strong>  indicates the age of the document holder in days substracted by the months.</td>
 </tr>
 <tr>
 <td>dob_doe_dn_hash_present</td>
