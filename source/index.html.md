@@ -210,9 +210,9 @@ curl --data "image_base64_encoded=<image in base64 encoding>"
 
 ```json
 { "age": {
-    "days": 11358,
-    "seconds": 85250,
-    "total_seconds": 981416450.424303
+    "years": 31,
+    "months": 1,
+    "days": 19
 },
 "dob_doe_dn_hash_present": true,
 "document_checks": {
@@ -283,9 +283,9 @@ eyn_ocr_token | - | Required |  The ***eyn_ocr_token*** is the token supplied by
 Parameter |  Type |  Description
 --------- | :-----------: | -----------
 age |  - | The ***age*** of the document holder.
-days | Integer | The ***days*** is the age of the document holder in days. You need to add the ***seconds*** to this parameter to get the full age.
-seconds | Integer | The ***seconds*** is the age of the document holder in seconds. You need to add the ***days*** to this parameter to get the full age.
-total_seconds | Double | The ***total_seconds*** is the age of the document holder in seconds. 
+years | Integer | The ***years*** indicates the age of the document holder in years.
+months | Integer | The ***months*** indicates the age of the document holder in months substracted by the years.
+days | Integer | The ***days***  indicates the age of the document holder in days substracted by the months.
 dob_doe_dn_hash_present  | Boolean | The ***dob_doe_dn_hash_present*** checks if the date of birth, date of expiry and document number hash of the MRZ is present.
 document_checks |  - | The ***document_checks*** performed on the document.
 is_birth_date_valid |  Boolean | The ***is_birth_date_valid*** verifies if the birth date of the document holder is valid.
@@ -338,9 +338,9 @@ curl --data "document_front_base64_encoded=<document front image in base64 encod
     "face_similarity": 90.26
 },
 "age": {
-    "days": 11358,
-    "seconds": 85250,
-    "total_seconds": 981416450.424303
+    "years": 31,
+    "months": 1,
+    "days": 19
 },
 "dob_doe_dn_hash_present": true,
 "document_checks": {
@@ -417,9 +417,9 @@ face_checks |  - | The ***face_checks*** performed on the document and selfie im
 face_matched | Boolean | The ***face_matched*** indicates if the face between the document image and the selfie image match.
 face_similarity | Double | The ***face_similarity*** indicates the similarity score of the face match.
 age |  - | The ***age*** of the document holder.
-days | Integer | The ***days*** is the age of the document holder in days. You need to add the ***seconds*** to this parameter to get the full age.
-seconds | Integer | The ***seconds*** is the age of the document holder in seconds. You need to add the ***days*** to this parameter to get the full age.
-total_seconds | Double | The ***total_seconds*** is the age of the document holder in seconds. 
+years | Integer | The ***years*** indicates the age of the document holder in years.
+months | Integer | The ***months*** indicates the age of the document holder in months substracted by the years.
+days | Integer | The ***days***  indicates the age of the document holder in days substracted by the months.
 dob_doe_dn_hash_present  | Boolean | The ***dob_doe_dn_hash_present*** checks if the date of birth, date of expiry and document number hash of the MRZ is present.
 document_checks |  - | The ***document_checks*** performed on the document.
 is_birth_date_valid |  Boolean | The ***is_birth_date_valid*** verifies if the birth date of the document holder is valid.
