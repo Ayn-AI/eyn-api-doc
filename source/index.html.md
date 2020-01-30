@@ -394,7 +394,7 @@ Identity documents supported:
 
 ### Testing
 
-Easy testing with our webflow <a href="https://app-staging.eyn.vision/identitycheck">here.</a>
+Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
 
 ### HTTP Request
 

@@ -317,4 +317,4 @@ Easy testing by uploading images and identity document examples <a href="https:/
 
 ## Demo Identity Check
 
-Easy testing with our webflow <a href="https://app-staging.eyn.vision/identitycheck">here.</a>
+Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
