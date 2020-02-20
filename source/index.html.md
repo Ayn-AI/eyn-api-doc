@@ -395,6 +395,7 @@ Identity documents supported:
 ### Testing
 
 Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
+ID check API response usually takes between 15 to 25 seconds.
 
 ### HTTP Request
 
