@@ -150,6 +150,7 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
   "document_checks": {
     "mrz_check": true, 
     "chip_check": true},
+  "BRP_remarks": "JOHN DOE\nYou can work in the UK until 02 January 2025\nDetails\nOn your current visa, you can:\ndo any job except those listed in the conditions below.\nConditions\nYou cannot:\nwork as a doctor or dentist in training\nplay or coach professional sports\nThese conditions are the standard requirements for your visa.",
   "checked_by": "user1@companydomain.com"
   "checked_at: {
     "site_id": "site_id_<number>"
@@ -186,8 +187,15 @@ images | dict | The ***images*** parameter contains a list of public links to (a
 right_to_work_status | string | The ***right_to_work_status*** parameter contains the status if an enrolee is allowed to work in the UK. Possible values are {passed, warn, failed}.
 biometric_checks | dict | The ***biometric_checks*** parameter contains a list of biometric checks where (a) ***face_matching_score*** parameter represents a confidence value of the face matching between the selfie and the document image,  (b) ***face_matching_status*** parameter represents the status of the face matching (either *passed* or *failed*), and (c) ***model_used*** parameter represents the model that was used to do the face matching.
 document_checks | dict | The ***document_checks*** parameter contains a list of boolean document checks where (a) ***mrz_check*** parameter asserts if the scanned MRZ code is correct and (b) ***chip_check*** parameter asserts if the chip of the identity document has been read successfully.
+BRP_remarks | string | The ***BRP_remarks*** parameter contains the remarks of a Biometric Recidency Permit queried to, and verified by, the UK Home Office, if applicable, otherwise it defaults to None.
 checked_by | string | The ***checked_by*** parameter contains the email address of the user who did the enrolment.
 checked_at | dict | The ***checked_at*** parameter contains location information where (a) ***site_id*** parameter is a unique id for the enrolment site, and (b) ***site_name*** parameter is a (changeable) name for the *site*.
+
+### Remarks
+
+<aside class="notice">
+In case the `/enrolments/{id}` endpoint is queried directly after the `/identitycheck` endpoint, it might be that `BRP_remarks` displays `None`. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
+</aside>
 
 # Document Checks
 
@@ -250,7 +258,7 @@ This API endpoint processes an identity document and returns:
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) [next version]</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol>
@@ -367,7 +375,9 @@ curl --data "document_front_base64_encoded=<document front image in base64 encod
     "optional_data_hash": "0",
     "sex": "F",
     "surname": "UK SPECIMEN"
-}}
+},
+"session_id": <enrolment_id>
+}
 ```
 
 This API endpoint processes an identity document and a selfie image and returns: 
@@ -379,7 +389,7 @@ This API endpoint processes an identity document and a selfie image and returns:
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) [next version]</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol>
@@ -443,5 +453,5 @@ optional_data  |  String | The ***optional_data*** is any optional data containt
 optional_data_hash  |  String | The ***optional_data_hash***  is the hash of the optional data used to verify the validity of the same.
 sex  |  String | The ***sex*** is the sex of document holder. This could be either F for female of M for male.
 surname  |  String | The ***surname***  is the last name of the document holder.
-
+session_id  |  uuid | The ***session_id*** uniquely identifies an enrolment. 
 
