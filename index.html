@@ -422,6 +422,7 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
   </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"BRP_remarks"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JOHN DOE</span><span class="se">\n</span><span class="s2">You can work in the UK until 02 January 2025</span><span class="se">\n</span><span class="s2">Details</span><span class="se">\n</span><span class="s2">On your current visa, you can:</span><span class="se">\n</span><span class="s2">do any job except those listed in the conditions below.</span><span class="se">\n</span><span class="s2">Conditions</span><span class="se">\n</span><span class="s2">You cannot:</span><span class="se">\n</span><span class="s2">work as a doctor or dentist in training</span><span class="se">\n</span><span class="s2">play or coach professional sports</span><span class="se">\n</span><span class="s2">These conditions are the standard requirements for your visa."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
   </span><span class="s2">"checked_at: {
     "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
@@ -515,6 +516,11 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>document_checks</em></strong> parameter contains a list of boolean document checks where (a) <strong><em>mrz_check</em></strong> parameter asserts if the scanned MRZ code is correct and (b) <strong><em>chip_check</em></strong> parameter asserts if the chip of the identity document has been read successfully.</td>
 </tr>
 <tr>
+<td>BRP_remarks</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>BRP_remarks</em></strong> parameter contains the remarks of a Biometric Recidency Permit queried to, and verified by, the UK Home Office, if applicable, otherwise it defaults to None.</td>
+</tr>
+<tr>
 <td>checked_by</td>
 <td style="text-align: center">string</td>
 <td>The <strong><em>checked_by</em></strong> parameter contains the email address of the user who did the enrolment.</td>
@@ -525,6 +531,10 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <td>The <strong><em>checked_at</em></strong> parameter contains location information where (a) <strong><em>site_id</em></strong> parameter is a unique id for the enrolment site, and (b) <strong><em>site_name</em></strong> parameter is a (changeable) name for the <em>site</em>.</td>
 </tr>
 </tbody></table>
+<h3 id='remarks'>Remarks</h3>
+<aside class="notice">
+In case the `/enrolments/{id}` endpoint is queried directly after the `/identitycheck` endpoint, it might be that `BRP_remarks` displays `None`. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
+</aside>
 <h1 id='document-checks'>Document Checks</h1><h2 id='perform-a-document-check'>Perform a Document Check</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
@@ -577,7 +587,7 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) [next version]</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol></p>
@@ -804,7 +814,9 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
     </span><span class="s2">"optional_data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"sex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"surname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="w">
-</span><span class="p">}}</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"session_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;enrolment_id&gt;</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This API endpoint processes an identity document and a selfie image and returns: 
 <ol>
@@ -815,7 +827,7 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) [next version]</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol></p>
@@ -1018,6 +1030,11 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>surname</td>
 <td style="text-align: center">String</td>
 <td>The <strong><em>surname</em></strong>  is the last name of the document holder.</td>
+</tr>
+<tr>
+<td>session_id</td>
+<td style="text-align: center">uuid</td>
+<td>The <strong><em>session_id</em></strong> uniquely identifies an enrolment.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
