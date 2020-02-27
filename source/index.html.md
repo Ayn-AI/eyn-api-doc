@@ -194,7 +194,7 @@ checked_at | dict | The ***checked_at*** parameter contains location information
 ### Remarks
 
 <aside class="notice">
-In case the `/enrolments/{id}` endpoint is queried directly after the `/identitycheck` endpoint, it might be that `BRP_remarks` displays `None`. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
+In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
 
 # Document Checks
