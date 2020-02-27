@@ -258,7 +258,7 @@ This API endpoint processes an identity document and returns:
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolments</a> endpoint)</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol>
@@ -389,7 +389,7 @@ This API endpoint processes an identity document and a selfie image and returns:
   <li>UK right to work</li>
   <ol>
     <li>Right to work status</li>
-    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolements</a> endpoint )</li>
+    <li>Right to work remarks (For BRPs) (see  <a href="#get-information-about-a-specific-enrolment">Enrolments</a> endpoint)</li>
     <li>Right to work share status (For BRPs) [next version]</li>
     </ol>
 </ol>
