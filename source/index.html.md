@@ -325,7 +325,8 @@ import requests
 data = {'document_front_base64_encoded': <document front image in base64 encoding>,
         'document_back_base64_encoded': <document back image in base64 encoding>,
         'selfie_base64_encoded': <selfie image in base64 encoding>,
-        'eyn_ocr_token': <EYN OCR TOKEN>}
+        'eyn_ocr_token': <EYN OCR TOKEN>,
+        'enrolment_site_id': <ENROLMENT SITE ID> (Optional)}
 response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
                          json=data)
 ```
@@ -335,6 +336,7 @@ curl --data "document_front_base64_encoded=<document front image in base64 encod
      --data "document_back_base64_encoded=<document back image in base64 encoding>"
      --data "selfie_base64_encoded=<selfie image in base64 encoding>"
      --data "eyn_ocr_token=<EYN OCR TOKEN>"
+     --data "enrolment_site_id"=<ENROLMENT SITE ID> (Optional)
      https://api.eyn.ninja/api/v1/prod/identitycheck
 ```
 
@@ -419,6 +421,7 @@ document_front_base64_encoded | - | Required | The ***document_front_base64_enco
 document_back_base64_encoded | - | Optional | The ***document_back_base64_encoded*** is the document back image (in case of an identity card) that should be processed in base64 encoding.
 selfie_base64_encoded | - | Required | The ***selfie_base64_encoded*** is the selfie image that should be processed in base64 encoding.
 eyn_ocr_token | - | Required |  The ***eyn_ocr_token*** is the token supplied by EYN for authentication.
+enrolment_site_id  | - | Optional |  The ***enrolment_site_id*** is the site id under which the enrolee's information will be stored in EYN's database (if applicable). All company's specific ***enrolment_site_id's*** can be found on the [here](https://app.eyn.vision/admin/sites) (access to EYN's Dashboard is required). 
 
 ### Response Parameters
 
