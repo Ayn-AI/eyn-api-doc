@@ -768,13 +768,15 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'document_front_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">document</span> <span class="n">front</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'document_back_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">document</span> <span class="n">back</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'selfie_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">selfie</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
-        <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
+        <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="s">'enrolment_site_id'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ENROLMENT</span> <span class="n">SITE</span> <span class="n">ID</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">Optional</span><span class="p">)}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/identitycheck'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"document_front_base64_encoded=&lt;document front image in base64 encoding&gt;"</span>
      --data <span class="s2">"document_back_base64_encoded=&lt;document back image in base64 encoding&gt;"</span>
      --data <span class="s2">"selfie_base64_encoded=&lt;selfie image in base64 encoding&gt;"</span>
      --data <span class="s2">"eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
+     --data <span class="s2">"enrolment_site_id"</span><span class="o">=</span>&lt;ENROLMENT SITE ID&gt; <span class="o">(</span>Optional<span class="o">)</span>
      https://api.eyn.ninja/api/v1/prod/identitycheck
 </code></pre>
 <blockquote>
@@ -876,6 +878,12 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>eyn_ocr_token</em></strong> is the token supplied by EYN for authentication.</td>
+</tr>
+<tr>
+<td>enrolment_site_id</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>enrolment_site_id</em></strong> is the site id under which the enrolee&#39;s information will be stored in EYN&#39;s database (if applicable). All company&#39;s specific <strong><em>enrolment_site_id&#39;s</em></strong> can be found on the <a href="https://app.eyn.vision/admin/sites">here</a> (access to EYN&#39;s Dashboard is required).</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters-4'>Response Parameters</h3>
