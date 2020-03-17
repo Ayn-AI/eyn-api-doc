@@ -423,6 +423,29 @@ selfie_base64_encoded | - | Required | The ***selfie_base64_encoded*** is the se
 eyn_ocr_token | - | Required |  The ***eyn_ocr_token*** is the token supplied by EYN for authentication.
 enrolment_site_id  | - | Optional |  The ***enrolment_site_id*** is the site id under which the enrolee's information will be stored in EYN's database (if applicable). All company's specific ***enrolment_site_id's*** can be found on the [here](https://app.eyn.vision/admin/sites) (access to EYN's Dashboard is required). 
 
+### Payload Samples
+
+To ensure a successfull API reponse, please upload images of the document which:
+
+<ol>
+  <li>Only include the first page </li>
+</ol>
+  <aside class="success"> **Good examples**
+    <br />
+    <center>
+    <img src="images/passport_good.jpeg" alt="good sample" style="width:300px;"/>
+    </center>
+ </aside>
+ <aside class="warning"> **Bad examples**
+    <br />
+    <center>
+    <img src="images/passport_bad.jpeg" alt="bad sample" style="width:300px;"/>
+    </center>
+ </aside>
+<ol>
+  <li value=2>Do not contain glares</li>
+</ol>
+
 ### Response Parameters
 
 Parameter |  Type |  Description
