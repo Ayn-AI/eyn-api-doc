@@ -227,6 +227,14 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication-for-enrolments" class="toc-h2 toc-link" data-title="Authentication for Enrolments">Authentication for Enrolments</a>
+                  </li>
+                  <li>
+                    <a href="#authentication-for-documentcheck-and-identitycheck" class="toc-h2 toc-link" data-title="Authentication for Documentcheck and Identitycheck">Authentication for Documentcheck and Identitycheck</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#enrolments" class="toc-h1 toc-link" data-title="Enrolments">Enrolments</a>
@@ -277,7 +285,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href="mailto:sales@eyn.vision">Request a Developer Key</a></li>
+            <li><a href="mailto:contact@eyn.vision">Request a Developer Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -291,7 +299,7 @@
 <p>TL;DR? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.</p>
 
 <p>Got more time? Continue exploring the API documentation below. In the following, we&#39;ll explain every API endpoint, the query and response parameters and give code examples how to query our endpoints and sample responses. As mentioned above, we provide demos which you can run to see how to query the endpoints in more detail. Any more questions --- let us know at <a href="mailto:developers@eyn.vision">developers@eyn.vision</a>.</p>
-<h1 id='authentication'>Authentication</h1>
+<h1 id='authentication'>Authentication</h1><h2 id='authentication-for-enrolments'>Authentication for Enrolments</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -308,7 +316,7 @@
 <p>Make sure to replace <code>username</code> and <code>password</code> with your AWS Cognito credentials. Replace <code>&lt;cognito_pool_id&gt;</code> with <code>eu-west-2_8ZNdnSazL</code> and <code>&lt;cognito_client_id&gt;</code> with <code>4sn0g6boc405tspau0lfl0aiba</code>.</p>
 </blockquote>
 
-<p>EYN uses AWS Cognito to authenticate users. Request your credentials from <a href="mailto:sales@eyn.vision">here</a>.</p>
+<p>EYN uses AWS Cognito to authenticate users. Request your credentials from <a href="mailto:contact@eyn.vision">here</a>.</p>
 
 <p>ENY also expects a API key to be included in all API requests to the server. EYN API expects a header to all API requests that looks like the following:</p>
 
@@ -318,6 +326,12 @@
 
 <aside class="notice">
 You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token</code> response when authenticating to AWS Cognito.
+</aside>
+<h2 id='authentication-for-documentcheck-and-identitycheck'>Authentication for Documentcheck and Identitycheck</h2>
+<p>Authentication for document check and identity check is currently entirely based on a token.</p>
+
+<aside class="notice">
+You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request your credentials from [here](mailto:contact@eyn.vision).
 </aside>
 <h1 id='enrolments'>Enrolments</h1><h2 id='get-enrolments'>Get Enrolments</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
