@@ -1356,30 +1356,7 @@ Replace <code>enrolment_id</code> with a valid enrolment id (for example, retrie
 <p>(5) Finally, you can use the returned enrolment information in your application. (The demo solely prints all retrieved information.)</p>
 <h2 id='demo-document-check'>Demo Document Check</h2>
 <p>Easy testing by uploading images and identity document examples <a href="https://app.eyn.vision/documentcheck">here.</a></p>
-<h2 id='demo-identity-check'>Demo Identity Check</h2>
-<p>Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a></p>
-
-<p>Further to our sample implementation in the code tabs you can find python and shell scripts to query the <code>/identitycheck</code> endpoint. </p>
-
-<p>You can download these sample scripts here:</p>
-
-<ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
-</ol>
-
-<ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
-</ol>
-
-<aside class="notice">
-Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
-</aside>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<h2 id='demo-identity-check'>Demo Identity Check</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="s">"passport_base64.txt"</span><span class="p">),</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
@@ -1431,8 +1408,30 @@ EOF
 
 <span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span> | 
 curl --header <span class="s2">"Content-Type:application/json"</span> -d @- https://api.eyn.ninja/api/v1/prod/identitycheck 
-
 </code></pre>
+<p>Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a></p>
+
+<p>Further to our sample implementation in the code tabs you can find python and shell scripts to query the <code>/identitycheck</code> endpoint. </p>
+
+<p>You can download these sample scripts here:</p>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
+</ol>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
+</aside>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
