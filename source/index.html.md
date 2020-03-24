@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href="mailto:sales@eyn.vision">Request a Developer Key</a>
+  - <a href="mailto:contact@eyn.vision">Request a Developer Key</a>
 
 includes:
   - errors
@@ -29,6 +29,7 @@ Got more time? Continue exploring the API documentation below. In the following,
 
 # Authentication
 
+## Authentication for Enrolments
 > To authorize, use this code:
 
 ```python
@@ -44,7 +45,7 @@ headers = {'Accept': '*/*',
 
 > Make sure to replace `username` and `password` with your AWS Cognito credentials. Replace `<cognito_pool_id>` with `eu-west-2_8ZNdnSazL` and `<cognito_client_id>` with `4sn0g6boc405tspau0lfl0aiba`.
 
-EYN uses AWS Cognito to authenticate users. Request your credentials from [here](mailto:sales@eyn.vision).
+EYN uses AWS Cognito to authenticate users. Request your credentials from [here](mailto:contact@eyn.vision).
 
 ENY also expects a API key to be included in all API requests to the server. EYN API expects a header to all API requests that looks like the following:
 
@@ -54,6 +55,14 @@ ENY also expects a API key to be included in all API requests to the server. EYN
 
 <aside class="notice">
 You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token</code> response when authenticating to AWS Cognito.
+</aside>
+
+## Authentication for Documentcheck and Identitycheck 
+
+Authentication for document check and identity check is currently entirely based on a token.
+
+<aside class="notice">
+You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request your credentials from [here](mailto:contact@eyn.vision).
 </aside>
 
 # Enrolments
