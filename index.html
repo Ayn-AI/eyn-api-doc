@@ -540,9 +540,14 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
         <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/documentcheck'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"image_base64_encoded=&lt;image in base64 encoding&gt;"</span>
-     --data <span class="s2">"eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
-     https://api.eyn.ninja/api/v1/prod/documentcheck
+</code></pre><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> -n <span class="s1">'{"image_base64_encoded": "'</span>; 
+ base64 document.jpg; 
+ <span class="nb">echo</span> <span class="s1">'",'</span>; 
+ <span class="nb">echo</span> -n <span class="s1">'"eyn_ocr_token": "&lt;EYN OCR TOKEN&gt;"'</span>;
+ <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
+ curl -H <span class="s2">"Content-Type: application/json"</span> 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/documentcheck
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -772,12 +777,22 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
         <span class="s">'enrolment_site_id'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">ENROLMENT</span> <span class="n">SITE</span> <span class="n">ID</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">Optional</span><span class="p">)}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/identitycheck'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl --data <span class="s2">"document_front_base64_encoded=&lt;document front image in base64 encoding&gt;"</span>
-     --data <span class="s2">"document_back_base64_encoded=&lt;document back image in base64 encoding&gt;"</span>
-     --data <span class="s2">"selfie_base64_encoded=&lt;selfie image in base64 encoding&gt;"</span>
-     --data <span class="s2">"eyn_ocr_token=&lt;EYN OCR TOKEN&gt;"</span>
-     --data <span class="s2">"enrolment_site_id"</span><span class="o">=</span>&lt;ENROLMENT SITE ID&gt; <span class="o">(</span>Optional<span class="o">)</span>
-     https://api.eyn.ninja/api/v1/prod/identitycheck
+</code></pre><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> -n <span class="s1">'{"document_front_base64_encoded": "'</span>; 
+ base64 document_front.jpg; 
+ <span class="nb">echo</span> <span class="s1">'",'</span>; 
+ <span class="nb">echo</span> -n <span class="s1">'"document_back_base64_encoded": "'</span>;   <span class="o">(</span>Optional<span class="o">)</span>
+ base64 document_back.jpg;                      <span class="o">(</span>Optional<span class="o">)</span>
+ <span class="nb">echo</span> <span class="s1">'",'</span>;                                     <span class="o">(</span>Optional<span class="o">)</span>
+ <span class="nb">echo</span> -n <span class="s1">'"selfie_base64_encoded": "'</span>; 
+ base64 selfie.jpg; 
+ <span class="nb">echo</span> <span class="s1">'",'</span>; 
+ <span class="nb">echo</span> -n <span class="s1">'"eyn_ocr_token": "&lt;EYN OCR TOKEN&gt;"'</span>;
+ <span class="nb">echo</span> <span class="s1">'",'</span>;                                             <span class="o">(</span>Optional<span class="o">)</span>
+ <span class="nb">echo</span> -n <span class="s1">'"enrolment_site_id": "&lt;ENROLMENT SITE ID&gt;"'</span>;  <span class="o">(</span>Optional<span class="o">)</span>
+ <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
+ curl -H <span class="s2">"Content-Type: application/json"</span> 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/identitycheck
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
