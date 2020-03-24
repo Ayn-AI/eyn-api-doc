@@ -318,3 +318,86 @@ Easy testing by uploading images and identity document examples <a href="https:/
 ## Demo Identity Check
 
 Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
+
+Further to our sample implementation in the code tabs you can find python and shell scripts to query the `/identitycheck` endpoint. 
+
+You can download these sample scripts here:
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
+</ol>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
+</aside>
+
+```python
+import requests
+import os
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "passport_base64.txt"), "r") as file:
+    document_front_base64_encoded = file.read()
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "selfie_base64.txt"), "r") as file:
+    selfie_base64_encoded = file.read()
+
+data = {'document_front_base64_encoded': document_front_base64_encoded,
+        'selfie_base64_encoded': selfie_base64_encoded,
+        'eyn_ocr_token': '<EYN OCR TOKEN>'}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck', json=data)
+print(response.text)
+```
+
+```python
+import requests
+import os
+import json
+import base64
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "passport.jpg"), "rb") as file:
+    blob = base64.encodebytes(file.read())
+    file.close()
+    blob = blob.decode("ascii")
+    document_front_base64_encoded = blob.replace("\n", "")
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "selfie.jpg"), "rb") as file:
+    blob = base64.encodebytes(file.read())
+    file.close()
+    blob = blob.decode("ascii")
+    selfie_base64_encoded = blob.replace("\n", "")
+
+data = {'document_front_base64_encoded': document_front_base64_encoded,
+        'selfie_base64_encoded': selfie_base64_encoded,
+        'eyn_ocr_token': '<EYN OCR TOKEN>'}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck', json=data)
+print(response.text)
+```
+
+```shell
+#!/bin/bash
+
+PASSPORT="$(base64 passport.jpg)"
+SELFIE="$(base64 selfie.jpg)"
+
+payload=$(cat <<EOF
+{
+    "selfie_base64_encoded": "${SELFIE}",
+    "document_front_base64_encoded": "${PASSPORT}",
+    "eyn_ocr_token": "<EYN OCR TOKEN>"
+}
+EOF
+)
+
+echo ${payload}
+
+echo ${payload} | 
+curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/identitycheck 
+
+```
