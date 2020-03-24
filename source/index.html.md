@@ -209,9 +209,14 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/documentcheck',
 ```
 
 ```shell
-curl --data "image_base64_encoded=<image in base64 encoding>"
-     --data "eyn_ocr_token=<EYN OCR TOKEN>"
-     https://api.eyn.ninja/api/v1/prod/documentcheck
+(echo -n '{"image_base64_encoded": "'; 
+ base64 document.jpg; 
+ echo '",'; 
+ echo -n '"eyn_ocr_token": "<EYN OCR TOKEN>"';
+ echo '}') | 
+ curl -H "Content-Type: application/json" 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/documentcheck
 ```
 
 > The above command returns JSON structured like this:
@@ -332,12 +337,22 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
 ```
 
 ```shell
-curl --data "document_front_base64_encoded=<document front image in base64 encoding>"
-     --data "document_back_base64_encoded=<document back image in base64 encoding>"
-     --data "selfie_base64_encoded=<selfie image in base64 encoding>"
-     --data "eyn_ocr_token=<EYN OCR TOKEN>"
-     --data "enrolment_site_id"=<ENROLMENT SITE ID> (Optional)
-     https://api.eyn.ninja/api/v1/prod/identitycheck
+(echo -n '{"document_front_base64_encoded": "'; 
+ base64 document_front.jpg; 
+ echo '",'; 
+ echo -n '"document_back_base64_encoded": "';   (Optional)
+ base64 document_back.jpg;                      (Optional)
+ echo '",';                                     (Optional)
+ echo -n '"selfie_base64_encoded": "'; 
+ base64 selfie.jpg; 
+ echo '",'; 
+ echo -n '"eyn_ocr_token": "<EYN OCR TOKEN>"';
+ echo '",';                                             (Optional)
+ echo -n '"enrolment_site_id": "<ENROLMENT SITE ID>"';  (Optional)
+ echo '}') | 
+ curl -H "Content-Type: application/json" 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/identitycheck
 ```
 
 > The above command returns JSON structured like this:
