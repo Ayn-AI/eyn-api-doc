@@ -317,29 +317,6 @@ Easy testing by uploading images and identity document examples <a href="https:/
 
 ## Demo Identity Check
 
-Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
-
-Further to our sample implementation in the code tabs you can find python and shell scripts to query the `/identitycheck` endpoint. 
-
-You can download these sample scripts here:
-
-<ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
-</ol>
-
-<ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
-</ol>
-
-<aside class="notice">
-Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
-</aside>
-
 ```python
 import requests
 import os
@@ -399,5 +376,29 @@ echo ${payload}
 
 echo ${payload} | 
 curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/identitycheck 
-
 ```
+
+Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
+
+Further to our sample implementation in the code tabs you can find python and shell scripts to query the `/identitycheck` endpoint. 
+
+You can download these sample scripts here:
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
+</ol>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
+</aside>
+
+
