@@ -62,7 +62,7 @@ You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token
 Authentication for document check and identity check is currently entirely based on a token.
 
 <aside class="notice">
-You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request your credentials from [here](mailto:contact@eyn.vision).
+You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request your credentials from <a href="mailto:contact@eyn.vision">here</a>.
 </aside>
 
 # Enrolments
