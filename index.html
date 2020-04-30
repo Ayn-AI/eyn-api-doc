@@ -560,21 +560,19 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <aside class="notice">
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
-<h1 id='check-in-outs'>Check-in/outs</h1><h2 id='get-check-in-outs'>Get Check-in/outs</h2>
-<p><a target="checks" />
-```python
-import requests
-parameters = {&#39;start_time&#39;: 0,
-              &#39;end_time&#39;: 1554389124,
-              &#39;api_key&#39;: <your api key supplied by EYN>}
-headers = {&#39;Accept&#39;: &#39;<em>/</em>&#39;,
-           &#39;Content-Type&#39;: &#39;application/json; charset=UTF-8&#39;,
-           &#39;Authorization&#39;: <Cognito Id Token>}</p>
 
-<p>response = requests.get(&#39;https://api.eyn.ninja/api/v1/prod/checks&#39;,
-                        params=parameters, headers=headers)
-```</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks?
+<p><a name="checks"></a></p>
+<h1 id='check-in-outs'>Check-in/outs</h1><h2 id='get-check-in-outs'>Get Check-in/outs</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1554389124</span><span class="p">,</span>
+              <span class="s">'api_key'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">api</span> <span class="n">key</span> <span class="n">supplied</span> <span class="n">by</span> <span class="n">EYN</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+           <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+           <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks'</span><span class="p">,</span>
+                        <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks?
     api_key=&lt;your api key supplied by EYN&gt;&amp;
     start_time=&lt;start time&gt;&amp;
     end_time=&lt;end time&gt;"</span> 
