@@ -229,7 +229,7 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authentication-for-enrolments" class="toc-h2 toc-link" data-title="Authentication for Enrolments">Authentication for Enrolments</a>
+                    <a href="#authentication-for-enrolments-and-check-in-outs" class="toc-h2 toc-link" data-title="Authentication for Enrolments and Check-in/outs">Authentication for Enrolments and Check-in/outs</a>
                   </li>
                   <li>
                     <a href="#authentication-for-documentcheck-and-identitycheck" class="toc-h2 toc-link" data-title="Authentication for Documentcheck and Identitycheck">Authentication for Documentcheck and Identitycheck</a>
@@ -244,6 +244,17 @@
                   </li>
                   <li>
                     <a href="#get-information-about-a-specific-enrolment" class="toc-h2 toc-link" data-title="Get Information about a Specific Enrolment">Get Information about a Specific Enrolment</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#check-in-outs" class="toc-h1 toc-link" data-title="Check-in/outs">Check-in/outs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-check-in-outs" class="toc-h2 toc-link" data-title="Get Check-in/outs">Get Check-in/outs</a>
+                  </li>
+                  <li>
+                    <a href="#get-information-about-a-specific-check-in-out" class="toc-h2 toc-link" data-title="Get Information about a Specific Check-in/out">Get Information about a Specific Check-in/out</a>
                   </li>
               </ul>
           </li>
@@ -299,7 +310,7 @@
 <p>TL;DR? EYN API provides demo files which show how to query the API endpoints. This way you can directly see what EYN API has to offer. Click <a href="#demos">here</a> to go directly to the demos.</p>
 
 <p>Got more time? Continue exploring the API documentation below. In the following, we&#39;ll explain every API endpoint, the query and response parameters and give code examples how to query our endpoints and sample responses. As mentioned above, we provide demos which you can run to see how to query the endpoints in more detail. Any more questions --- let us know at <a href="mailto:developers@eyn.vision">developers@eyn.vision</a>.</p>
-<h1 id='authentication'>Authentication</h1><h2 id='authentication-for-enrolments'>Authentication for Enrolments</h2>
+<h1 id='authentication'>Authentication</h1><h2 id='authentication-for-enrolments-and-check-in-outs'>Authentication for Enrolments and Check-in/outs</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -357,7 +368,7 @@ You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request
                    </span><span class="err">...</span><span class="w">
                    </span><span class="p">{</span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;enrolment_id_n&gt;</span><span class="p">}]}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns a list of enrolment ids.</p>
+<p>This endpoint returns a list of enrolment ids. Each enrolment id maps to a specific enrolment which is captured when scanning an enrolee&#39;s identity document.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://api.eyn.ninja/api/v1/prod/enrolments</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -417,12 +428,12 @@ You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUT"</span><span class="p">,</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19881204"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20420101"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20250928"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"link_identity_document_image_front"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
@@ -436,13 +447,13 @@ You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request
   </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
-  </span><span class="s2">"BRP_remarks"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JOHN DOE</span><span class="se">\n</span><span class="s2">You can work in the UK until 02 January 2025</span><span class="se">\n</span><span class="s2">Details</span><span class="se">\n</span><span class="s2">On your current visa, you can:</span><span class="se">\n</span><span class="s2">do any job except those listed in the conditions below.</span><span class="se">\n</span><span class="s2">Conditions</span><span class="se">\n</span><span class="s2">You cannot:</span><span class="se">\n</span><span class="s2">work as a doctor or dentist in training</span><span class="se">\n</span><span class="s2">play or coach professional sports</span><span class="se">\n</span><span class="s2">These conditions are the standard requirements for your visa."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"BRP_remarks"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE</span><span class="se">\n</span><span class="s2">You can work in the UK until 02 January 2025</span><span class="se">\n</span><span class="s2">Details</span><span class="se">\n</span><span class="s2">On your current visa, you can:</span><span class="se">\n</span><span class="s2">do any job except those listed in the conditions below.</span><span class="se">\n</span><span class="s2">Conditions</span><span class="se">\n</span><span class="s2">You cannot:</span><span class="se">\n</span><span class="s2">work as a doctor or dentist in training</span><span class="se">\n</span><span class="s2">play or coach professional sports</span><span class="se">\n</span><span class="s2">These conditions are the standard requirements for your visa."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
-  </span><span class="s2">"checked_at: {
-    "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
-    "</span><span class="err">site_name</span><span class="s2">":"</span><span class="err">site_name</span><span class="s2">" }}
+  </span><span class="s2">"checked_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_59898a5f-1b20-47df-8855-3d6d5e3b6b2e"</span><span class="w">
+    </span><span class="s2">"site_name"</span><span class="p">:</span><span class="s2">"London"</span><span class="w"> </span><span class="p">}}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns information about a specific enrolment.</p>
+<p>This endpoint returns information about a specific enrolment. The information refects the data captured from the enrolee&#39;s identity document.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://api.eyn.ninja/api/v1/prod/enrolments/{enrolment_id}</code></p>
 
@@ -549,6 +560,193 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <aside class="notice">
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
+
+<p><a name="checks"></a></p>
+<h1 id='check-in-outs'>Check-in/outs</h1><h2 id='get-check-in-outs'>Get Check-in/outs</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1554389124</span><span class="p">,</span>
+              <span class="s">'api_key'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">api</span> <span class="n">key</span> <span class="n">supplied</span> <span class="n">by</span> <span class="n">EYN</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+           <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+           <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks'</span><span class="p">,</span>
+                        <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks?
+    api_key=&lt;your api key supplied by EYN&gt;&amp;
+    start_time=&lt;start time&gt;&amp;
+    end_time=&lt;end time&gt;"</span> 
+    -H <span class="s2">"Authorization: &lt;Cognito Id Token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"check_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">"check_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;check_id_</span><span class="mi">1</span><span class="err">&gt;</span><span class="p">},</span><span class="w">
+               </span><span class="p">{</span><span class="s2">"check_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;check_id_</span><span class="mi">2</span><span class="err">&gt;</span><span class="p">},</span><span class="w">
+               </span><span class="err">...</span><span class="w">
+               </span><span class="p">{</span><span class="s2">"check_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;check_id_n&gt;</span><span class="p">}]}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns a list of check-in/out ids. Each check id maps to a specific check-in/out of an enrolee when using EYN&#39;s time and attendance service.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.eyn.ninja/api/v1/prod/checks</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>api_key</em></strong> of EYN to access the endpoint.</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td style="text-align: center">0</td>
+<td>Optional</td>
+<td>If <strong><em>start_time</em></strong> is set, then the response contains all checks from this point in time. <strong><em>start_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
+</tr>
+<tr>
+<td>end_time</td>
+<td style="text-align: center">request time</td>
+<td>Optional</td>
+<td>If <strong><em>end_time</em></strong> is set, then the response contains all checks up to this point in time. <strong><em>end_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>site_id</em></strong> is the site id under which the enrolee&#39;s information is stored in EYN&#39;s database. All customer&#39;s specific <strong><em>site_id&#39;s</em></strong> can be found <a href="https://app.eyn.vision/admin/sites">here</a> (access to EYN&#39;s Dashboard is required).</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-3'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>check_id</td>
+<td style="text-align: center">uuid</td>
+<td>An <strong><em>check_id</em></strong> uniquely identifies a check-in/out.</td>
+</tr>
+</tbody></table>
+<h2 id='get-information-about-a-specific-check-in-out'>Get Information about a Specific Check-in/out</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'api_key'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">api</span> <span class="n">key</span> <span class="n">supplied</span> <span class="n">by</span> <span class="n">EYN</span><span class="o">&gt;&gt;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+           <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+           <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks/&lt;check_id&gt;'</span><span class="p">,</span>
+                        <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks/&lt;check_id&gt;?
+    api_key=&lt;your api key supplied by EYN&gt;&gt;"</span> 
+    -H <span class="s2">"Authorization: &lt;Cognito Id Token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"other_names"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"family_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19881204"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"check_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_stamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586276011386</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">21124</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_confirmed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_cbec63ff-71e0-46d6-a0ed-c06fa168f676"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf79eeb-d92f-40d6-a3fb-0b494af04b77"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns information about a specific check-in/out.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.eyn.ninja/api/v1/prod/checks/{check_id}</code></p>
+
+<aside class="notice">
+You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>).
+</aside>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>api_key</em></strong> of EYN to access the endpoints.</td>
+</tr>
+<tr>
+<td>check_id</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>check_id</em></strong> for that specific information is requested. A &#39;check_id&#39; can be retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-4'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>other_names</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>other_names</em></strong> parameter contains the given names of a worker  (including middle names).</td>
+</tr>
+<tr>
+<td>family_name</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>family_name</em></strong> parameter contains the family name of a worker.</td>
+</tr>
+<tr>
+<td>date_of_birth</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>date_of_birth</em></strong> parameter contains the date of birth of a worker. The returned value has a format of yyyymmdd.</td>
+</tr>
+<tr>
+<td>check_state</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>check_state</em></strong> parameter contains the status of the check. It can be either of the following: <code>{&quot;in&quot;, &quot;out&quot;, &quot;in_manual&quot;, &quot;out_manual&quot;}</code>.</td>
+</tr>
+<tr>
+<td>time_stamp</td>
+<td style="text-align: center">number</td>
+<td>The <strong><em>time_stamp</em></strong> parameter represents time stamp when the check-in/out has been performed in Unix Epoch format (in milliseconds).</td>
+</tr>
+<tr>
+<td>duration</td>
+<td style="text-align: center">number</td>
+<td>The <strong><em>duration</em></strong> parameter is the difference between the check-out time stamp and the check-in time stamp of a worker in Unix Epoch format (in milliseconds). For check-ins or if this duration can not be calculated, this parameter is <code>-1</code>.</td>
+</tr>
+<tr>
+<td>user_confirmed</td>
+<td style="text-align: center">Boolean</td>
+<td>The <strong><em>user_confirmed</em></strong> parameter indicates if a worker confirmed his/her identity when checking in/out.</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>site_id</em></strong> parameter is a unique identifier for a site.</td>
+</tr>
+<tr>
+<td>enrolment_id</td>
+<td style="text-align: center">uuid</td>
+<td>The <strong><em>enrolment_id</em></strong> parameter is a unique identifier for a worker.</td>
+</tr>
+</tbody></table>
 <h1 id='document-checks'>Document Checks</h1><h2 id='perform-a-document-check'>Perform a Document Check</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'image_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="s">'eyn_ocr_token'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">EYN</span> <span class="n">OCR</span> <span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">}</span>
@@ -620,7 +818,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 </ol>
 <h3 id='drag-and-drop-testing'>Drag and Drop Testing</h3>
 <p>Easy testing by uploading images and identity document examples <a href="https://app.eyn.vision/documentcheck">here.</a></p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.eyn.ninja/api/v1/prod/documentcheck</code></p>
 <h3 id='payload'>Payload</h3>
 <table><thead>
@@ -644,7 +842,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 <td>The <strong><em>eyn_ocr_token</em></strong> is the token supplied by EYN for authentication.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-3'>Response Parameters</h3>
+<h3 id='response-parameters-5'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -812,7 +1010,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"face_checks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"face_matched"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"face_matched"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"face_similarity"</span><span class="p">:</span><span class="w"> </span><span class="mf">90.26</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -873,7 +1071,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 <h3 id='testing'>Testing</h3>
 <p>Easy testing with our webflow <a href="https://app.eyn.vision/identitycheck">here.</a>
 ID check API response usually takes between 15 to 25 seconds.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://api.eyn.ninja/api/v1/prod/identitycheck</code></p>
 <h3 id='payload-2'>Payload</h3>
 <table><thead>
@@ -912,7 +1110,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>enrolment_site_id</td>
 <td style="text-align: center">-</td>
 <td>Optional</td>
-<td>The <strong><em>enrolment_site_id</em></strong> is the site id under which the enrolee&#39;s information will be stored in EYN&#39;s database (if applicable). All company&#39;s specific <strong><em>enrolment_site_id&#39;s</em></strong> can be found on the <a href="https://app.eyn.vision/admin/sites">here</a> (access to EYN&#39;s Dashboard is required).</td>
+<td>The <strong><em>enrolment_site_id</em></strong> is the site id under which the enrolee&#39;s information will be stored in EYN&#39;s database (if applicable). All company&#39;s specific <strong><em>enrolment_site_id&#39;s</em></strong> can be found <a href="https://app.eyn.vision/admin/sites">here</a> (access to EYN&#39;s Dashboard is required).</td>
 </tr>
 </tbody></table>
 <h3 id='payload-samples'>Payload Samples</h3>
@@ -937,7 +1135,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <ol>
   <li value=2>Do not contain glares</li>
 </ol></p>
-<h3 id='response-parameters-4'>Response Parameters</h3>
+<h3 id='response-parameters-6'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
