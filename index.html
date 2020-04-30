@@ -449,9 +449,9 @@ You must replace <code>EYN OCR TOKEN</code> with the token given by EYN. Request
     </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
   </span><span class="s2">"BRP_remarks"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE</span><span class="se">\n</span><span class="s2">You can work in the UK until 02 January 2025</span><span class="se">\n</span><span class="s2">Details</span><span class="se">\n</span><span class="s2">On your current visa, you can:</span><span class="se">\n</span><span class="s2">do any job except those listed in the conditions below.</span><span class="se">\n</span><span class="s2">Conditions</span><span class="se">\n</span><span class="s2">You cannot:</span><span class="se">\n</span><span class="s2">work as a doctor or dentist in training</span><span class="se">\n</span><span class="s2">play or coach professional sports</span><span class="se">\n</span><span class="s2">These conditions are the standard requirements for your visa."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
-  </span><span class="s2">"checked_at: {
-    "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
-    "</span><span class="err">site_name</span><span class="s2">":"</span><span class="err">site_name</span><span class="s2">" }}
+  </span><span class="s2">"checked_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_&lt;number&gt;"</span><span class="w">
+    </span><span class="s2">"site_name"</span><span class="p">:</span><span class="s2">"site_name"</span><span class="w"> </span><span class="p">}}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns information about a specific enrolment. The information refects the data captured from the enrolee&#39;s identity document.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -560,17 +560,21 @@ You must replace <code>{enrolment_id}</code> with a valid enrolment id (e.g. ret
 <aside class="notice">
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
-<h1 id='check-in-outs'>Check-in/outs</h1><h2 id='get-check-in-outs'>Get Check-in/outs</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1554389124</span><span class="p">,</span>
-              <span class="s">'api_key'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">your</span> <span class="n">api</span> <span class="n">key</span> <span class="n">supplied</span> <span class="n">by</span> <span class="n">EYN</span><span class="o">&gt;</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
-           <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
-           <span class="s">'Authorization'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Cognito</span> <span class="n">Id</span> <span class="n">Token</span><span class="o">&gt;</span><span class="p">}</span>
+<h1 id='check-in-outs'>Check-in/outs</h1><h2 id='get-check-in-outs'>Get Check-in/outs</h2>
+<p><a target="checks" />
+```python
+import requests
+parameters = {&#39;start_time&#39;: 0,
+              &#39;end_time&#39;: 1554389124,
+              &#39;api_key&#39;: <your api key supplied by EYN>}
+headers = {&#39;Accept&#39;: &#39;<em>/</em>&#39;,
+           &#39;Content-Type&#39;: &#39;application/json; charset=UTF-8&#39;,
+           &#39;Authorization&#39;: <Cognito Id Token>}</p>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks'</span><span class="p">,</span>
-                        <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks?
+<p>response = requests.get(&#39;https://api.eyn.ninja/api/v1/prod/checks&#39;,
+                        params=parameters, headers=headers)
+```</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.eyn.ninja/api/v1/prod/checks?
     api_key=&lt;your api key supplied by EYN&gt;&amp;
     start_time=&lt;start time&gt;&amp;
     end_time=&lt;end time&gt;"</span> 
@@ -657,7 +661,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
     </span><span class="s2">"check_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"time_stamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586276011386</span><span class="p">,</span><span class="w">
     </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">21124</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user_confirmed"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_confirmed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_cbec63ff-71e0-46d6-a0ed-c06fa168f676"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf79eeb-d92f-40d6-a3fb-0b494af04b77"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -667,7 +671,7 @@ In case the <code>/enrolments/{id}</code> endpoint is queried directly after the
 <p><code>GET https://api.eyn.ninja/api/v1/prod/checks/{check_id}</code></p>
 
 <aside class="notice">
-You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#get-check-in/outs" style="text-decoration: none"><code>/checks</code></a>).
+You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>).
 </aside>
 <h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
@@ -688,7 +692,7 @@ You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved v
 <td>check_id</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
-<td>The <strong><em>check_id</em></strong> for that specific information is requested. A &#39;check_id&#39; can be retrieved via <a href="#get-check-in/outs"" style="text-decoration: none"><code>/checks</code></a>.</td>
+<td>The <strong><em>check_id</em></strong> for that specific information is requested. A &#39;check_id&#39; can be retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters-4'>Response Parameters</h3>
@@ -741,7 +745,7 @@ You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved v
 </tr>
 <tr>
 <td>enrolment_id</td>
-<td style="text-align: center">string</td>
+<td style="text-align: center">uuid</td>
 <td>The <strong><em>enrolment_id</em></strong> parameter is a unique identifier for a worker.</td>
 </tr>
 </tbody></table>
@@ -1008,7 +1012,7 @@ You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved v
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="s2">"face_checks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"face_matched"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"face_matched"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"face_similarity"</span><span class="p">:</span><span class="w"> </span><span class="mf">90.26</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="s2">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
