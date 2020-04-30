@@ -161,9 +161,9 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
     "chip_check": true},
   "BRP_remarks": "ANGELA ZOE\nYou can work in the UK until 02 January 2025\nDetails\nOn your current visa, you can:\ndo any job except those listed in the conditions below.\nConditions\nYou cannot:\nwork as a doctor or dentist in training\nplay or coach professional sports\nThese conditions are the standard requirements for your visa.",
   "checked_by": "user1@companydomain.com"
-  "checked_at: {
-    "site_id": "site_id_<number>"
-    "site_name":"site_name" }}
+  "checked_at": {
+    "site_id": "site_id_59898a5f-1b20-47df-8855-3d6d5e3b6b2e"
+    "site_name":"London" }}
 ```
 This endpoint returns information about a specific enrolment. The information refects the data captured from the enrolee's identity document.
 
@@ -206,8 +206,10 @@ checked_at | dict | The ***checked_at*** parameter contains location information
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
 
+<a name="checks"></a>
 # Check-in/outs
 ## Get Check-in/outs
+
 ```python
 import requests
 parameters = {'start_time': 0,
@@ -289,7 +291,7 @@ curl "https://api.eyn.ninja/api/v1/prod/checks/<check_id>?
     "check_state": "in",
     "time_stamp": 1586276011386,
     "duration": 21124,
-    "user_confirmed": True,
+    "user_confirmed": true,
     "site_id": "site_id_cbec63ff-71e0-46d6-a0ed-c06fa168f676",
     "enrolment_id": "9bf79eeb-d92f-40d6-a3fb-0b494af04b77"
 }
@@ -301,7 +303,7 @@ This endpoint returns information about a specific check-in/out.
 `GET https://api.eyn.ninja/api/v1/prod/checks/{check_id}`
 
 <aside class="notice">
-You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#get-check-in/outs" style="text-decoration: none"><code>/checks</code></a>).
+You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>).
 </aside>
 
 ### Query Parameters
@@ -309,7 +311,7 @@ You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved v
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
-check_id | - | Required | The ***check_id*** for that specific information is requested. A 'check_id' can be retrieved via <a href="#get-check-in/outs"" style="text-decoration: none"><code>/checks</code></a>.
+check_id | - | Required | The ***check_id*** for that specific information is requested. A 'check_id' can be retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>.
 
 ### Response Parameters
 
@@ -323,7 +325,7 @@ time_stamp  | number | The ***time_stamp*** parameter represents time stamp when
 duration  | number | The ***duration*** parameter is the difference between the check-out time stamp and the check-in time stamp of a worker in Unix Epoch format (in milliseconds). For check-ins or if this duration can not be calculated, this parameter is `-1`.
 user_confirmed  | Boolean | The ***user_confirmed*** parameter indicates if a worker confirmed his/her identity when checking in/out.
 site_id  | string | The ***site_id*** parameter is a unique identifier for a site.
-enrolment_id  | string | The ***enrolment_id*** parameter is a unique identifier for a worker.
+enrolment_id  | uuid | The ***enrolment_id*** parameter is a unique identifier for a worker.
 
 # Document Checks
 
@@ -487,7 +489,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
 
 ```json
 { "face_checks" : {
-    "face_matched": True,
+    "face_matched": true,
     "face_similarity": 90.26
 },
 "age": {
