@@ -29,7 +29,7 @@ Got more time? Continue exploring the API documentation below. In the following,
 
 # Authentication
 
-## Authentication for Enrolments
+## Authentication for Enrolments and Check-in/outs
 > To authorize, use this code:
 
 ```python
@@ -97,7 +97,7 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments?
                    {"enrolment_id": <enrolment_id_n>}]}
 ```
 
-This endpoint returns a list of enrolment ids.
+This endpoint returns a list of enrolment ids. Each enrolment id maps to a specific enrolment which is captured when scanning an enrolee's identity document.
 
 ### HTTP Request
 
@@ -140,12 +140,12 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
 > The above command returns JSON structured like this:
 
 ```json
-{"other_names" : "John",
- "family_name" : "Doe",
- "date_of_birth": "19700101",
- "nationality": "AUT",
+{"other_names" : "ANGELA ZOE",
+ "family_name" : "UK SPECIMEN",
+ "date_of_birth": "19881204",
+ "nationality": "GBR",
  "document_type": "P",
- "document_expiry_date": "20420101",
+ "document_expiry_date": "20250928",
  "images" : {
     "link_identity_document_chip_face": <link>, 
     "link_identity_document_image_front": <link>,
@@ -159,13 +159,13 @@ curl "https://api.eyn.ninja/api/v1/prod/enrolments/<enrolment_id>?
   "document_checks": {
     "mrz_check": true, 
     "chip_check": true},
-  "BRP_remarks": "JOHN DOE\nYou can work in the UK until 02 January 2025\nDetails\nOn your current visa, you can:\ndo any job except those listed in the conditions below.\nConditions\nYou cannot:\nwork as a doctor or dentist in training\nplay or coach professional sports\nThese conditions are the standard requirements for your visa.",
+  "BRP_remarks": "ANGELA ZOE\nYou can work in the UK until 02 January 2025\nDetails\nOn your current visa, you can:\ndo any job except those listed in the conditions below.\nConditions\nYou cannot:\nwork as a doctor or dentist in training\nplay or coach professional sports\nThese conditions are the standard requirements for your visa.",
   "checked_by": "user1@companydomain.com"
-  "checked_at: {
-    "site_id": "site_id_<number>"
-    "site_name":"site_name" }}
+  "checked_at": {
+    "site_id": "site_id_59898a5f-1b20-47df-8855-3d6d5e3b6b2e"
+    "site_name":"London" }}
 ```
-This endpoint returns information about a specific enrolment.
+This endpoint returns information about a specific enrolment. The information refects the data captured from the enrolee's identity document.
 
 ### HTTP Request
 
@@ -205,6 +205,127 @@ checked_at | dict | The ***checked_at*** parameter contains location information
 <aside class="notice">
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
+
+<a name="checks"></a>
+# Check-in/outs
+## Get Check-in/outs
+
+```python
+import requests
+parameters = {'start_time': 0,
+              'end_time': 1554389124,
+              'api_key': <your api key supplied by EYN>}
+headers = {'Accept': '*/*',
+           'Content-Type': 'application/json; charset=UTF-8',
+           'Authorization': <Cognito Id Token>}
+
+response = requests.get('https://api.eyn.ninja/api/v1/prod/checks',
+                        params=parameters, headers=headers)
+```
+
+```shell
+curl "https://api.eyn.ninja/api/v1/prod/checks?
+    api_key=<your api key supplied by EYN>&
+    start_time=<start time>&
+    end_time=<end time>" 
+    -H "Authorization: <Cognito Id Token>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{"check_ids": [{"check_id": <check_id_1>},
+               {"check_id": <check_id_2>},
+               ...
+               {"check_id": <check_id_n>}]}
+```
+
+This endpoint returns a list of check-in/out ids. Each check id maps to a specific check-in/out of an enrolee when using EYN's time and attendance service.
+
+### HTTP Request
+
+`GET https://api.eyn.ninja/api/v1/prod/checks`
+
+### Query Parameters
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+api_key | - | Required | The ***api_key*** of EYN to access the endpoint.
+start_time | 0 | Optional | If ***start_time*** is set, then the response contains all checks from this point in time. ***start_time*** should be supplied as a *string* in UTC format in milliseconds.
+end_time | request time | Optional | If ***end_time*** is set, then the response contains all checks up to this point in time. ***end_time*** should be supplied as a *string* in UTC format in milliseconds.
+site_id  | - | Optional |  The ***site_id*** is the site id under which the enrolee's information is stored in EYN's database. All customer's specific ***site_id's*** can be found [here](https://app.eyn.vision/admin/sites) (access to EYN's Dashboard is required). 
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+check_id |  uuid | An ***check_id*** uniquely identifies a check-in/out. 
+
+
+## Get Information about a Specific Check-in/out
+
+```python
+import requests
+parameters = {'api_key': <your api key supplied by EYN>>}
+headers = {'Accept': '*/*',
+           'Content-Type': 'application/json; charset=UTF-8',
+           'Authorization': <Cognito Id Token>}
+
+response = requests.get('https://api.eyn.ninja/api/v1/prod/checks/<check_id>',
+                        params=parameters, headers=headers)
+```
+
+```shell
+curl "https://api.eyn.ninja/api/v1/prod/checks/<check_id>?
+    api_key=<your api key supplied by EYN>>" 
+    -H "Authorization: <Cognito Id Token>"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "other_names": "ANGELA ZOE",
+    "family_name": "UK SPECIMEN",
+    "date_of_birth": "19881204",
+    "check_state": "in",
+    "time_stamp": 1586276011386,
+    "duration": 21124,
+    "user_confirmed": true,
+    "site_id": "site_id_cbec63ff-71e0-46d6-a0ed-c06fa168f676",
+    "enrolment_id": "9bf79eeb-d92f-40d6-a3fb-0b494af04b77"
+}
+```
+This endpoint returns information about a specific check-in/out.
+
+### HTTP Request
+
+`GET https://api.eyn.ninja/api/v1/prod/checks/{check_id}`
+
+<aside class="notice">
+You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>).
+</aside>
+
+### Query Parameters
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+api_key | - | Required | The ***api_key*** of EYN to access the endpoints.
+check_id | - | Required | The ***check_id*** for that specific information is requested. A 'check_id' can be retrieved via <a href="#checks" style="text-decoration: none"><code>/checks</code></a>.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+other_names | string | The ***other_names*** parameter contains the given names of a worker  (including middle names).
+family_name | string | The ***family_name*** parameter contains the family name of a worker.
+date_of_birth | string | The ***date_of_birth*** parameter contains the date of birth of a worker. The returned value has a format of yyyymmdd.
+check_state  | string | The ***check_state*** parameter contains the status of the check. It can be either of the following: `{"in", "out", "in_manual", "out_manual"}`. 
+time_stamp  | number | The ***time_stamp*** parameter represents time stamp when the check-in/out has been performed in Unix Epoch format (in milliseconds).
+duration  | number | The ***duration*** parameter is the difference between the check-out time stamp and the check-in time stamp of a worker in Unix Epoch format (in milliseconds). For check-ins or if this duration can not be calculated, this parameter is `-1`.
+user_confirmed  | Boolean | The ***user_confirmed*** parameter indicates if a worker confirmed his/her identity when checking in/out.
+site_id  | string | The ***site_id*** parameter is a unique identifier for a site.
+enrolment_id  | uuid | The ***enrolment_id*** parameter is a unique identifier for a worker.
 
 # Document Checks
 
@@ -368,7 +489,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
 
 ```json
 { "face_checks" : {
-    "face_matched": True,
+    "face_matched": true,
     "face_similarity": 90.26
 },
 "age": {
@@ -445,7 +566,7 @@ document_front_base64_encoded | - | Required | The ***document_front_base64_enco
 document_back_base64_encoded | - | Optional | The ***document_back_base64_encoded*** is the document back image (in case of an identity card) that should be processed in base64 encoding.
 selfie_base64_encoded | - | Required | The ***selfie_base64_encoded*** is the selfie image that should be processed in base64 encoding.
 eyn_ocr_token | - | Required |  The ***eyn_ocr_token*** is the token supplied by EYN for authentication.
-enrolment_site_id  | - | Optional |  The ***enrolment_site_id*** is the site id under which the enrolee's information will be stored in EYN's database (if applicable). All company's specific ***enrolment_site_id's*** can be found on the [here](https://app.eyn.vision/admin/sites) (access to EYN's Dashboard is required). 
+enrolment_site_id  | - | Optional |  The ***enrolment_site_id*** is the site id under which the enrolee's information will be stored in EYN's database (if applicable). All company's specific ***enrolment_site_id's*** can be found [here](https://app.eyn.vision/admin/sites) (access to EYN's Dashboard is required). 
 
 ### Payload Samples
 
