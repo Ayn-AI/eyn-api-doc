@@ -29,7 +29,7 @@ Got more time? Continue exploring the API documentation below. In the following,
 
 # Authentication
 
-## Authentication for Enrolments
+## Authentication for Enrolments and Check-in/outs
 > To authorize, use this code:
 
 ```python
