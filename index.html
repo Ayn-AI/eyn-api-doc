@@ -1658,7 +1658,7 @@ Make sure that you replace <code>eyn_ocr_token</code> with the credentials suppl
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </code></pre>
 <p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
-This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Check-in/outs</a> endpoint. </p>
+This demo will show you how to query the <a href="#get-checks" style="text-decoration: none">Get Check-in/outs</a> endpoint. </p>
 
 <p>(1) Run the following commands to deploy the demo (see tabs on the right-hand side).</p>
 
@@ -1721,7 +1721,7 @@ Authentication can be done via <code>warrant-lite</code>. (To install run <code>
 <span class="n">req_auth_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
                     <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
                     <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
-<span class="c"># Now, we can query EYN API to get a list of enrolments</span>
+<span class="c"># Now, we can query EYN API to get a list of checks</span>
 <span class="n">check_ids</span> <span class="o">=</span> <span class="n">get_checks</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
 </code></pre>
 <p>(3)
@@ -1738,10 +1738,10 @@ You can create the autorisation headers using the authentication tokens. Then, w
     <span class="k">return</span> <span class="n">check_ids</span>
 </code></pre>
 <p>(4)
-You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>start_time = 0</code> and <code>end_time = &lt;current_time_stamp&gt;</code> to retrieve a list of all enrolments.</p>
+You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>start_time = 0</code> and <code>end_time = &lt;current_time_stamp&gt;</code> to retrieve a list of all check-in/outs.</p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="c"># Let's print the list of enrolments that we retrieved</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments'</span><span class="p">)</span>
+<span class="c"># Let's print the list of checks that we retrieved</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /checks'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">check_id</span> <span class="ow">in</span> <span class="n">check_ids</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'check_id :'</span> <span class="o">+</span> <span class="n">check_id</span><span class="p">[</span><span class="s">"check_id"</span><span class="p">])</span>
 </code></pre>
@@ -1780,7 +1780,7 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_check_info.py">demo_get_specific_check_info.py</a>: </p>
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: </p>
 <pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
     <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c"># replace with your username</span>
