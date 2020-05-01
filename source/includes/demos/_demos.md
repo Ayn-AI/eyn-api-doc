@@ -418,7 +418,7 @@ pip install -r requirements.txt
 ```
 
 You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
-This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Check-in/outs</a> endpoint. 
+This demo will show you how to query the <a href="#get-checks" style="text-decoration: none">Get Check-in/outs</a> endpoint. 
 
 (1) Run the following commands to deploy the demo (see tabs on the right-hand side).
 
@@ -498,7 +498,7 @@ Authentication can be done via `warrant-lite`. (To install run `pip install warr
 req_auth_headers = {'Accept': '*/*',
                     'Content-Type': 'application/json; charset=UTF-8',
                     'Authorization': tokens['AuthenticationResult']['IdToken']}
-# Now, we can query EYN API to get a list of enrolments
+# Now, we can query EYN API to get a list of checks
 check_ids = get_checks(req_auth_headers, api_key)
 ```
 
@@ -519,12 +519,12 @@ def get_checks(req_auth_headers, api_key):
 ```
 
 (4)
-You can use `requests` to query EYN's API. (To install run `pip install requests`.) The following code sends a `GET` request with `start_time = 0` and `end_time = <current_time_stamp>` to retrieve a list of all enrolments.
+You can use `requests` to query EYN's API. (To install run `pip install requests`.) The following code sends a `GET` request with `start_time = 0` and `end_time = <current_time_stamp>` to retrieve a list of all check-in/outs.
 
 ```python
 (5)
-# Let's print the list of enrolments that we retrieved
-    print('[eyn-api-demo] Results of querying /enrolments')
+# Let's print the list of checks that we retrieved
+    print('[eyn-api-demo] Results of querying /checks')
     for check_id in check_ids:
         print('check_id :' + check_id["check_id"])
 ```
@@ -575,7 +575,7 @@ python demo_get_specific_checks.py
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_check_info.py">demo_get_specific_check_info.py</a>: 
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: 
 
 ```python
 (4)
