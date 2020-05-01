@@ -545,7 +545,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_check_info.py">demo_get_specific_check_info.py</a>.
+You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>.
 This demo will show you how to query the <a href="#get-information-about-a-specific-check" style="text-decoration: none">Get Information about a Specific Check-in/out</a> endpoint. 
 
 (1) Run the following commands to deploy the demo:
@@ -554,7 +554,7 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 
 ```python
 (2)
-python demo_get_specific_check_info.py
+python demo_get_specific_checks.py
 ```
 
 (3) You shall see a demo response like this:
