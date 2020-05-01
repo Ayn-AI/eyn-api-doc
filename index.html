@@ -292,6 +292,12 @@
                   <li>
                     <a href="#demo-identity-check" class="toc-h2 toc-link" data-title="Demo Identity Check">Demo Identity Check</a>
                   </li>
+                  <li>
+                    <a href="#demo-get-check-in-outs" class="toc-h2 toc-link" data-title="Demo Get Check-in/outs">Demo Get Check-in/outs</a>
+                  </li>
+                  <li>
+                    <a href="#demo-get-information-about-a-specific-check-in-out" class="toc-h2 toc-link" data-title="Demo Get Information about a Specific Check-in/out">Demo Get Information about a Specific Check-in/out</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -323,10 +329,6 @@
            <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
            <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>username</code> and <code>password</code> with your AWS Cognito credentials. Replace <code>&lt;cognito_pool_id&gt;</code> with <code>eu-west-2_8ZNdnSazL</code> and <code>&lt;cognito_client_id&gt;</code> with <code>4sn0g6boc405tspau0lfl0aiba</code>.</p>
-</blockquote>
-
 <p>EYN uses AWS Cognito to authenticate users. Request your credentials from <a href="mailto:contact@eyn.vision">here</a>.</p>
 
 <p>ENY also expects a API key to be included in all API requests to the server. EYN API expects a header to all API requests that looks like the following:</p>
@@ -1322,7 +1324,9 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <p><a href="#demo-get-enrolments" style="text-decoration: none"><code>Demo Get Enrolments</code></a><br>
 <a href="#demo-get-information-about-a-specific-enrolment" style="text-decoration: none"><code>Demo Get Information about a Specific Enrolment</code></a><br>
 <a href="#demo-document-check" style="text-decoration: none"><code>Demo Document Check</code></a><br>
-<a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a></p>
+<a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a><br>
+<a href="#demo-get-checks" style="text-decoration: none"><code>Demo Get Checks-in/outs</code></a><br>
+<a href="#demo-get-information-about-a-specific-check" style="text-decoration: none"><code>Demo Get Information about a Specific Check-in/out</code></a><br></p>
 
 <p>Download and follow the quickstart sections to immediately run the demos. For more details, read the demo guides.</p>
 <h2 id='demo-get-enrolments'>Demo Get Enrolments</h2><h3 id='quickstart'>Quickstart</h3><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1440,12 +1444,12 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 </code></pre>
 <p>(3) You shall see a demo response like this:</p>
 <pre class="highlight json tab-json"><code><span class="err">(</span><span class="mi">3</span><span class="err">)</span><span class="w">
-</span><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19700101"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUT"</span><span class="p">,</span><span class="w">
+</span><span class="p">{</span><span class="s2">"other_names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"family_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19881204"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"document_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20420101"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"document_expiry_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20250928"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"link_identity_document_chip_face"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"link_identity_document_image_front"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;link&gt;</span><span class="p">,</span><span class="w">
@@ -1459,10 +1463,11 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
   </span><span class="s2">"document_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"mrz_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"chip_check"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w">
+  </span><span class="s2">"BRP_remarks"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE</span><span class="se">\n</span><span class="s2">You can work in the UK until 02 January 2025</span><span class="se">\n</span><span class="s2">Details</span><span class="se">\n</span><span class="s2">On your current visa, you can:</span><span class="se">\n</span><span class="s2">do any job except those listed in the conditions below.</span><span class="se">\n</span><span class="s2">Conditions</span><span class="se">\n</span><span class="s2">You cannot:</span><span class="se">\n</span><span class="s2">work as a doctor or dentist in training</span><span class="se">\n</span><span class="s2">play or coach professional sports</span><span class="se">\n</span><span class="s2">These conditions are the standard requirements for your visa."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"checked_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user1@companydomain.com"</span><span class="w">
-  </span><span class="s2">"checked_at: {
-    "</span><span class="err">site_id</span><span class="s2">": "</span><span class="err">site_id_&lt;number&gt;</span><span class="s2">"
-    "</span><span class="err">site_name</span><span class="s2">":"</span><span class="err">site_name</span><span class="s2">" }}
+  </span><span class="s2">"checked_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_59898a5f-1b20-47df-8855-3d6d5e3b6b2e"</span><span class="w">
+    </span><span class="s2">"site_name"</span><span class="p">:</span><span class="s2">"London"</span><span class="w"> </span><span class="p">}}</span><span class="w">
 </span></code></pre>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
 the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
@@ -1643,6 +1648,215 @@ curl --header <span class="s2">"Content-Type:application/json"</span> -d @- http
 <aside class="notice">
 Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
 </aside>
+
+<p><a name="demo-get-checks"></a></p>
+<h2 id='demo-get-check-in-outs'>Demo Get Check-in/outs</h2><h3 id='quickstart-3'>Quickstart</h3><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
+<span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</code></pre>
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
+This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Check-in/outs</a> endpoint. </p>
+
+<p>(1) Run the following commands to deploy the demo (see tabs on the right-hand side).</p>
+
+<p>(2) To execute, run the following command.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+ <span class="n">python</span> <span class="n">demo_get_checks</span><span class="o">.</span><span class="n">py</span>
+</code></pre>
+<p>(3) You shall see a demo response like this.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">check_id</span> <span class="p">:</span><span class="n">a987259c</span><span class="o">-</span><span class="n">bbbb</span><span class="o">-</span><span class="mi">4</span><span class="n">b26</span><span class="o">-</span><span class="mi">926</span><span class="n">e</span><span class="o">-</span><span class="n">b3e6ab64620d</span>
+<span class="n">check_id</span> <span class="p">:</span><span class="mi">64897</span><span class="n">f67</span><span class="o">-</span><span class="n">c798</span><span class="o">-</span><span class="mi">40</span><span class="n">c6</span><span class="o">-</span><span class="mi">8</span><span class="n">ba6</span><span class="o">-</span><span class="n">fbf888892b3a</span>
+<span class="n">check_id</span> <span class="p">:</span><span class="mi">764</span><span class="n">a4755</span><span class="o">-</span><span class="mf">79e5</span><span class="o">-</span><span class="mi">4678</span><span class="o">-</span><span class="mi">9</span><span class="n">b11</span><span class="o">-</span><span class="mi">268</span><span class="n">b0136fcb6</span>
+<span class="n">check_id</span> <span class="p">:</span><span class="n">a62749cd</span><span class="o">-</span><span class="mi">5</span><span class="n">a5b</span><span class="o">-</span><span class="mi">4723</span><span class="o">-</span><span class="n">a8b4</span><span class="o">-</span><span class="n">e18a674489c3</span>
+</code></pre>
+<p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>     <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>              <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito client id</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="s">""</span>                      <span class="c"># replace with your eyn api key</span>
+</code></pre>
+<p>This will give you access to your production data. Want to know more? The following demo guide will explain the demo step-by-step.</p>
+<h3 id='demo-guide-3'>Demo Guide</h3><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Demo Get Checks'</span><span class="p">)</span>
+
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>     <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>              <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito client id</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="s">""</span>                      <span class="c"># replace with your eyn api key</span>
+
+    <span class="c"># First, we have to authenticate to AWS Cognito</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">)</span>
+</code></pre>
+<p>(1)
+The entry point of the demo is <code>if __name__ == &#39;__main__&#39;:</code> </p>
+
+<aside class="notice">
+Make sure that you replace <code>username</code>,  <code>password</code>,  <code>cognito_pool_id</code> and  <code>cognito_client_id</code> with the credentials supplied by EYN.
+</aside>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">):</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">WarrantLite</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                     <span class="n">pool_id</span><span class="o">=</span><span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">cognito_client_id</span><span class="p">,</span>
+                     <span class="n">client_secret</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pool_region</span><span class="o">=</span><span class="s">"eu-west-2"</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+</code></pre>
+<p>For every call to EYN&#39;s API you have to authenticate to AWS Cognito. In the demo this is done via
+<code>do_authentication(username, password, cognito_pool_id, cognito_client_id)</code></p>
+
+<p>(2)
+Authentication can be done via <code>warrant-lite</code>. (To install run <code>pip install warrant-lite</code>.) After successful authentication, warrent-lite returns the authentication tokens.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">req_auth_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+                    <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+                    <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
+<span class="c"># Now, we can query EYN API to get a list of enrolments</span>
+<span class="n">check_ids</span> <span class="o">=</span> <span class="n">get_checks</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
+</code></pre>
+<p>(3)
+You can create the autorisation headers using the authentication tokens. Then, we can query EYN&#39;s API endpoint <a href="#get-checks" style="text-decoration: none">/checks</a> via <code>get_checks(req_auth_headers)</code>.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_checks</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">api_key</span><span class="p">):</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                  <span class="s">'end_time'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">s'</span><span class="p">))</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span>
+                  <span class="s">'api_key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks'</span><span class="p">,</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">req_auth_headers</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">check_ids</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s">"check_ids"</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">check_ids</span>
+</code></pre>
+<p>(4)
+You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>start_time = 0</code> and <code>end_time = &lt;current_time_stamp&gt;</code> to retrieve a list of all enrolments.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="c"># Let's print the list of enrolments that we retrieved</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /enrolments'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">check_id</span> <span class="ow">in</span> <span class="n">check_ids</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'check_id :'</span> <span class="o">+</span> <span class="n">check_id</span><span class="p">[</span><span class="s">"check_id"</span><span class="p">])</span>
+</code></pre>
+<p>(5)
+Finally, you can use the returned check_ids in your application. (The demo solely prints the retrieved list of check ids.)</p>
+
+<p><a name="demo-get-information-about-a-specific-check"></a></p>
+<h2 id='demo-get-information-about-a-specific-check-in-out'>Demo Get Information about a Specific Check-in/out</h2><h3 id='quickstart-4'>Quickstart</h3><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
+<span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</code></pre>
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_check_info.py">demo_get_specific_check_info.py</a>.
+This demo will show you how to query the <a href="#get-information-about-a-specific-check" style="text-decoration: none">Get Information about a Specific Check-in/out</a> endpoint. </p>
+
+<p>(1) Run the following commands to deploy the demo:</p>
+
+<p>(2) To execute, run the following command:</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">python</span> <span class="n">demo_get_specific_check_info</span><span class="o">.</span><span class="n">py</span>
+</code></pre>
+<p>(3) You shall see a demo response like this:</p>
+<pre class="highlight json tab-json"><code><span class="err">(</span><span class="mi">3</span><span class="err">)</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"other_names"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANGELA ZOE"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"family_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK SPECIMEN"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"date_of_birth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19881204"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"check_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time_stamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586276011386</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">21124</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_confirmed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"site_id_cbec63ff-71e0-46d6-a0ed-c06fa168f676"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"enrolment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9bf79eeb-d92f-40d6-a3fb-0b494af04b77"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_check_info.py">demo_get_specific_check_info.py</a>: </p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>     <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>              <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito client id</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="s">""</span>                      <span class="c"># replace with your eyn api key</span>
+    <span class="n">check_id</span> <span class="o">=</span> <span class="s">""</span>                     <span class="c"># replace with a valid check_id (eg. retrieved via /checks)</span>
+</code></pre>
+<p>This will give you access to your production data. Want to know more? The following demo guide will explain the demo step-by-step.</p>
+<h3 id='demo-guide-4'>Demo Guide</h3><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Demo Get Specific Check Info.'</span><span class="p">)</span>
+
+    <span class="c"># TODO: Demo parameters - replace with your eyn credentials</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c"># replace with your username</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s">"Def4ultP4ssw0rd!"</span>     <span class="c"># replace with your password</span>
+    <span class="n">cognito_pool_id</span> <span class="o">=</span> <span class="s">""</span>              <span class="c"># replace with your cognito pool id</span>
+    <span class="n">cognito_client_id</span> <span class="o">=</span> <span class="s">""</span>            <span class="c"># replace with your cognito client id</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="s">""</span>                      <span class="c"># replace with your eyn api key</span>
+
+    <span class="c"># First, we have to authenticate to AWS Cognito</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">)</span>
+</code></pre>
+<p>(1) The entry point of the demo is <code>if __name__ == &#39;__main__&#39;:</code></p>
+
+<aside class="notice">
+Make sure that you replace <code>username</code>,  <code>password</code>,  <code>cognito_pool_id</code> and  <code>cognito_client_id</code> with the credentials supplied by EYN.
+</aside>
+
+<aside class="notice">
+Replace <code>check_id</code> with a valid check id (for example, retrieved via <a href="#get-checks" style="text-decoration: none">/checks</a>).
+</aside>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">do_authentication</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">cognito_client_id</span><span class="p">):</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="n">WarrantLite</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+                     <span class="n">pool_id</span><span class="o">=</span><span class="n">cognito_pool_id</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">cognito_client_id</span><span class="p">,</span>
+                     <span class="n">client_secret</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pool_region</span><span class="o">=</span><span class="s">"eu-west-2"</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">wl</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+</code></pre>
+<p>For every call to EYN&#39;s API you have to authenticate to AWS Cognito. In the demo this is done via
+<code>do_authentication(username, password, cognito_pool_id, cognito_client_id)</code></p>
+
+<p>(2) Authentication can be done via <code>warrant-lite</code>. (To install run <code>pip install warrant-lite</code>.) After successful authentication, warrent-lite returns the authentication tokens.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">req_auth_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Accept'</span><span class="p">:</span> <span class="s">'*/*'</span><span class="p">,</span>
+                    <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json; charset=UTF-8'</span><span class="p">,</span>
+                    <span class="s">'Authorization'</span><span class="p">:</span> <span class="n">tokens</span><span class="p">[</span><span class="s">'AuthenticationResult'</span><span class="p">][</span><span class="s">'IdToken'</span><span class="p">]}</span>
+<span class="c"># Now, we can query EYN API to get specific information about a check</span>
+<span class="n">check_info</span> <span class="o">=</span> <span class="n">get_specific_check_info</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">check_id</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
+</code></pre>
+<p>(3) You can create the autorisation headers using the authentication tokens. Then, we can query EYN&#39;s API endpoint <a href="#get-information-about-a-specific-check" style="text-decoration: none">/checks/{id}</a> via <code>get_specific_check_info(req_auth_headers, check_id, eyn_api_key)</code>.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_specific_check_info</span><span class="p">(</span><span class="n">req_auth_headers</span><span class="p">,</span> <span class="n">check_id</span><span class="p">,</span> <span class="n">api_key</span><span class="p">):</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s">'api_key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/checks'</span> <span class="o">+</span> <span class="n">check_id</span><span class="p">,</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">req_auth_headers</span><span class="p">)</span>
+    <span class="n">check_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">check_info</span>
+</code></pre>
+<p>(4) You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>pip install requests</code>.) The following code sends a <code>GET</code> request with <code>check_id = &lt;a valid check id&gt;</code> to retrieve specific information about that check.</p>
+<pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="c"># Let's print the information that we retrieved</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'[eyn-api-demo] Results of querying /checks/{id}:'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'other_names: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"other_names"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'family_name: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"family_name"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'date_of_birth: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"date_of_birth"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'check_state: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"check_state"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'time_stamp: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">check_info</span><span class="p">[</span><span class="s">"time_stamp"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'duration: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"duration"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'user_confirmed: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">check_info</span><span class="p">[</span><span class="s">"user_confirmed"</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'site_id: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"site_id"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'enrolment_id: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"enrolment_id"</span><span class="p">])</span>
+</code></pre>
+<p>(5) Finally, you can use the returned check information in your application. (The demo solely prints all retrieved information.)</p>
 
       </div>
       <div class="dark-box">
