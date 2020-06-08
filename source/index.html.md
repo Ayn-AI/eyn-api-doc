@@ -571,23 +571,19 @@ enrolment_site_id  | - | Optional |  The ***enrolment_site_id*** is the site id 
 To ensure a successfull API reponse, please upload images of the document which:
 
 <ol>
-  <li>Only include the first page </li>
+  <li value=1>Are clearly visible</li>
+  <li value=2>Do not contain glares</li>
 </ol>
   <aside class="success"> **Good examples**
     <br />
     <center>
-    <img src="images/passport_good.jpeg" alt="good sample" style="width:300px;"/>
+    <img src="images/passport_good.jpeg" alt="good sample 1" style="width:300px;"/>
     </center>
- </aside>
- <aside class="warning"> **Bad examples**
     <br />
     <center>
-    <img src="images/passport_bad.jpeg" alt="bad sample" style="width:300px;"/>
+    <img src="images/passport_good_2.jpeg" alt="good sample 2" style="width:300px;"/>
     </center>
  </aside>
-<ol>
-  <li value=2>Do not contain glares</li>
-</ol>
 
 ### Response Parameters
 
