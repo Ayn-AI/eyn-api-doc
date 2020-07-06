@@ -310,6 +310,9 @@
                   <li>
                     <a href="#demo-get-information-about-a-specific-check-in-out" class="toc-h2 toc-link" data-title="Demo Get Information about a Specific Check-in/out">Demo Get Information about a Specific Check-in/out</a>
                   </li>
+                  <li>
+                    <a href="#demos-covid-free-certificates" class="toc-h2 toc-link" data-title="Demos Covid-free Certificates">Demos Covid-free Certificates</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -1642,7 +1645,8 @@ The verify API response usually takes 5 seconds.</p>
 <a href="#demo-document-check" style="text-decoration: none"><code>Demo Document Check</code></a><br>
 <a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a><br>
 <a href="#demo-get-checks" style="text-decoration: none"><code>Demo Get Checks-in/outs</code></a><br>
-<a href="#demo-get-information-about-a-specific-check" style="text-decoration: none"><code>Demo Get Information about a Specific Check-in/out</code></a><br></p>
+<a href="#demo-get-information-about-a-specific-check" style="text-decoration: none"><code>Demo Get Information about a Specific Check-in/out</code></a><br>
+<a href="#demo-covid-free-certificates" style="text-decoration: none"><code>Demo Covid-free Certificates</code></a><br></p>
 
 <p>Download and follow the quickstart sections to immediately run the demos. For more details, read the demo guides.</p>
 <h2 id='demo-get-enrolments'>Demo Get Enrolments</h2><h3 id='quickstart'>Quickstart</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -2173,6 +2177,112 @@ Replace <code>check_id</code> with a valid check id (for example, retrieved via 
 <span class="k">print</span><span class="p">(</span><span class="s">'enrolment_id: '</span> <span class="o">+</span> <span class="n">check_info</span><span class="p">[</span><span class="s">"enrolment_id"</span><span class="p">])</span>
 </code></pre></div>
 <p>(5) Finally, you can use the returned check information in your application. (The demo solely prints all retrieved information.)</p>
+
+<p><a name="demo-covid-free-certificates"></a></p>
+<h2 id='demos-covid-free-certificates'>Demos Covid-free Certificates</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="s">"selfie.jpg"</span><span class="p">),</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">blob</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">encodebytes</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">blob</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"ascii"</span><span class="p">)</span>
+    <span class="n">selfie_base64_encoded</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
+    <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
+    <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
+    <span class="s">'issue_date'</span><span class="p">:</span> <span class="s">'1592310965'</span><span class="p">,</span>
+    <span class="s">'expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
+    <span class="s">'selfie'</span><span class="p">:</span> <span class="n">selfie_base64_encoded</span><span class="p">,</span>
+    <span class="s">'test'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'test_type'</span><span class="p">:</span> <span class="s">'Molecular Swab Test'</span><span class="p">,</span>
+        <span class="s">'test_result'</span><span class="p">:</span> <span class="s">'Negative'</span><span class="p">,</span>
+        <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'robin@eyn.vision'</span><span class="p">,</span>
+        <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'Test Site'</span>
+<span class="p">}}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_enrol'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="s">"certificate.jpeg"</span><span class="p">),</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">blob</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">encodebytes</span><span class="p">(</span><span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">blob</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"ascii"</span><span class="p">)</span>
+    <span class="n">certificate_base64_encoded</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
+    <span class="s">'certificate'</span><span class="p">:</span> <span class="n">certificate_base64_encoded</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_verify'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">SELFIE</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64 </span>selfie.jpg<span class="si">)</span><span class="s2">"</span>
+
+<span class="nv">payload</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+{
+    "api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d",
+    'first_name': 'ANGELA ZOE',
+    'last_name': 'UK SPECIMEN',
+    'issue_date': '1592310965',
+    'expiry_date': '1592310966',
+    "selfie": "</span><span class="k">${</span><span class="nv">SELFIE</span><span class="k">}</span><span class="sh">",
+    'test': {
+        'test_type': 'Molecular Swab Test',
+        'test_result': 'Negative',
+        'issuer_email': 'robin@eyn.vision',
+        'issuer_location': 'Test Site'
+}}
+</span><span class="no">EOF
+</span><span class="si">)</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span> | 
+curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://api.eyn.ninja/api/v1/prod/immunity_enrol 
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">CERTIFICATE</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64 </span>certificate.jpeg<span class="si">)</span><span class="s2">"</span>
+
+<span class="nv">payload</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+{
+    "api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5",
+    "certificate": "</span><span class="k">${</span><span class="nv">CERTIFICATE</span><span class="k">}</span><span class="sh">",
+}
+</span><span class="no">EOF
+</span><span class="si">)</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span> | 
+curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://api.eyn.ninja/api/v1/prod/immunity_verify
+</code></pre></div>
+<p>Easy testing with our webflow <a href="https://enrol.immunity.eyn.vision">here</a> to issue a <strong><em>Covid-free certificate</em></strong>. To validate such a certificate use the webflow <a href="https://verify.immunity.eyn.vision">here</a>.</p>
+
+<p>Further to our sample implementations in the code tabs you can find python and shell scripts to query the <code>/immunity_enrol</code> and <code>/immunity_verify</code> endpoints. </p>
+
+<p>You can download these sample scripts here:</p>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/demo_immunity_enrol.py">python script</a>  for issuing a certificate </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/demo_immunity_verify.py">python script</a>  for verifying a certificate </li>
+</ol>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/selfie.jpg">sample selfie</a></li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/certificate.jpeg">sample certificate</a></li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>api_secret</code> with the credentials supplied by EYN.
+</aside>
 
       </div>
       <div class="dark-box">
