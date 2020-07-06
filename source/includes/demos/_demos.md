@@ -8,6 +8,7 @@ The EYN API includes the following demos:
 <a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a><br>
 <a href="#demo-get-checks" style="text-decoration: none"><code>Demo Get Checks-in/outs</code></a><br>
 <a href="#demo-get-information-about-a-specific-check" style="text-decoration: none"><code>Demo Get Information about a Specific Check-in/out</code></a><br>
+<a href="#demo-covid-free-certificates" style="text-decoration: none"><code>Demo Covid-free Certificates</code></a><br>
 
 Download and follow the quickstart sections to immediately run the demos. For more details, read the demo guides.
 
@@ -671,3 +672,121 @@ print('enrolment_id: ' + check_info["enrolment_id"])
 
 (5) Finally, you can use the returned check information in your application. (The demo solely prints all retrieved information.)
 
+<a name="demo-covid-free-certificates"></a>
+## Demos Covid-free Certificates
+
+```python
+import requests
+import os
+import json
+import base64
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "selfie.jpg"), "rb") as file:
+    blob = base64.encodebytes(file.read())
+    file.close()
+    blob = blob.decode("ascii")
+    selfie_base64_encoded = blob.replace("\n", "")
+
+data = {
+    'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+    'first_name': 'ANGELA ZOE',
+    'last_name': 'UK SPECIMEN',
+    'issue_date': '1592310965',
+    'expiry_date': '1592310966',
+    'selfie': selfie_base64_encoded,
+    'test': {
+        'test_type': 'Molecular Swab Test',
+        'test_result': 'Negative',
+        'issuer_email': 'robin@eyn.vision',
+        'issuer_location': 'Test Site'
+}}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol', json=data)
+print(response.text)
+```
+
+```python
+import requests
+import os
+import json
+import base64
+
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "certificate.jpeg"), "rb") as file:
+    blob = base64.encodebytes(file.read())
+    file.close()
+    blob = blob.decode("ascii")
+    certificate_base64_encoded = blob.replace("\n", "")
+
+data = {
+    'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
+    'certificate': certificate_base64_encoded,
+}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_verify', json=data)
+print(response.text)
+```
+
+```shell
+#!/bin/bash
+
+SELFIE="$(base64 selfie.jpg)"
+
+payload=$(cat <<EOF
+{
+    "api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d",
+    'first_name': 'ANGELA ZOE',
+    'last_name': 'UK SPECIMEN',
+    'issue_date': '1592310965',
+    'expiry_date': '1592310966',
+    "selfie": "${SELFIE}",
+    'test': {
+        'test_type': 'Molecular Swab Test',
+        'test_result': 'Negative',
+        'issuer_email': 'robin@eyn.vision',
+        'issuer_location': 'Test Site'
+}}
+EOF
+)
+
+echo ${payload}
+
+echo ${payload} | 
+curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/immunity_enrol 
+```
+
+```shell
+#!/bin/bash
+
+CERTIFICATE="$(base64 certificate.jpeg)"
+
+payload=$(cat <<EOF
+{
+    "api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5",
+    "certificate": "${CERTIFICATE}",
+}
+EOF
+)
+
+echo ${payload}
+
+echo ${payload} | 
+curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/immunity_verify
+```
+
+Easy testing with our webflow <a href="https://enrol.immunity.eyn.vision">here</a> to issue a ***Covid-free certificate***. To validate such a certificate use the webflow <a href="https://verify.immunity.eyn.vision">here</a>.
+
+Further to our sample implementations in the code tabs you can find python and shell scripts to query the `/immunity_enrol` and `/immunity_verify` endpoints. 
+
+You can download these sample scripts here:
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/demo_immunity_enrol.py">python script</a>  for issuing a certificate </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/demo_immunity_verify.py">python script</a>  for verifying a certificate </li>
+</ol>
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/selfie.jpg">sample selfie</a></li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/immunity/certificate.jpeg">sample certificate</a></li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>api_secret</code> with the credentials supplied by EYN.
+</aside>
