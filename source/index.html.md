@@ -482,6 +482,14 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
       -d @- 
       https://api.eyn.ninja/api/v1/prod/identitycheck
 ```
+```iframe
+<iframe 
+    style="display:block; width:100%; height:600px; border:none;"
+    src="https://app.eyn.vision/identitycheck" 
+    title="Eagle-ID"
+>
+</iframe>
+```
 
 > The above command returns JSON structured like this:
 
@@ -661,6 +669,15 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol',
  curl -H "Content-Type: application/json" 
       -d @- 
       https://api.eyn.ninja/api/v1/prod/immunity_enrol
+```
+
+```iframe
+<iframe 
+    style="display:block; width:100%; height:600px; border:none;"
+    src="https://enrol.immunity.eyn.vision" 
+    title="Covid-free Enrol"
+>
+</iframe>
 ```
 
 > The above command returns JSON structured like this:
