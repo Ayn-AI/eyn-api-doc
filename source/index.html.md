@@ -726,7 +726,7 @@ certificate |  base64 string | The ***certificate*** is a base64 encoded string 
 ```python
 import requests
 data = {
-        'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+        'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
         'certificate': <certificate image in base64 encoding>
 }
 response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_verify',
@@ -734,7 +734,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_verify',
 ```
 
 ```shell
-(echo -n '{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"';
+(echo -n '{"api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5"';
  echo -n '"certificate": "'; 
  base64 certificate.jpeg;
  echo '",'; 
@@ -819,7 +819,7 @@ The enrol API response usually takes 5 seconds.
 
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
-api_secret | - | Required | The ***api_secret*** identifies the issuer and allows to issue ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+api_secret | - | Required | The ***api_secret*** identifies the verifier and allows to verify ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
 certificate | - | Required | The ***certificate*** of an enrolee as an base64 encoded image string. The image string ***MUST*** be in a ***square*** image format (i.e. width == height).
 
 ### Response Parameters
