@@ -635,24 +635,25 @@ session_id  |  uuid | The ***session_id*** uniquely identifies an enrolment.
 ## Issue a Covid-free Certificate
 ```python
 import requests
-data = {'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
-        'first_name': 'ANGELA ZOE',
-        'last_name': 'UK SPECIMEN',
-        'issue_date': '1592310965',
-        'expiry_date': '1592310966',
-        'selfie': <selfie image in base64 encoding>,
-        'test': {
-            'test_type': 'Molecular Swab Test',
-            'test_result': 'Negative',
-            'issuer_email': 'robin@eyn.vision',
-            'issuer_location': 'Test Site'
-        }}
+data = {
+    'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+    'first_name': 'ANGELA ZOE',
+    'last_name': 'UK SPECIMEN',
+    'issue_date': '1592310965',
+    'expiry_date': '1592310966',
+    'selfie': <selfie image in base64 encoding>,
+    'test': {
+        'test_type': 'Molecular Swab Test',
+        'test_result': 'Negative',
+        'issuer_email': 'robin@eyn.vision',
+        'issuer_location': 'Test Site'
+}}
 response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol',
                          json=data)
 ```
 
 ```shell
-(echo -n '"eyn_ocr_token": "e1131458-4664-4da7-855a-7ac3e5b9648d"';
+(echo -n '{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"';
  echo -n '"first_name": "ANGELA ZOE"';
  echo -n '"last_name": "UK SPECIMEN"';
  echo -n '"issue_date": "1592310965"';
@@ -685,7 +686,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol',
 
 ```json
 {
-  'certificate': <certificate in base64 encoding>
+  "certificate": <certificate in base64 encoding>
 }
 ```
 
@@ -721,3 +722,118 @@ Parameter |  Type |  Description
 --------- | :-----------: | -----------
 certificate |  base64 string | The ***certificate*** is a base64 encoded string of the `QRCode` representation of the digital certificate.
 
+## Verify a Covid-free Certificate
+```python
+import requests
+data = {
+        'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+        'certificate': <certificate image in base64 encoding>
+}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_verify',
+                         json=data)
+```
+
+```shell
+(echo -n '{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"';
+ echo -n '"certificate": "'; 
+ base64 certificate.jpeg;
+ echo '",'; 
+ echo '}') | 
+ curl -H "Content-Type: application/json" 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/immunity_verify
+```
+
+```html
+<iframe 
+    style="display:block; width:100%; height:600px; border:none;"
+    src="https://verify.immunity.eyn.vision" 
+    title="Covid-free Verify"
+>
+</iframe>
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": {
+        "signature": "PASS",
+        "revoked": "PASS",
+    },
+    "certificate": {
+        "first_name": "ANGELA ZOE",
+        "last_name": "UK SPECIMEN",
+        "issue_date": "1592310965",
+        "expiry_date": "1592310966",
+        "selfie": <selfie image in base64 encoding>,
+        "test": {
+            "test_type": "Molecular Swab Test",
+            "test_result": "Negative",
+            "issuer_email": "robin@eyn.vision",
+            "issuer_location": "Test Site",
+        }
+    }
+}
+```
+
+This API endpoint processes a ***Covid-free certificate*** and performs the following operations:
+<ol>
+  <li>extracts identity information such as: 
+        <ol>
+           <li>first name</li>
+           <li>last name</li>
+           <li>facial image</li>
+        </ol>
+  </li>
+  <li>extracts test information such as: 
+        <ol>
+           <li>test type</li>
+           <li>test result</li>
+           <li>issue date</li>
+           <li>expiry date</li>
+           <li>issuer email</li>
+           <li>issuer location</li>
+        </ol>
+  </li>
+  <li>performs the following validation checks:
+        <ol>
+           <li>signature check</li>
+           <li>revocation check</li>
+        </ol>
+  </li>
+</ol>
+
+All the information submitted is hashed using the `SHA3-256` hash primitive and digitally signed using the `ECDSA-512` digital signature primitive and curve `brainpoolP512t1`. The submitted `certificate` is a base64 encoded string of the `QRCode` representation of the digital certificate and ***MUST*** be in a ***square*** image format (i.e. width == height).
+
+### Testing
+
+Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
+The enrol API response usually takes 5 seconds.
+
+### HTTP Request
+
+`POST https://api.eyn.ninja/api/v1/prod/immunity_verify`
+
+### Payload
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+api_secret | - | Required | The ***api_secret*** identifies the issuer and allows to issue ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+certificate | - | Required | The ***certificate*** of an enrolee as an base64 encoded image string. The image string ***MUST*** be in a ***square*** image format (i.e. width == height).
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+signature |  - | The ***signature*** check verifies if the signature of the ***Covid-free certificate*** is valid. If valid it responds with `PASS` otherwise with `FAIL`.
+revoked |  - | The ***revoked*** check verifies if the ***Covid-free certificate*** is revoked or not. If valid (i.e. not revoked) it responds with `PASS` otherwise with `FAIL`.
+first_name | - | Required | The ***first_name*** of the enrolee.
+last_name | - | Required | The ***last_name*** of the enrolee.
+issue_date | - | Required | The ***issue_date*** records the date when the ***Covid test*** has been done. The date should be a string in Unix Epoch format.
+first_name | - | Required | The ***expiry_date*** records the date when the ***Covid test***  expires. This coincides with the ***Covid-free certificate*** expiry date. The date should be a string in Unix Epoch format.
+selfie | - | Required | The ***selfie*** of the enrolee is a ***frontal facial image*** of the enrolee for ***identification*** purposes. This should be a base64 encoded image string.
+test_type | - | Required | The ***test_type*** of the ***Covid test***.
+test_result | - | Required | The ***test_result*** of the ***Covid test***.
+issuer_email | - | Required | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
+issuer_location | - | Required | The ***issuer_location*** of the ***Covid test*** records the location where the test was performed for accountability and auditing purposes.
