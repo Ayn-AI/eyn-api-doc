@@ -16,14 +16,14 @@ Download and follow the quickstart sections to immediately run the demos. For mo
 
 ```python
 (1)
-git clone https://github.com/Ayn-AI/eyn-api-demo
-cd eyn-api-demo
+git clone https://github.com/Ayn-AI/eyn-api-demo/enrolments
+cd eyn-api-demo/enrolments
 virtualenv venv -p python3
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_enrolments.py">demo_get_enrolments.py</a>.
+You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_enrolments.py">demo_get_enrolments.py</a>.
 This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Enrolments</a> endpoint. 
 
 (1) Run the following commands to deploy the demo (see tabs on the right-hand side).
@@ -46,7 +46,7 @@ enrolment_id :a62749cd-5a5b-4723-a8b4-e18a674489c3
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_enrolments.py">demo_get_enrolments.py</a>.
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_enrolments.py">demo_get_enrolments.py</a>.
 
 ```python
 (4)
@@ -143,14 +143,14 @@ Finally, you can use the returned enrolment_ids in your application. (The demo s
 
 ```python
 (1)
-git clone https://github.com/Ayn-AI/eyn-api-demo
-cd eyn-api-demo
+git clone https://github.com/Ayn-AI/eyn-api-demo/enrolments
+cd eyn-api-demo/enrolments
 virtualenv venv -p python3
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>.
+You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>.
 This demo will show you how to query the <a href="#get-information-about-a-specific-enrolment" style="text-decoration: none">Get Information about a Specific Enrolment</a> endpoint. 
 
 (1) Run the following commands to deploy the demo:
@@ -193,7 +193,7 @@ python demo_get_specific_enrolment_info.py
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: 
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: 
 
 ```python
 (4)
@@ -388,16 +388,16 @@ Further to our sample implementation in the code tabs you can find python and sh
 You can download these sample scripts here:
 
 <ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBase64.py">python script</a>  from base64 encoded files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBinary.py">python script</a>  from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBinary.sh">shell script</a> from binary files </li>
 </ol>
 
 <ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/passport.jpg">sample passport</a> (binary)  </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/passport_base64.txt">sample passport</a>  (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/selfie.jpg">sample selfie</a> (binary) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/selfie_base64.txt">sample selfie</a> (base64) </li>
 </ol>
 
 <aside class="notice">
@@ -410,14 +410,14 @@ Make sure that you replace <code>eyn_ocr_token</code> with the credentials suppl
 
 ```python
 (1)
-git clone https://github.com/Ayn-AI/eyn-api-demo
-cd eyn-api-demo
+git clone https://github.com/Ayn-AI/eyn-api-demo/checks
+cd eyn-api-demo/checks
 virtualenv venv -p python3
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
+You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_checks.py">demo_get_checks.py</a>.
 This demo will show you how to query the <a href="#get-checks" style="text-decoration: none">Get Check-in/outs</a> endpoint. 
 
 (1) Run the following commands to deploy the demo (see tabs on the right-hand side).
@@ -440,7 +440,7 @@ check_id :a62749cd-5a5b-4723-a8b4-e18a674489c3
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_checks.py">demo_get_checks.py</a>.
 
 ```python
 (4)
@@ -538,14 +538,14 @@ Finally, you can use the returned check_ids in your application. (The demo solel
 
 ```python
 (1)
-git clone https://github.com/Ayn-AI/eyn-api-demo
-cd eyn-api-demo
+git clone https://github.com/Ayn-AI/eyn-api-demo/checks
+cd eyn-api-demo/checks
 virtualenv venv -p python3
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>.
+You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_specific_checks.py">demo_get_specific_checks.py</a>.
 This demo will show you how to query the <a href="#get-information-about-a-specific-check" style="text-decoration: none">Get Information about a Specific Check-in/out</a> endpoint. 
 
 (1) Run the following commands to deploy the demo:
@@ -575,7 +575,7 @@ python demo_get_specific_checks.py
 ```
 
 (4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: 
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: 
 
 ```python
 (4)
