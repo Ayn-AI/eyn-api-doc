@@ -828,12 +828,12 @@ Parameter |  Type |  Description
 --------- | :-----------: | -----------
 signature |  - | The ***signature*** check verifies if the signature of the ***Covid-free certificate*** is valid. If valid it responds with `PASS` otherwise with `FAIL`.
 revoked |  - | The ***revoked*** check verifies if the ***Covid-free certificate*** is revoked or not. If valid (i.e. not revoked) it responds with `PASS` otherwise with `FAIL`.
-first_name | - | Required | The ***first_name*** of the enrolee.
-last_name | - | Required | The ***last_name*** of the enrolee.
-issue_date | - | Required | The ***issue_date*** records the date when the ***Covid test*** has been done. The date should be a string in Unix Epoch format.
-first_name | - | Required | The ***expiry_date*** records the date when the ***Covid test***  expires. This coincides with the ***Covid-free certificate*** expiry date. The date should be a string in Unix Epoch format.
-selfie | - | Required | The ***selfie*** of the enrolee is a ***frontal facial image*** of the enrolee for ***identification*** purposes. This should be a base64 encoded image string.
-test_type | - | Required | The ***test_type*** of the ***Covid test***.
-test_result | - | Required | The ***test_result*** of the ***Covid test***.
-issuer_email | - | Required | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
-issuer_location | - | Required | The ***issuer_location*** of the ***Covid test*** records the location where the test was performed for accountability and auditing purposes.
+first_name | - | The ***first_name*** of the enrolee.
+last_name | - | The ***last_name*** of the enrolee.
+issue_date | - | The ***issue_date*** records the date when the ***Covid test*** has been done. The date should be a string in Unix Epoch format.
+first_name | - | The ***expiry_date*** records the date when the ***Covid test***  expires. This coincides with the ***Covid-free certificate*** expiry date. The date should be a string in Unix Epoch format.
+selfie | - | The ***selfie*** of the enrolee is a ***frontal facial image*** of the enrolee for ***identification*** purposes. This should be a base64 encoded image string.
+test_type | - | The ***test_type*** of the ***Covid test***.
+test_result | - | The ***test_result*** of the ***Covid test***.
+issuer_email | - | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
+issuer_location | - | The ***issuer_location*** of the ***Covid test*** records the location where the test was performed for accountability and auditing purposes.
