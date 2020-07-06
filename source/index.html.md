@@ -4,6 +4,7 @@ title: EYN API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - python
   - shell
+  - html
 
 toc_footers:
   - <a href="mailto:contact@eyn.vision">Request a Developer Key</a>
@@ -482,7 +483,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/identitycheck',
       -d @- 
       https://api.eyn.ninja/api/v1/prod/identitycheck
 ```
-```iframe
+```html
 <iframe 
     style="display:block; width:100%; height:600px; border:none;"
     src="https://app.eyn.vision/identitycheck" 
@@ -671,7 +672,7 @@ response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol',
       https://api.eyn.ninja/api/v1/prod/immunity_enrol
 ```
 
-```iframe
+```html
 <iframe 
     style="display:block; width:100%; height:600px; border:none;"
     src="https://enrol.immunity.eyn.vision" 
