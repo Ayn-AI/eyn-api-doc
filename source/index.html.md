@@ -809,7 +809,7 @@ All the information submitted is hashed using the `SHA3-256` hash primitive and 
 ### Testing
 
 Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
-The enrol API response usually takes 5 seconds.
+The verify API response usually takes 5 seconds.
 
 ### HTTP Request
 
