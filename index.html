@@ -1646,13 +1646,13 @@ The verify API response usually takes 5 seconds.</p>
 
 <p>Download and follow the quickstart sections to immediately run the demos. For more details, read the demo guides.</p>
 <h2 id='demo-get-enrolments'>Demo Get Enrolments</h2><h3 id='quickstart'>Quickstart</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
-<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">enrolments</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">enrolments</span>
 <span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
 <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </code></pre></div>
-<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_enrolments.py">demo_get_enrolments.py</a>.
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_enrolments.py">demo_get_enrolments.py</a>.
 This demo will show you how to query the <a href="#get-enrolments" style="text-decoration: none">Get Enrolments</a> endpoint. </p>
 
 <p>(1) Run the following commands to deploy the demo (see tabs on the right-hand side).</p>
@@ -1669,7 +1669,7 @@ This demo will show you how to query the <a href="#get-enrolments" style="text-d
 <span class="n">enrolment_id</span> <span class="p">:</span><span class="n">a62749cd</span><span class="o">-</span><span class="mi">5</span><span class="n">a5b</span><span class="o">-</span><span class="mi">4723</span><span class="o">-</span><span class="n">a8b4</span><span class="o">-</span><span class="n">e18a674489c3</span>
 </code></pre></div>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_enrolments.py">demo_get_enrolments.py</a>.</p>
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_enrolments.py">demo_get_enrolments.py</a>.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="mi">64</span><span class="p">:</span>    <span class="c1"># TODO: Demo parameters - replace with your eyn credentials
 </span><span class="mi">65</span><span class="p">:</span>    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c1"># replace with your username
@@ -1743,13 +1743,13 @@ You can use <code>requests</code> to query EYN&#39;s API. (To install run <code>
 <p>(5)
 Finally, you can use the returned enrolment_ids in your application. (The demo solely prints the retrieved list of enrolment ids.)</p>
 <h2 id='demo-get-information-about-a-specific-enrolment'>Demo Get Information about a Specific Enrolment</h2><h3 id='quickstart-2'>Quickstart</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
-<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">enrolments</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">enrolments</span>
 <span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
 <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </code></pre></div>
-<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>.
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>.
 This demo will show you how to query the <a href="#get-information-about-a-specific-enrolment" style="text-decoration: none">Get Information about a Specific Enrolment</a> endpoint. </p>
 
 <p>(1) Run the following commands to deploy the demo:</p>
@@ -1786,7 +1786,7 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
     </span><span class="nl">"site_name"</span><span class="p">:</span><span class="s2">"London"</span><span class="w"> </span><span class="p">}}</span><span class="w">
 </span></code></pre></div>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/enrolments/demo_get_specific_enrolment_info.py">demo_get_specific_enrolment_info.py</a>: </p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="mi">64</span><span class="p">:</span>    <span class="c1"># TODO: Demo parameters - replace with your eyn credentials
 </span><span class="mi">65</span><span class="p">:</span>    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c1"># replace with your username
@@ -1949,16 +1949,16 @@ curl <span class="nt">--header</span> <span class="s2">"Content-Type:application
 <p>You can download these sample scripts here:</p>
 
 <ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBase64.py">python script</a>  from base64 encoded files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.py">python script</a>  from binary files </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/requestFromBinary.sh">shell script</a> from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBase64.py">python script</a>  from base64 encoded files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBinary.py">python script</a>  from binary files </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/requestFromBinary.sh">shell script</a> from binary files </li>
 </ol>
 
 <ol>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport.jpg">sample passport</a> (binary)  </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/passport_base64.txt">sample passport</a>  (base64) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie.jpg">sample selfie</a> (binary) </li>
-    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/selfie_base64.txt">sample selfie</a> (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/passport.jpg">sample passport</a> (binary)  </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/passport_base64.txt">sample passport</a>  (base64) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/selfie.jpg">sample selfie</a> (binary) </li>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/identitycheck/selfie_base64.txt">sample selfie</a> (base64) </li>
 </ol>
 
 <aside class="notice">
@@ -1967,13 +1967,13 @@ Make sure that you replace <code>eyn_ocr_token</code> with the credentials suppl
 
 <p><a name="demo-get-checks"></a></p>
 <h2 id='demo-get-check-in-outs'>Demo Get Check-in/outs</h2><h3 id='quickstart-3'>Quickstart</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
-<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">checks</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">checks</span>
 <span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
 <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </code></pre></div>
-<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_checks.py">demo_get_checks.py</a>.
 This demo will show you how to query the <a href="#get-checks" style="text-decoration: none">Get Check-in/outs</a> endpoint. </p>
 
 <p>(1) Run the following commands to deploy the demo (see tabs on the right-hand side).</p>
@@ -1990,7 +1990,7 @@ This demo will show you how to query the <a href="#get-checks" style="text-decor
 <span class="n">check_id</span> <span class="p">:</span><span class="n">a62749cd</span><span class="o">-</span><span class="mi">5</span><span class="n">a5b</span><span class="o">-</span><span class="mi">4723</span><span class="o">-</span><span class="n">a8b4</span><span class="o">-</span><span class="n">e18a674489c3</span>
 </code></pre></div>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_checks.py">demo_get_checks.py</a>.</p>
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_checks.py">demo_get_checks.py</a>.</p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="c1"># TODO: Demo parameters - replace with your eyn credentials
 </span>    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c1"># replace with your username
@@ -2066,13 +2066,13 @@ Finally, you can use the returned check_ids in your application. (The demo solel
 
 <p><a name="demo-get-information-about-a-specific-check"></a></p>
 <h2 id='demo-get-information-about-a-specific-check-in-out'>Demo Get Information about a Specific Check-in/out</h2><h3 id='quickstart-4'>Quickstart</h3><div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
-<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Ayn</span><span class="o">-</span><span class="n">AI</span><span class="o">/</span><span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">checks</span>
+<span class="n">cd</span> <span class="n">eyn</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">demo</span><span class="o">/</span><span class="n">checks</span>
 <span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span>
 <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </code></pre></div>
-<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>.
+<p>You can download the demo file <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_specific_checks.py">demo_get_specific_checks.py</a>.
 This demo will show you how to query the <a href="#get-information-about-a-specific-check" style="text-decoration: none">Get Information about a Specific Check-in/out</a> endpoint. </p>
 
 <p>(1) Run the following commands to deploy the demo:</p>
@@ -2096,7 +2096,7 @@ This demo will show you how to query the <a href="#get-information-about-a-speci
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>(4) Ask <a href="mailto:sales@eyn.vision">EYN</a> for your production <a href="#authentication">credentials</a> and change 
-the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: </p>
+the following lines in <a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/checks/demo_get_specific_checks.py">demo_get_specific_checks.py</a>: </p>
 <div class="highlight"><pre class="highlight python tab-python"><code><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="c1"># TODO: Demo parameters - replace with your eyn credentials
 </span>    <span class="n">username</span> <span class="o">=</span> <span class="s">"demo@api.eyn.ninja"</span>   <span class="c1"># replace with your username
