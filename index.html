@@ -201,7 +201,7 @@
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;html&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,6 +213,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="html">html</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -1015,12 +1016,12 @@ You must replace <code>{check_id}</code> with a valid check id (e.g. retrieved v
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
       <span class="nt">-d</span> @- 
       https://api.eyn.ninja/api/v1/prod/identitycheck
-</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>&lt;iframe 
-    style="display:block; width:100%; height:600px; border:none;"
-    src="https://app.eyn.vision/identitycheck" 
-    title="Eagle-ID"
-&gt;
-&lt;/iframe&gt;
+</code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;iframe</span> 
+    <span class="na">style=</span><span class="s">"display:block; width:100%; height:600px; border:none;"</span>
+    <span class="na">src=</span><span class="s">"https://app.eyn.vision/identitycheck"</span> 
+    <span class="na">title=</span><span class="s">"Eagle-ID"</span>
+<span class="nt">&gt;</span>
+<span class="nt">&lt;/iframe&gt;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1339,12 +1340,12 @@ ID check API response usually takes between 15 to 25 seconds.</p>
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
       <span class="nt">-d</span> @- 
       https://api.eyn.ninja/api/v1/prod/immunity_enrol
-</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>&lt;iframe 
-    style="display:block; width:100%; height:600px; border:none;"
-    src="https://enrol.immunity.eyn.vision" 
-    title="Covid-free Enrol"
-&gt;
-&lt;/iframe&gt;
+</code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;iframe</span> 
+    <span class="na">style=</span><span class="s">"display:block; width:100%; height:600px; border:none;"</span>
+    <span class="na">src=</span><span class="s">"https://enrol.immunity.eyn.vision"</span> 
+    <span class="na">title=</span><span class="s">"Covid-free Enrol"</span>
+<span class="nt">&gt;</span>
+<span class="nt">&lt;/iframe&gt;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -2010,6 +2011,7 @@ Replace <code>check_id</code> with a valid check id (for example, retrieved via 
           <div class="lang-selector">
                 <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="html">html</a>
           </div>
       </div>
     </div>
