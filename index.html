@@ -1450,12 +1450,12 @@ The enrol API response usually takes 5 seconds.</p>
 </tbody></table>
 <h2 id='verify-a-covid-free-certificate'>Verify a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
+        <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
         <span class="s">'certificate'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">certificate</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span>
 <span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_verify'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"'</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"certificate": "'</span><span class="p">;</span> 
  <span class="nb">base64 </span>certificate.jpeg<span class="p">;</span>
  <span class="nb">echo</span> <span class="s1">'",'</span><span class="p">;</span> 
@@ -1539,7 +1539,7 @@ The enrol API response usually takes 5 seconds.</p>
 <td>api_secret</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
-<td>The <strong><em>api_secret</em></strong> identifies the issuer and allows to issue <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
+<td>The <strong><em>api_secret</em></strong> identifies the verifier and allows to verify <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
 </tr>
 <tr>
 <td>certificate</td>
