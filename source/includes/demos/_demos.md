@@ -4,6 +4,7 @@ The EYN API includes the following demos:
 
 <a href="#demo-get-enrolments" style="text-decoration: none"><code>Demo Get Enrolments</code></a><br>
 <a href="#demo-get-information-about-a-specific-enrolment" style="text-decoration: none"><code>Demo Get Information about a Specific Enrolment</code></a><br>
+<a href="#demo-eu-settlement" style="text-decoration: none"><code>Demo EU-Settlement Checks</code></a><br>
 <a href="#demo-document-check" style="text-decoration: none"><code>Demo Document Check</code></a><br>
 <a href="#demo-identity-check" style="text-decoration: none"><code>Demo Identity Check</code></a><br>
 <a href="#demo-get-checks" style="text-decoration: none"><code>Demo Get Checks-in/outs</code></a><br>
@@ -404,6 +405,58 @@ You can download these sample scripts here:
 <aside class="notice">
 Make sure that you replace <code>eyn_ocr_token</code> with the credentials supplied by EYN.
 </aside>
+
+
+<a name="demo-eu-settlement"></a>
+## Demo EU-Settlement Checks 
+
+```python
+import requests
+
+data = {
+    # update with the api secret obtained from EYN (contact@eyn.vision)
+    'api_secret': '9b7539bc-5f62-420d-ba4d-2241ade8f4b6',
+    # update with a share code obtained from https://view-immigration-status.service.gov.uk
+    'share_code': 'JP7LFW2FP',
+    # update with the candidate's birth date
+    'date_of_birth': '04/12/1988',
+    'company_name': 'EYN',
+}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/eu-settlement', json=data)
+print(response.text)
+
+```
+
+```shell
+#!/bin/bash
+
+payload=$(cat <<EOF
+{
+    'api_secret': '9b7539bc-5f62-420d-ba4d-2241ade8f4b6',
+    'share_code': 'JP7LFW2FP',
+    'date_of_birth': '04/12/1988',
+    'company_name': 'EYN'
+}
+EOF
+)
+
+echo ${payload}
+
+echo ${payload} | 
+curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/eu-settlement 
+```
+In our sample implementations in the code tabs you can find python and shell scripts to query the `/eu-settlement`  endpoint. 
+
+You can download these sample scripts here:
+
+<ol>
+    <li><a href="https://github.com/Ayn-AI/eyn-api-demo/blob/master/eu-settlement/demo_eu_settlement.py">python script</a> to query the `/eu-settlement` endpoint.</li>
+</ol>
+
+<aside class="notice">
+Make sure that you replace <code>api_secret</code> with the credentials supplied by EYN.
+</aside>
+
 
 <a name="demo-get-checks"></a>
 ## Demo Get Check-in/outs

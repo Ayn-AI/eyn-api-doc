@@ -56,7 +56,7 @@ ENY also expects a API key to be included in all API requests to the server. EYN
 You must replace <code>&#60;Cognito Id Token&#62;</code> with the <code>Id Token</code> response when authenticating to AWS Cognito.
 </aside>
 
-## Authentication for Documentcheck and Identitycheck 
+## Authentication for Documentcheck, Identitycheck, Covid-free Certificates and EU-Settlement Checks
 
 Authentication for document check and identity check is currently entirely based on a token.
 
@@ -204,6 +204,66 @@ checked_at | dict | The ***checked_at*** parameter contains location information
 <aside class="notice">
 In case the <code>/enrolments/{id}</code> endpoint is queried directly after the <code>/identitycheck</code> endpoint, it might be that *BRP_remarks* displays <code>None</code>. This is because the response from the UK Home Office may take a while. In such a case, please re-query after a certain timeout (typically in a range of less than a minute).
 </aside>
+
+# EU-Settlement Checks
+## Check Right-to-Work Status
+```python
+import requests
+data = {
+    'api_secret': '9b7539bc-5f62-420d-ba4d-2241ade8f4b6',
+    'share_code': 'JP7LFW2FP',
+    'date_of_birth': '04/12/1988',
+    'company_name': 'EYN',
+}
+response = requests.post('https://api.eyn.ninja/api/v1/prod/eu-settlement', 
+                         json=data)
+```
+
+```shell
+(echo -n '{"api_secret": "9b7539bc-5f62-420d-ba4d-2241ade8f4b6"'; 
+ echo -n '"share_code": "JP7LFW2FP"';
+ echo -n '"date_of_birth": "04/12/1988"';
+ echo -n '"company_name": "EYN"';
+ echo '}') | 
+ curl -H "Content-Type: application/json" 
+      -d @- 
+      https://api.eyn.ninja/api/v1/prod/eu-settlement
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    'name': 'UK SPECIMEN ANGELA ZOE',
+    'status': 'They can work in the UK.',
+    'details': 'They can work in any job.',
+    'legal_basis': 'This leave is issued in accordance with the EU exit separation agreements. For EU citizens, and the family members of EU citizens or of UK citizens, this is the Withdrawal Agreement. For EEA European Free Trade Association (EFTA) citizens, and the family members of EEA EFTA citizens, this is the EEA EFTA Separation Agreement. For Swiss citizens, and the family members of Swiss citizens, this is the Swiss Citizens'Rights Agreement.'
+}
+```
+
+This endpoint returns the right-to-work information of a person who enrolled via the EU settlement scheme. To query this endpoint, the candidate is required to present a so-called `share_code`, which can be obtained from [here](https://view-immigration-status.service.gov.uk). Further to this, to receive the right-to-work information of the candidate the candidate's `date of birth` must be provided. 
+
+### HTTP Request
+
+`POST https://api.eyn.ninja/api/v1/prod/eu-settlement`
+
+### Query Parameters
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+api_secret | - | Required | The ***api_secret*** of EYN to access the endpoints. You can obtain your api_secret by contacting us at [contact@eyn.vision](mailto:contact@eyn.vision).
+share_code | - | Required | The ***share_code*** is an identifier that allows you to access the candidate right-to-work status, assessed by the UK government during the candidate's EU settlement application. The candidate can obtain his/her share code by visiting [https://view-immigration-status.service.gov.uk](https://view-immigration-status.service.gov.uk). 
+date_of_birth | - | Required | The ***date_of_birth*** is the date of birth of the candidate that you want to obtain the right-to-work information.
+company_name | - | Required | The ***company_name*** is your company name, which is stored for auditing purposes by the UK government. 
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+name |  string | The ***name*** of the candidate whom's right-to-work status is being checked.
+status |  string | The ***status*** of the candidate's right-to-work. The status outlines if the candidate is allowed to work in the UK.
+details |  string | The ***details*** of the candidate's right-to-work information. The details outline any remarks about the right-to-work status of the candidate.
+legal_basis |  string | The ***legal_basis*** of the candidate's right-to-work status outlined by the EU settlement scheme.
 
 <a name="checks"></a>
 # Check-in/outs
