@@ -292,6 +292,9 @@
                   <li>
                     <a href="#verify-a-covid-free-certificate" class="toc-h2 toc-link" data-title="Verify a Covid-free Certificate">Verify a Covid-free Certificate</a>
                   </li>
+                  <li>
+                    <a href="#verify-the-signature-of-a-covid-free-certificate" class="toc-h2 toc-link" data-title="Verify the Signature of a Covid-free Certificate">Verify the Signature of a Covid-free Certificate</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1437,6 +1440,15 @@ ID check API response usually takes between 15 to 25 seconds.</p>
     <span class="s">'issuer'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'dev@eyn.vision'</span><span class="p">,</span>
         <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'RESERVED_KEY'</span>
+    <span class="p">},</span>
+    <span class="s">'analytics'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'location'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'accuracy'</span><span class="p">:</span> <span class="s">'30.00'</span><span class="p">,</span>
+            <span class="s">'altitude'</span><span class="p">:</span> <span class="s">'79.00'</span><span class="p">,</span>
+            <span class="s">'latitude'</span><span class="p">:</span> <span class="s">'89.00'</span><span class="p">,</span>
+            <span class="s">'longitude'</span><span class="p">:</span> <span class="s">'-0.072258'</span><span class="p">,</span>
+            <span class="s">'provider'</span><span class="p">:</span> <span class="s">'fused'</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_enrol'</span><span class="p">,</span>
@@ -1460,6 +1472,15 @@ ID check API response usually takes between 15 to 25 seconds.</p>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_email": "dev@eyn.vision"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_location": "RESERVED_KEY"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="s1">'},'</span><span class="o">)</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"analytics": {'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"location": {'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"accuracy": "30.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"altitude": "79.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"latitude": "89.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"longitude": "-0.072258"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"provider": "fused"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
@@ -1566,6 +1587,36 @@ The enrol API response usually takes 5 seconds.</p>
 <td>Required</td>
 <td>The <strong><em>issuer_location</em></strong> is a reserved key and must be submitted as <code>RESERVED_KEY</code>.</td>
 </tr>
+<tr>
+<td>accuracy</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>accuracy</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>altitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>latitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>longitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>provider</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>provider</em></strong> of the measured location.</td>
+</tr>
 </tbody></table>
 <h3 id='response-parameters-8'>Response Parameters</h3>
 <table><thead>
@@ -1583,15 +1634,33 @@ The enrol API response usually takes 5 seconds.</p>
 </tbody></table>
 <h2 id='verify-a-covid-free-certificate'>Verify a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
-        <span class="s">'certificate'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">certificate</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span>
+    <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
+    <span class="s">'certificate'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">certificate</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">'analytics'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'location'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'accuracy'</span><span class="p">:</span> <span class="s">'30.00'</span><span class="p">,</span>
+            <span class="s">'altitude'</span><span class="p">:</span> <span class="s">'79.00'</span><span class="p">,</span>
+            <span class="s">'latitude'</span><span class="p">:</span> <span class="s">'89.00'</span><span class="p">,</span>
+            <span class="s">'longitude'</span><span class="p">:</span> <span class="s">'-0.072258'</span><span class="p">,</span>
+            <span class="s">'provider'</span><span class="p">:</span> <span class="s">'fused'</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immuntiy.eyn.ninja/immunity_verify'</span><span class="p">,</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_verify'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"certificate": "'</span><span class="p">;</span> 
  <span class="nb">base64 </span>certificate.jpeg<span class="p">;</span>
  <span class="nb">echo</span> <span class="s1">'",'</span><span class="p">;</span> 
+ <span class="nb">echo</span> <span class="s1">'},'</span><span class="o">)</span> 
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"analytics": {'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"location": {'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"accuracy": "30.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"altitude": "79.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"latitude": "89.00"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"longitude": "-0.072258"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"provider": "fused"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
       <span class="nt">-d</span> @- 
@@ -1680,6 +1749,36 @@ The verify API response usually takes 5 seconds.</p>
 <td>Required</td>
 <td>The <strong><em>certificate</em></strong> of an enrolee as an base64 encoded image string. The image string <strong><em>MUST</em></strong> be in a <strong><em>square</em></strong> image format (i.e. width == height).</td>
 </tr>
+<tr>
+<td>accuracy</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>accuracy</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>altitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>latitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>longitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>provider</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>provider</em></strong> of the measured location.</td>
+</tr>
 </tbody></table>
 <h3 id='response-parameters-9'>Response Parameters</h3>
 <table><thead>
@@ -1743,6 +1842,202 @@ The verify API response usually takes 5 seconds.</p>
 <td>issuer_location</td>
 <td style="text-align: center">-</td>
 <td>The <strong><em>issuer_location</em></strong> of the <strong><em>Covid test</em></strong> records the location where the test was performed for accountability and auditing purposes.</td>
+</tr>
+</tbody></table>
+<h2 id='verify-the-signature-of-a-covid-free-certificate'>Verify the Signature of a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
+    <span class="s">'certificate_id'</span><span class="p">:</span> <span class="s">'69cf84c1-76be-4cea-b4c2-577ce24c3d8c'</span><span class="p">,</span>
+    <span class="s">'certificate_issue_date'</span><span class="p">:</span> <span class="s">'1593534763'</span><span class="p">,</span>
+    <span class="s">'certificate_expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
+    <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
+    <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
+    <span class="s">'selfie_base64_encoded'</span><span class="p">:</span> <span class="s">'&lt;selfie in base64 encoding&gt;'</span><span class="p">,</span>
+    <span class="s">'test_type'</span><span class="p">:</span> <span class="s">'Molecular Swab Test'</span><span class="p">,</span>
+    <span class="s">'test_result'</span><span class="p">:</span> <span class="s">'Negative'</span><span class="p">,</span>
+    <span class="s">'test_issue_date'</span><span class="p">:</span> <span class="s">'1592310965'</span><span class="p">,</span>
+    <span class="s">'test_expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
+    <span class="s">'issuer_id'</span><span class="p">:</span> <span class="s">'700852e3-4db1-47ea-9c4b-c0826f22b2d1'</span><span class="p">,</span>
+    <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'dev@eyn.vision'</span><span class="p">,</span>
+    <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'RESERVED_KEY'</span><span class="p">,</span>
+    <span class="s">'signature_base64_encoded'</span><span class="p">:</span> <span class="s">'&lt;signature in base64 encoding&gt;'</span><span class="p">,</span>
+    <span class="s">'analytics'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'location'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'accuracy'</span><span class="p">:</span> <span class="s">'30.00'</span><span class="p">,</span>
+            <span class="s">'altitude'</span><span class="p">:</span> <span class="s">'79.00'</span><span class="p">,</span>
+            <span class="s">'latitude'</span><span class="p">:</span> <span class="s">'89.00'</span><span class="p">,</span>
+            <span class="s">'longitude'</span><span class="p">:</span> <span class="s">'-0.072258'</span><span class="p">,</span>
+            <span class="s">'provider'</span><span class="p">:</span> <span class="s">'fused'</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/verify_signature'</span><span class="p">,</span>
+                         <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"revoked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASS"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API endpoint processes a decoded <strong><em>Covid-free certificate</em></strong> and performs the following operations:
+<ol>
+  <li> verifies the signature of the certifcate </li>
+  <li> verifies if the certificate has been revoked </li>
+</ol></p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>POST https://immunity.eyn.ninja/verify_signature</code></p>
+<h3 id='payload-5'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_secret</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>api_secret</em></strong> identifies the verifier and allows to verify <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+<tr>
+<td>certificate_id</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>certificate_id</em></strong> uniquely identifies a certificate.</td>
+</tr>
+<tr>
+<td>certificate_issue_date</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>certificate_issue_date</em></strong>  records the date when the <strong><em>certificate</em></strong> has been issued. The date should be a string in Unix Epoch format.</td>
+</tr>
+<tr>
+<td>certificate_expiry_date</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>certificate_expiry_date</em></strong>  records the date when the <strong><em>certificate</em></strong> expires. The date should be a string in Unix Epoch format.</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>first_name</em></strong> of the enrolee.</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>last_name</em></strong> of the enrolee.</td>
+</tr>
+<tr>
+<td>selfie_base64_encoded</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>selfie_base64_encoded</em></strong> of the enrolee is a <strong><em>frontal facial image</em></strong> of the enrolee for <strong><em>identification</em></strong> purposes. This should be a base64 encoded image string.</td>
+<td></td>
+</tr>
+<tr>
+<td>test_type</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>test_type</em></strong> of the <strong><em>Covid test</em></strong>.</td>
+<td></td>
+</tr>
+<tr>
+<td>test_result</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>test_result</em></strong> of the <strong><em>Covid test</em></strong>.</td>
+<td></td>
+</tr>
+<tr>
+<td>test_issue_date</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>test_issue_date</em></strong>  records the date when the <strong><em>Covid test</em></strong> has been issued. The date should be a string in Unix Epoch format.</td>
+</tr>
+<tr>
+<td>test_expiry_date</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>test_expiry_date</em></strong>  records the date when the <strong><em>Covid test</em></strong> expires. The date should be a string in Unix Epoch format.</td>
+</tr>
+<tr>
+<td>issuer_id</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>issuer_id</em></strong> uniquely identifies an issuer.</td>
+</tr>
+<tr>
+<td>issuer_email</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>issuer_email</em></strong> of the <strong><em>Covid test</em></strong> records the email address of the issuer for accountability and auditing purposes.</td>
+<td></td>
+</tr>
+<tr>
+<td>issuer_location</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>issuer_location</em></strong> of the <strong><em>Covid test</em></strong> records the location where the test was performed for accountability and auditing purposes.</td>
+<td></td>
+</tr>
+<tr>
+<td>signature_base64_encoded</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>signature_base64_encoded</em></strong> of the <strong><em>Covid test</em></strong> is the digital signature over the data stored within the QRCode.</td>
+<td></td>
+</tr>
+<tr>
+<td>accuracy</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>accuracy</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>altitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>altitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>latitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>longitude</em></strong> of the measured location.</td>
+</tr>
+<tr>
+<td>provider</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>provider</em></strong> of the measured location.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-10'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>signature</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>signature</em></strong> check verifies if the signature of the <strong><em>Covid-free certificate</em></strong> is valid. If valid it responds with <code>PASS</code> otherwise with <code>FAIL</code>.</td>
+</tr>
+<tr>
+<td>revoked</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>revoked</em></strong> check verifies if the <strong><em>Covid-free certificate</em></strong> is revoked or not. If valid (i.e. not revoked) it responds with <code>PASS</code> otherwise with <code>FAIL</code>.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
