@@ -713,6 +713,15 @@ data = {
     'issuer': {
         'issuer_email': 'dev@eyn.vision',
         'issuer_location': 'RESERVED_KEY'
+    },
+    'analytics': {
+        'location': {
+            'accuracy': '30.00',
+            'altitude': '79.00',
+            'latitude': '89.00',
+            'longitude': '-0.072258',
+            'provider': 'fused'
+        }
     }
 }
 response = requests.post('https://immunity.eyn.ninja/immunity_enrol',
@@ -739,6 +748,15 @@ response = requests.post('https://immunity.eyn.ninja/immunity_enrol',
  echo -n '"issuer": {';
  echo -n '"issuer_email": "dev@eyn.vision"';
  echo -n '"issuer_location": "RESERVED_KEY"';
+ echo '},')
+ echo -n '"analytics": {';
+ echo -n '"location": {';
+ echo -n '"accuracy": "30.00"';
+ echo -n '"altitude": "79.00"';
+ echo -n '"latitude": "89.00"';
+ echo -n '"longitude": "-0.072258"';
+ echo -n '"provider": "fused"';
+ echo '}')
  echo '}')
  echo '}') | 
  curl -H "Content-Type: application/json" 
@@ -790,6 +808,11 @@ test_result | - | Required | The ***test_result*** of the ***Covid test***.
 package_id | - | Required | The ***package_id*** is a 16 digit unique identifier of the  ***Covid test*** as a string.
 issuer_email | - | Required | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
 issuer_location | - | Required | The ***issuer_location*** is a reserved key and must be submitted as `RESERVED_KEY`.
+accuracy | - | Optional | The ***accuracy*** of the measured location.
+altitude | - | Optional | The ***altitude*** of the measured location.
+latitude | - | Optional | The ***latitude*** of the measured location.
+longitude | - | Optional | The ***longitude*** of the measured location.
+provider  | - | Optional | The ***provider*** of the measured location.
 
 ### Response Parameters
 
@@ -801,10 +824,19 @@ certificate |  base64 string | The ***certificate*** is a base64 encoded string 
 ```python
 import requests
 data = {
-        'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
-        'certificate': <certificate image in base64 encoding>
+    'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
+    'certificate': <certificate image in base64 encoding>,
+    'analytics': {
+        'location': {
+            'accuracy': '30.00',
+            'altitude': '79.00',
+            'latitude': '89.00',
+            'longitude': '-0.072258',
+            'provider': 'fused'
+        }
+    }
 }
-response = requests.post('https://immuntiy.eyn.ninja/immunity_verify',
+response = requests.post('https://immunity.eyn.ninja/immunity_verify',
                          json=data)
 ```
 
@@ -813,6 +845,15 @@ response = requests.post('https://immuntiy.eyn.ninja/immunity_verify',
  echo -n '"certificate": "'; 
  base64 certificate.jpeg;
  echo '",'; 
+ echo '},') 
+ echo -n '"analytics": {';
+ echo -n '"location": {';
+ echo -n '"accuracy": "30.00"';
+ echo -n '"altitude": "79.00"';
+ echo -n '"latitude": "89.00"';
+ echo -n '"longitude": "-0.072258"';
+ echo -n '"provider": "fused"';
+ echo '}')
  echo '}') | 
  curl -H "Content-Type: application/json" 
       -d @- 
@@ -896,6 +937,11 @@ Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 api_secret | - | Required | The ***api_secret*** identifies the verifier and allows to verify ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
 certificate | - | Required | The ***certificate*** of an enrolee as an base64 encoded image string. The image string ***MUST*** be in a ***square*** image format (i.e. width == height).
+accuracy | - | Optional | The ***accuracy*** of the measured location.
+altitude | - | Optional | The ***altitude*** of the measured location.
+latitude | - | Optional | The ***latitude*** of the measured location.
+longitude | - | Optional | The ***longitude*** of the measured location.
+provider  | - | Optional | The ***provider*** of the measured location.
 
 ### Response Parameters
 
@@ -912,3 +958,89 @@ test_type | - | The ***test_type*** of the ***Covid test***.
 test_result | - | The ***test_result*** of the ***Covid test***.
 issuer_email | - | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
 issuer_location | - | The ***issuer_location*** of the ***Covid test*** records the location where the test was performed for accountability and auditing purposes.
+
+## Verify the Signature of a Covid-free Certificate
+```python
+import requests
+data = {
+    'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
+    'certificate_id': '69cf84c1-76be-4cea-b4c2-577ce24c3d8c',
+    'certificate_issue_date': '1593534763',
+    'certificate_expiry_date': '1592310966',
+    'first_name': 'ANGELA ZOE',
+    'last_name': 'UK SPECIMEN',
+    'selfie_base64_encoded': '<selfie in base64 encoding>',
+    'test_type': 'Molecular Swab Test',
+    'test_result': 'Negative',
+    'test_issue_date': '1592310965',
+    'test_expiry_date': '1592310966',
+    'issuer_id': '700852e3-4db1-47ea-9c4b-c0826f22b2d1',
+    'issuer_email': 'dev@eyn.vision',
+    'issuer_location': 'RESERVED_KEY',
+    'signature_base64_encoded': '<signature in base64 encoding>',
+    'analytics': {
+        'location': {
+            'accuracy': '30.00',
+            'altitude': '79.00',
+            'latitude': '89.00',
+            'longitude': '-0.072258',
+            'provider': 'fused'
+        }
+    }
+}
+response = requests.post('https://immunity.eyn.ninja/verify_signature',
+                         json=data)
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": {
+        "signature": "PASS",
+        "revoked": "PASS",
+    }
+}
+```
+
+This API endpoint processes a decoded ***Covid-free certificate*** and performs the following operations:
+<ol>
+  <li> verifies the signature of the certifcate </li>
+  <li> verifies if the certificate has been revoked </li>
+</ol>
+
+### HTTP Request
+
+`POST https://immunity.eyn.ninja/verify_signature`
+
+### Payload
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+api_secret | - | Required | The ***api_secret*** identifies the verifier and allows to verify ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+certificate_id | - | Required | The ***certificate_id*** uniquely identifies a certificate.
+certificate_issue_date | - | Required | The ***certificate_issue_date***  records the date when the ***certificate*** has been issued. The date should be a string in Unix Epoch format.
+certificate_expiry_date | - | Required | The ***certificate_expiry_date***  records the date when the ***certificate*** expires. The date should be a string in Unix Epoch format.
+first_name  | - | Required | The ***first_name*** of the enrolee. 
+last_name  | - | Required | The ***last_name*** of the enrolee. 
+selfie_base64_encoded | - | The ***selfie_base64_encoded*** of the enrolee is a ***frontal facial image*** of the enrolee for ***identification*** purposes. This should be a base64 encoded image string.
+test_type | - | The ***test_type*** of the ***Covid test***.
+test_result | - | The ***test_result*** of the ***Covid test***.
+test_issue_date | - | Required | The ***test_issue_date***  records the date when the ***Covid test*** has been issued. The date should be a string in Unix Epoch format.
+test_expiry_date | - | Required | The ***test_expiry_date***  records the date when the ***Covid test*** expires. The date should be a string in Unix Epoch format.
+issuer_id | - | Required | The ***issuer_id*** uniquely identifies an issuer.
+issuer_email | - | The ***issuer_email*** of the ***Covid test*** records the email address of the issuer for accountability and auditing purposes.
+issuer_location | - | The ***issuer_location*** of the ***Covid test*** records the location where the test was performed for accountability and auditing purposes.
+signature_base64_encoded  | - | The ***signature_base64_encoded*** of the ***Covid test*** is the digital signature over the data stored within the QRCode.
+accuracy | - | Optional | The ***accuracy*** of the measured location.
+altitude | - | Optional | The ***altitude*** of the measured location.
+latitude | - | Optional | The ***latitude*** of the measured location.
+longitude | - | Optional | The ***longitude*** of the measured location.
+provider  | - | Optional | The ***provider*** of the measured location.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+signature |  - | The ***signature*** check verifies if the signature of the ***Covid-free certificate*** is valid. If valid it responds with `PASS` otherwise with `FAIL`.
+revoked |  - | The ***revoked*** check verifies if the ***Covid-free certificate*** is revoked or not. If valid (i.e. not revoked) it responds with `PASS` otherwise with `FAIL`.
