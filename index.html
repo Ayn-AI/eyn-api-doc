@@ -1421,37 +1421,50 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <h1 id='covid-free-certificates'>Covid-free Certificates</h1><h2 id='issue-a-covid-free-certificate'>Issue a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
-    <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
-    <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
-    <span class="s">'issue_date'</span><span class="p">:</span> <span class="s">'1592310965'</span><span class="p">,</span>
-    <span class="s">'expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
-    <span class="s">'selfie'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">selfie</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">'identity'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
+        <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
+        <span class="s">'selfie_base64_encoded'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">selfie</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="s">'email_address'</span><span class="p">:</span> <span class="s">'angela.zoe@gov.uk'</span><span class="p">,</span> <span class="o">//</span> <span class="n">optional</span>
+        <span class="s">'phone_number'</span><span class="p">:</span> <span class="s">'00447700123456'</span><span class="p">,</span>     <span class="o">//</span> <span class="n">optional</span>
+        <span class="s">'date_of_birth'</span><span class="p">:</span> <span class="s">'19881204'</span>           <span class="o">//</span> <span class="n">optional</span>
+    <span class="p">},</span>
     <span class="s">'test'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'test_type'</span><span class="p">:</span> <span class="s">'Molecular Swab Test'</span><span class="p">,</span>
         <span class="s">'test_result'</span><span class="p">:</span> <span class="s">'Negative'</span><span class="p">,</span>
-        <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'robin@eyn.vision'</span><span class="p">,</span>
-        <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'Test Site'</span>
-<span class="p">}}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_enrol'</span><span class="p">,</span>
+        <span class="s">'package_id'</span><span class="p">:</span> <span class="s">'1234567890987654'</span>
+    <span class="p">},</span>
+    <span class="s">'issuer'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'dev@eyn.vision'</span><span class="p">,</span>
+        <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'RESERVED_KEY'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_enrol'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"identity": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"first_name": "ANGELA ZOE"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"last_name": "UK SPECIMEN"'</span><span class="p">;</span>
- <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issue_date": "1592310965"'</span><span class="p">;</span>
- <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"expiry_date": "1592310966"'</span><span class="p">;</span>
- <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"selfie": "'</span><span class="p">;</span> 
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"selfie_base64_encoded": "'</span><span class="p">;</span> 
  <span class="nb">base64 </span>selfie.jpg<span class="p">;</span>
- <span class="nb">echo</span> <span class="s1">'",'</span><span class="p">;</span> 
+ <span class="nb">echo</span> <span class="s1">'",'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"email_address": "angela.zoe@gov.uk"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"phone_number": "00447700123456"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"date_of_birth": "19881204"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="s1">'},'</span><span class="o">)</span> 
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"test": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"test_type": "Molecular Swab Test"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"test_result": "Negative"'</span><span class="p">;</span>
- <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_email": "robin@eyn.vision"'</span><span class="p">;</span>
- <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_location": "Test Site"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"package_id": "1234567890987654"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="s1">'},'</span><span class="o">)</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer": {'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_email": "dev@eyn.vision"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"issuer_location": "RESERVED_KEY"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
       <span class="nt">-d</span> @- 
-      https://api.eyn.ninja/api/v1/prod/immunity_enrol
+      https://immunity.eyn.ninja/immunity_enrol
 </code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;iframe</span> 
     <span class="na">style=</span><span class="s">"display:block; width:100%; height:600px; border:none;"</span>
     <span class="na">src=</span><span class="s">"https://enrol.immunity.eyn.vision"</span> 
@@ -1466,12 +1479,12 @@ ID check API response usually takes between 15 to 25 seconds.</p>
   </span><span class="nl">"certificate"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;certificate</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoding&gt;</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This API endpoint processes identity information such as the first name, last name and face image of a person (as a base64 encoded image string) and test information such as the test type, test result, the issuer and the issuer location and issues a digitally signed immunity certificate. All the information submitted is hashed using the <code>SHA3-256</code> hash primitive and digitally signed using the <code>ECDSA-512</code> digital signature primitive and curve <code>brainpoolP512t1</code>. The responded <code>certificate</code> is a base64 encoded string of the <code>QRCode</code> representation of the digital certificate.</p>
+<p>This API endpoint processes identity information such as the first name, last name and face image of a person (as a base64 encoded image string) and test information such as the test type, test result, the test id and issuer information such as the issuer email and the issuer location and issues a digitally signed immunity certificate. All the information submitted is hashed using the <code>SHA3-256</code> hash primitive and digitally signed using the <code>ECDSA-512</code> digital signature primitive and curve <code>brainpoolP512t1</code>. The responded <code>certificate</code> is a base64 encoded string of the <code>QRCode</code> representation of the digital certificate.</p>
 <h3 id='testing-2'>Testing</h3>
 <p>Try our webflow <a href="https://enrol.immunity.eyn.vision">here.</a>
 The enrol API response usually takes 5 seconds.</p>
 <h3 id='http-request-8'>HTTP Request</h3>
-<p><code>POST https://api.eyn.ninja/api/v1/prod/immunity_enrol</code></p>
+<p><code>POST https://immunity.eyn.ninja/immunity_enrol</code></p>
 <h3 id='payload-3'>Payload</h3>
 <table><thead>
 <tr>
@@ -1500,22 +1513,28 @@ The enrol API response usually takes 5 seconds.</p>
 <td>The <strong><em>last_name</em></strong> of the enrolee.</td>
 </tr>
 <tr>
-<td>issue_date</td>
-<td style="text-align: center">-</td>
-<td>Required</td>
-<td>The <strong><em>issue_date</em></strong> records the date when the <strong><em>Covid test</em></strong> has been done. The date should be a string in Unix Epoch format.</td>
-</tr>
-<tr>
-<td>first_name</td>
-<td style="text-align: center">-</td>
-<td>Required</td>
-<td>The <strong><em>expiry_date</em></strong> records the date when the <strong><em>Covid test</em></strong>  expires. This coincides with the <strong><em>Covid-free certificate</em></strong> expiry date. The date should be a string in Unix Epoch format.</td>
-</tr>
-<tr>
-<td>selfie</td>
+<td>selfie_base64_encoded</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>selfie</em></strong> of the enrolee is a <strong><em>frontal facial image</em></strong> of the enrolee for <strong><em>identification</em></strong> purposes. This should be a base64 encoded image string.</td>
+</tr>
+<tr>
+<td>email_address</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>email_address</em></strong> of the enrolee.</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>phone_number</em></strong> of the enrolee.</td>
+</tr>
+<tr>
+<td>date_of_birth</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>date_of_birth</em></strong> of the enrolee.</td>
 </tr>
 <tr>
 <td>test_type</td>
@@ -1530,6 +1549,12 @@ The enrol API response usually takes 5 seconds.</p>
 <td>The <strong><em>test_result</em></strong> of the <strong><em>Covid test</em></strong>.</td>
 </tr>
 <tr>
+<td>package_id</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>package_id</em></strong> is a 16 digit unique identifier of the  <strong><em>Covid test</em></strong> as a string.</td>
+</tr>
+<tr>
 <td>issuer_email</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
@@ -1539,7 +1564,7 @@ The enrol API response usually takes 5 seconds.</p>
 <td>issuer_location</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
-<td>The <strong><em>issuer_location</em></strong> of the <strong><em>Covid test</em></strong> records the location where the test was performed for accountability and auditing purposes.</td>
+<td>The <strong><em>issuer_location</em></strong> is a reserved key and must be submitted as <code>RESERVED_KEY</code>.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters-8'>Response Parameters</h3>
@@ -1561,7 +1586,7 @@ The enrol API response usually takes 5 seconds.</p>
         <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
         <span class="s">'certificate'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">certificate</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_verify'</span><span class="p">,</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immuntiy.eyn.ninja/immunity_verify'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "676bc3ca-e2b9-4161-85a4-1dc8592916a5"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"certificate": "'</span><span class="p">;</span> 
@@ -1570,7 +1595,7 @@ The enrol API response usually takes 5 seconds.</p>
  <span class="nb">echo</span> <span class="s1">'}'</span><span class="o">)</span> | 
  curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> 
       <span class="nt">-d</span> @- 
-      https://api.eyn.ninja/api/v1/prod/immunity_verify
+      https://immunity.eyn.ninja/immunity_verify
 </code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;iframe</span> 
     <span class="na">style=</span><span class="s">"display:block; width:100%; height:600px; border:none;"</span>
     <span class="na">src=</span><span class="s">"https://verify.immunity.eyn.vision"</span> 
@@ -1633,7 +1658,7 @@ The enrol API response usually takes 5 seconds.</p>
 <p>Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
 The verify API response usually takes 5 seconds.</p>
 <h3 id='http-request-9'>HTTP Request</h3>
-<p><code>POST https://api.eyn.ninja/api/v1/prod/immunity_verify</code></p>
+<p><code>POST https://immunity.eyn.ninja/immunity_verify</code></p>
 <h3 id='payload-4'>Payload</h3>
 <table><thead>
 <tr>
@@ -2342,18 +2367,25 @@ Replace <code>check_id</code> with a valid check id (for example, retrieved via 
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
-    <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
-    <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
-    <span class="s">'issue_date'</span><span class="p">:</span> <span class="s">'1592310965'</span><span class="p">,</span>
-    <span class="s">'expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
-    <span class="s">'selfie'</span><span class="p">:</span> <span class="n">selfie_base64_encoded</span><span class="p">,</span>
+    <span class="s">'identity'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
+        <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
+        <span class="s">'selfie_base64_encoded'</span><span class="p">:</span> <span class="n">selfie_base64_encoded</span><span class="p">,</span>
+        <span class="s">'email_address'</span><span class="p">:</span> <span class="s">'angela.zoe@gov.uk'</span><span class="p">,</span>
+        <span class="s">'phone_number'</span><span class="p">:</span> <span class="s">'00447700123456'</span><span class="p">,</span> 
+        <span class="s">'date_of_birth'</span><span class="p">:</span> <span class="s">'19881204'</span> 
+    <span class="p">},</span>
     <span class="s">'test'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'test_type'</span><span class="p">:</span> <span class="s">'Molecular Swab Test'</span><span class="p">,</span>
         <span class="s">'test_result'</span><span class="p">:</span> <span class="s">'Negative'</span><span class="p">,</span>
-        <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'robin@eyn.vision'</span><span class="p">,</span>
-        <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'Test Site'</span>
-<span class="p">}}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_enrol'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="s">'package_id'</span><span class="p">:</span> <span class="s">'1234567890987654'</span>
+    <span class="p">},</span>
+    <span class="s">'issuer'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'issuer_email'</span><span class="p">:</span> <span class="s">'dev@eyn.vision'</span><span class="p">,</span>
+        <span class="s">'issuer_location'</span><span class="p">:</span> <span class="s">'RESERVED_KEY'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_enrol'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -2370,7 +2402,7 @@ Replace <code>check_id</code> with a valid check id (for example, retrieved via 
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
     <span class="s">'certificate'</span><span class="p">:</span> <span class="n">certificate_base64_encoded</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://api.eyn.ninja/api/v1/prod/immunity_verify'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_verify'</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">#!/bin/bash</span>
 
@@ -2378,25 +2410,32 @@ Replace <code>check_id</code> with a valid check id (for example, retrieved via 
 
 <span class="nv">payload</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 {
-    "api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d",
-    'first_name': 'ANGELA ZOE',
-    'last_name': 'UK SPECIMEN',
-    'issue_date': '1592310965',
-    'expiry_date': '1592310966',
-    "selfie": "</span><span class="k">${</span><span class="nv">SELFIE</span><span class="k">}</span><span class="sh">",
+    'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+    'identity': {
+        'first_name': 'ANGELA ZOE',
+        'last_name': 'UK SPECIMEN',
+        'selfie_base64_encoded': "</span><span class="k">${</span><span class="nv">SELFIE</span><span class="k">}</span><span class="sh">",
+        'email_address': 'angela.zoe@gov.uk', 
+        'phone_number': '00447700123456', 
+        'date_of_birth': '19881204' 
+    },
     'test': {
         'test_type': 'Molecular Swab Test',
         'test_result': 'Negative',
-        'issuer_email': 'robin@eyn.vision',
-        'issuer_location': 'Test Site'
-}}
+        'package_id': '1234567890987654'
+    },
+    'issuer': {
+        'issuer_email': 'dev@eyn.vision',
+        'issuer_location': 'RESERVED_KEY'
+    }
+}
 </span><span class="no">EOF
 </span><span class="si">)</span>
 
 <span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span>
 
 <span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span> | 
-curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://api.eyn.ninja/api/v1/prod/immunity_enrol 
+curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://immunity.eyn.ninja/immunity_enrol 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c">#!/bin/bash</span>
 
 <span class="nv">CERTIFICATE</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">base64 </span>certificate.jpeg<span class="si">)</span><span class="s2">"</span>
@@ -2412,7 +2451,7 @@ curl <span class="nt">--header</span> <span class="s2">"Content-Type:application
 <span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span>
 
 <span class="nb">echo</span> <span class="k">${</span><span class="nv">payload</span><span class="k">}</span> | 
-curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://api.eyn.ninja/api/v1/prod/immunity_verify
+curl <span class="nt">--header</span> <span class="s2">"Content-Type:application/json"</span> <span class="nt">-d</span> @- https://immunity.eyn.ninja/immunity_verify
 </code></pre></div><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;iframe</span> 
     <span class="na">style=</span><span class="s">"display:block; width:100%; height:600px; border:none;"</span>
     <span class="na">src=</span><span class="s">"https://enrol.immunity.eyn.vision"</span> 
