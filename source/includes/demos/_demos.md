@@ -742,18 +742,25 @@ with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "selfie.jpg"
 
 data = {
     'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
-    'first_name': 'ANGELA ZOE',
-    'last_name': 'UK SPECIMEN',
-    'issue_date': '1592310965',
-    'expiry_date': '1592310966',
-    'selfie': selfie_base64_encoded,
+    'identity': {
+        'first_name': 'ANGELA ZOE',
+        'last_name': 'UK SPECIMEN',
+        'selfie_base64_encoded': selfie_base64_encoded,
+        'email_address': 'angela.zoe@gov.uk',
+        'phone_number': '00447700123456', 
+        'date_of_birth': '19881204' 
+    },
     'test': {
         'test_type': 'Molecular Swab Test',
         'test_result': 'Negative',
-        'issuer_email': 'robin@eyn.vision',
-        'issuer_location': 'Test Site'
-}}
-response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_enrol', json=data)
+        'package_id': '1234567890987654'
+    },
+    'issuer': {
+        'issuer_email': 'dev@eyn.vision',
+        'issuer_location': 'RESERVED_KEY'
+    }
+}
+response = requests.post('https://immunity.eyn.ninja/immunity_enrol', json=data)
 print(response.text)
 ```
 
@@ -773,7 +780,7 @@ data = {
     'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
     'certificate': certificate_base64_encoded,
 }
-response = requests.post('https://api.eyn.ninja/api/v1/prod/immunity_verify', json=data)
+response = requests.post('https://immunity.eyn.ninja/immunity_verify', json=data)
 print(response.text)
 ```
 
@@ -784,25 +791,32 @@ SELFIE="$(base64 selfie.jpg)"
 
 payload=$(cat <<EOF
 {
-    "api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d",
-    'first_name': 'ANGELA ZOE',
-    'last_name': 'UK SPECIMEN',
-    'issue_date': '1592310965',
-    'expiry_date': '1592310966',
-    "selfie": "${SELFIE}",
+    'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+    'identity': {
+        'first_name': 'ANGELA ZOE',
+        'last_name': 'UK SPECIMEN',
+        'selfie_base64_encoded': "${SELFIE}",
+        'email_address': 'angela.zoe@gov.uk', 
+        'phone_number': '00447700123456', 
+        'date_of_birth': '19881204' 
+    },
     'test': {
         'test_type': 'Molecular Swab Test',
         'test_result': 'Negative',
-        'issuer_email': 'robin@eyn.vision',
-        'issuer_location': 'Test Site'
-}}
+        'package_id': '1234567890987654'
+    },
+    'issuer': {
+        'issuer_email': 'dev@eyn.vision',
+        'issuer_location': 'RESERVED_KEY'
+    }
+}
 EOF
 )
 
 echo ${payload}
 
 echo ${payload} | 
-curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/immunity_enrol 
+curl --header "Content-Type:application/json" -d @- https://immunity.eyn.ninja/immunity_enrol 
 ```
 
 ```shell
@@ -821,7 +835,7 @@ EOF
 echo ${payload}
 
 echo ${payload} | 
-curl --header "Content-Type:application/json" -d @- https://api.eyn.ninja/api/v1/prod/immunity_verify
+curl --header "Content-Type:application/json" -d @- https://immunity.eyn.ninja/immunity_verify
 ```
 
 ```html
