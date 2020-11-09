@@ -697,6 +697,7 @@ session_id  |  uuid | The ***session_id*** uniquely identifies an enrolment.
 import requests
 data = {
     'api_secret': 'e1131458-4664-4da7-855a-7ac3e5b9648d',
+    'token': 'eyJ0eXAiOiJKV1QiLCJ',
     'identity': {
         'first_name': 'ANGELA ZOE',
         'last_name': 'UK SPECIMEN',
@@ -730,6 +731,7 @@ response = requests.post('https://immunity.eyn.ninja/immunity_enrol',
 
 ```shell
 (echo -n '{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"';
+ echo -n '"token": "eyJ0eXAiOiJKV1QiLCJ",';
  echo -n '"identity": {';
  echo -n '"first_name": "ANGELA ZOE"';
  echo -n '"last_name": "UK SPECIMEN"';
@@ -797,6 +799,7 @@ The enrol API response usually takes 5 seconds.
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 api_secret | - | Required | The ***api_secret*** identifies the issuer and allows to issue ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+token | - | Required | The ***token*** is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.
 first_name | - | Required | The ***first_name*** of the enrolee.
 last_name | - | Required | The ***last_name*** of the enrolee.
 selfie_base64_encoded | - | Required | The ***selfie*** of the enrolee is a ***frontal facial image*** of the enrolee for ***identification*** purposes. This should be a base64 encoded image string.
@@ -826,6 +829,8 @@ import requests
 data = {
     'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
     'certificate': <certificate image in base64 encoding>,
+    'token': "eyJ0eXAiOiJKV1QiLCJ",
+    'verifier_email': "dev@eyn.vision",
     'analytics': {
         'location': {
             'accuracy': '30.00',
@@ -846,6 +851,8 @@ response = requests.post('https://immunity.eyn.ninja/immunity_verify',
  base64 certificate.jpeg;
  echo '",'; 
  echo '},') 
+ echo -n '"token": "eyJ0eXAiOiJKV1QiLCJ",'; 
+ echo -n '"verifier_email": "dev@eyn.vision",';
  echo -n '"analytics": {';
  echo -n '"location": {';
  echo -n '"accuracy": "30.00"';
@@ -936,6 +943,8 @@ The verify API response usually takes 5 seconds.
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 api_secret | - | Required | The ***api_secret*** identifies the verifier and allows to verify ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+token | - | Optional | The ***token*** is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.
+verifier_email  | - | Optional | The ***verifier_email*** is the email address of the verifier and handed over after login. The verifier_email is used for authorisation and auditing purposes.
 certificate | - | Required | The ***certificate*** of an enrolee as an base64 encoded image string. The image string ***MUST*** be in a ***square*** image format (i.e. width == height).
 accuracy | - | Optional | The ***accuracy*** of the measured location.
 altitude | - | Optional | The ***altitude*** of the measured location.
@@ -964,6 +973,8 @@ issuer_location | - | The ***issuer_location*** of the ***Covid test*** records 
 import requests
 data = {
     'api_secret': '676bc3ca-e2b9-4161-85a4-1dc8592916a5',
+    'token': "eyJ0eXAiOiJKV1QiLCJ",
+    'verifier_email': "dev@eyn.vision",
     'certificate_id': '69cf84c1-76be-4cea-b4c2-577ce24c3d8c',
     'certificate_issue_date': '1593534763',
     'certificate_expiry_date': '1592310966',
@@ -1018,6 +1029,8 @@ This API endpoint processes a decoded ***Covid-free certificate*** and performs 
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
 api_secret | - | Required | The ***api_secret*** identifies the verifier and allows to verify ***Covid-free certificates***. Request your ***api_secret*** <a href="mailto:contact@eyn.vision">now</a>.
+token | - | Optional | The ***token*** is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.
+verifier_email  | - | Optional | The ***verifier_email*** is the email address of the verifier and handed over after login. The verifier_email is used for authorisation and auditing purposes.
 certificate_id | - | Required | The ***certificate_id*** uniquely identifies a certificate.
 certificate_issue_date | - | Required | The ***certificate_issue_date***  records the date when the ***certificate*** has been issued. The date should be a string in Unix Epoch format.
 certificate_expiry_date | - | Required | The ***certificate_expiry_date***  records the date when the ***certificate*** expires. The date should be a string in Unix Epoch format.
