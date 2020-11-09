@@ -1424,6 +1424,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <h1 id='covid-free-certificates'>Covid-free Certificates</h1><h2 id='issue-a-covid-free-certificate'>Issue a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
+    <span class="s">'token'</span><span class="p">:</span> <span class="s">'eyJ0eXAiOiJKV1QiLCJ'</span><span class="p">,</span>
     <span class="s">'identity'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'first_name'</span><span class="p">:</span> <span class="s">'ANGELA ZOE'</span><span class="p">,</span>
         <span class="s">'last_name'</span><span class="p">:</span> <span class="s">'UK SPECIMEN'</span><span class="p">,</span>
@@ -1454,6 +1455,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://immunity.eyn.ninja/immunity_enrol'</span><span class="p">,</span>
                          <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="o">(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'{"api_secret": "e1131458-4664-4da7-855a-7ac3e5b9648d"'</span><span class="p">;</span>
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"token": "eyJ0eXAiOiJKV1QiLCJ",'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"identity": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"first_name": "ANGELA ZOE"'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"last_name": "UK SPECIMEN"'</span><span class="p">;</span>
@@ -1520,6 +1522,12 @@ The enrol API response usually takes 5 seconds.</p>
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>api_secret</em></strong> identifies the issuer and allows to issue <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+<tr>
+<td>token</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>token</em></strong> is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.</td>
 </tr>
 <tr>
 <td>first_name</td>
@@ -1636,6 +1644,8 @@ The enrol API response usually takes 5 seconds.</p>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
     <span class="s">'certificate'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">certificate</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">encoding</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">'token'</span><span class="p">:</span> <span class="s">"eyJ0eXAiOiJKV1QiLCJ"</span><span class="p">,</span>
+    <span class="s">'verifier_email'</span><span class="p">:</span> <span class="s">"dev@eyn.vision"</span><span class="p">,</span>
     <span class="s">'analytics'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'location'</span><span class="p">:</span> <span class="p">{</span>
             <span class="s">'accuracy'</span><span class="p">:</span> <span class="s">'30.00'</span><span class="p">,</span>
@@ -1653,6 +1663,8 @@ The enrol API response usually takes 5 seconds.</p>
  <span class="nb">base64 </span>certificate.jpeg<span class="p">;</span>
  <span class="nb">echo</span> <span class="s1">'",'</span><span class="p">;</span> 
  <span class="nb">echo</span> <span class="s1">'},'</span><span class="o">)</span> 
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"token": "eyJ0eXAiOiJKV1QiLCJ",'</span><span class="p">;</span> 
+ <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"verifier_email": "dev@eyn.vision",'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"analytics": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"location": {'</span><span class="p">;</span>
  <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'"accuracy": "30.00"'</span><span class="p">;</span>
@@ -1742,6 +1754,18 @@ The verify API response usually takes 5 seconds.</p>
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>api_secret</em></strong> identifies the verifier and allows to verify <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+<tr>
+<td>token</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>token</em></strong> is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.</td>
+</tr>
+<tr>
+<td>verifier_email</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>verifier_email</em></strong> is the email address of the verifier and handed over after login. The verifier_email is used for authorisation and auditing purposes.</td>
 </tr>
 <tr>
 <td>certificate</td>
@@ -1847,6 +1871,8 @@ The verify API response usually takes 5 seconds.</p>
 <h2 id='verify-the-signature-of-a-covid-free-certificate'>Verify the Signature of a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'676bc3ca-e2b9-4161-85a4-1dc8592916a5'</span><span class="p">,</span>
+    <span class="s">'token'</span><span class="p">:</span> <span class="s">"eyJ0eXAiOiJKV1QiLCJ"</span><span class="p">,</span>
+    <span class="s">'verifier_email'</span><span class="p">:</span> <span class="s">"dev@eyn.vision"</span><span class="p">,</span>
     <span class="s">'certificate_id'</span><span class="p">:</span> <span class="s">'69cf84c1-76be-4cea-b4c2-577ce24c3d8c'</span><span class="p">,</span>
     <span class="s">'certificate_issue_date'</span><span class="p">:</span> <span class="s">'1593534763'</span><span class="p">,</span>
     <span class="s">'certificate_expiry_date'</span><span class="p">:</span> <span class="s">'1592310966'</span><span class="p">,</span>
@@ -1905,6 +1931,18 @@ The verify API response usually takes 5 seconds.</p>
 <td style="text-align: center">-</td>
 <td>Required</td>
 <td>The <strong><em>api_secret</em></strong> identifies the verifier and allows to verify <strong><em>Covid-free certificates</em></strong>. Request your <strong><em>api_secret</em></strong> <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+<tr>
+<td>token</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>token</em></strong> is the JWT token that is handed over after login. The token is used for authorisation and auditing purposes.</td>
+</tr>
+<tr>
+<td>verifier_email</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>verifier_email</em></strong> is the email address of the verifier and handed over after login. The verifier_email is used for authorisation and auditing purposes.</td>
 </tr>
 <tr>
 <td>certificate_id</td>
