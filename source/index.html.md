@@ -696,7 +696,7 @@ session_id  |  uuid | The ***session_id*** uniquely identifies an enrolment.
 
 ```python
 import requests
-API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'  # A non-production, example API_SECRET
 headers = {
     'Authorization': 'Basic %s' % API_SECRET
 }
@@ -779,7 +779,7 @@ model | string | The ***model*** detailes the model used for face recognition.
 
 ```python
 import requests
-API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'  # A non-production, example API_SECRET
 headers = {
     'Authorization': 'Basic %s' % API_SECRET
 }
@@ -816,7 +816,7 @@ audio | base64 string | The ***audio*** is a base64 encoded string of the audio 
 ## Get Recordings
 ```python
 import requests
-API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'  # A non-production, example API_SECRET
 headers = {
     'Authorization': 'Basic %s' % API_SECRET
 }
@@ -874,7 +874,7 @@ record_id |  uuid | An ***record_id*** uniquely identifies a recording.
 
 ```python
 import requests
-API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'  # A non-production, example API_SECRET
 headers = {
     'Authorization': 'Basic %s' % API_SECRET
 }
