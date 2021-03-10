@@ -289,6 +289,9 @@
                   <li>
                     <a href="#retrieve-liveness-score" class="toc-h2 toc-link" data-title="Retrieve Liveness Score">Retrieve Liveness Score</a>
                   </li>
+                  <li>
+                    <a href="#retrieve-audio-stimulus" class="toc-h2 toc-link" data-title="Retrieve Audio Stimulus">Retrieve Audio Stimulus</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1602,6 +1605,54 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>The <strong><em>model</em></strong> detailes the model used for face recognition.</td>
 </tr>
 </tbody></table>
+<h2 id='retrieve-audio-stimulus'>Retrieve Audio Stimulus</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">API_SECRET</span> <span class="o">=</span> <span class="s">'6e4071cb-656d-4eef-9dfd-93a7093f86b8'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Basic </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_SECRET</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://liveness.eyn.ninja/audio'</span><span class="p">,</span>
+                        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">'audio':</span><span class="w"> </span><span class="err">&lt;base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">audio</span><span class="w"> </span><span class="err">stimulus&gt;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API endpoint returns the audio stimulus file used to detect the genuine presense of the human face in front of the smartphone.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET https://liveness.eyn.ninja/audio</code></p>
+<h3 id='header-2'>Header</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>Authorization</em></strong> identifies the requester and to retrieve the audio stimulus file. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-9'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>audio</td>
+<td style="text-align: center">base64 string</td>
+<td>The <strong><em>audio</em></strong> is a base64 encoded string of the audio stimulus file in <code>wav</code> format used to detect the genuine presense of the human face in front of the smartphone.</td>
+</tr>
+</tbody></table>
 <h1 id='covid-free-certificates'>Covid-free Certificates</h1><h2 id='issue-a-covid-free-certificate'>Issue a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
@@ -1687,7 +1738,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <h3 id='testing-2'>Testing</h3>
 <p>Try our webflow <a href="https://enrol.immunity.eyn.vision">here.</a>
 The enrol API response usually takes 5 seconds.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_enrol</code></p>
 <h3 id='payload-4'>Payload</h3>
 <table><thead>
@@ -1807,7 +1858,7 @@ The enrol API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-9'>Response Parameters</h3>
+<h3 id='response-parameters-10'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1919,7 +1970,7 @@ The enrol API response usually takes 5 seconds.</p>
 <h3 id='testing-3'>Testing</h3>
 <p>Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
 The verify API response usually takes 5 seconds.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_verify</code></p>
 <h3 id='payload-5'>Payload</h3>
 <table><thead>
@@ -1985,7 +2036,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-10'>Response Parameters</h3>
+<h3 id='response-parameters-11'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2096,7 +2147,7 @@ The verify API response usually takes 5 seconds.</p>
   <li> verifies the signature of the certifcate </li>
   <li> verifies if the certificate has been revoked </li>
 </ol></p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/verify_signature</code></p>
 <h3 id='payload-6'>Payload</h3>
 <table><thead>
@@ -2240,7 +2291,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-11'>Response Parameters</h3>
+<h3 id='response-parameters-12'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
