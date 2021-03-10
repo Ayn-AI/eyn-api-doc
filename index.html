@@ -292,6 +292,12 @@
                   <li>
                     <a href="#retrieve-audio-stimulus" class="toc-h2 toc-link" data-title="Retrieve Audio Stimulus">Retrieve Audio Stimulus</a>
                   </li>
+                  <li>
+                    <a href="#get-recordings" class="toc-h2 toc-link" data-title="Get Recordings">Get Recordings</a>
+                  </li>
+                  <li>
+                    <a href="#get-information-about-a-specific-recording" class="toc-h2 toc-link" data-title="Get Information about a Specific Recording">Get Information about a Specific Recording</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1636,7 +1642,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>Authorization</td>
 <td style="text-align: center">-</td>
 <td>Required</td>
-<td>The <strong><em>Authorization</em></strong> identifies the requester and to retrieve the audio stimulus file. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
+<td>The <strong><em>Authorization</em></strong> identifies the requester and allows the requester to retrieve the audio stimulus file. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
 </tr>
 </tbody></table>
 <h3 id='response-parameters-9'>Response Parameters</h3>
@@ -1651,6 +1657,208 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>audio</td>
 <td style="text-align: center">base64 string</td>
 <td>The <strong><em>audio</em></strong> is a base64 encoded string of the audio stimulus file in <code>wav</code> format used to detect the genuine presense of the human face in front of the smartphone.</td>
+</tr>
+</tbody></table>
+<h2 id='get-recordings'>Get Recordings</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">API_SECRET</span> <span class="o">=</span> <span class="s">'6e4071cb-656d-4eef-9dfd-93a7093f86b8'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Basic </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_SECRET</span>
+<span class="p">}</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'start_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1554389124</span><span class="p">,</span>
+    <span class="s">'tag'</span><span class="p">:</span> <span class="bp">None</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://liveness.eyn.ninja/records'</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"record_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"record_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;record_id_</span><span class="mi">1</span><span class="err">&gt;</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"record_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;record_id_</span><span class="mi">2</span><span class="err">&gt;</span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"record_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;record_id_n&gt;</span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns a list of records ids. Each record id maps to a specific record which is captured when requesting the <code>liveness_score</code> via the <code>/liveness_receiver</code> endpoint.</p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>GET https://liveness.eyn.ninja/records</code></p>
+<h3 id='header-3'>Header</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>Authorization</em></strong> identifies the requester and allows the requester to retrieve records information. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+</tbody></table>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_time</td>
+<td style="text-align: center">0</td>
+<td>Optional</td>
+<td>If <strong><em>start_time</em></strong> is set, then the response contains all records from this point in time. <strong><em>start_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
+</tr>
+<tr>
+<td>end_time</td>
+<td style="text-align: center">request time</td>
+<td>Optional</td>
+<td>If <strong><em>end_time</em></strong> is set, then the response contains all records up to this point in time. <strong><em>end_time</em></strong> should be supplied as a <em>string</em> in UTC format in milliseconds.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>If <strong><em>tag</em></strong> is set, then the response is filtered by this tag and contains all records associated with this tag.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-10'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>record_id</td>
+<td style="text-align: center">uuid</td>
+<td>An <strong><em>record_id</em></strong> uniquely identifies a recording.</td>
+</tr>
+</tbody></table>
+<h2 id='get-information-about-a-specific-recording'>Get Information about a Specific Recording</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">API_SECRET</span> <span class="o">=</span> <span class="s">'6e4071cb-656d-4eef-9dfd-93a7093f86b8'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Basic </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_SECRET</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://liveness.eyn.vision/records/{record_id}'</span><span class="p">,</span>
+                        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">'record_id':</span><span class="w"> </span><span class="err">'</span><span class="mi">1388</span><span class="err">ac</span><span class="mi">7</span><span class="err">f</span><span class="mi">-2e11-4</span><span class="err">d</span><span class="mi">53</span><span class="err">-ba</span><span class="mi">44-13e2</span><span class="err">cb</span><span class="mi">4</span><span class="err">d</span><span class="mi">1</span><span class="err">ab</span><span class="mi">7</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'created_at':</span><span class="w"> </span><span class="mi">1608231266</span><span class="p">,</span><span class="w">
+    </span><span class="err">'audio':</span><span class="w"> </span><span class="err">&lt;base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="w"> </span><span class="err">audio</span><span class="w"> </span><span class="err">signal&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="err">'video':</span><span class="w"> </span><span class="err">&lt;base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="w"> </span><span class="err">video</span><span class="w"> </span><span class="err">signal&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="err">'ref_image':</span><span class="w"> </span><span class="err">&lt;base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="w"> </span><span class="err">image&gt;</span><span class="p">,</span><span class="w"> 
+    </span><span class="err">'liveness_score':</span><span class="w"> </span><span class="err">'</span><span class="mf">0.9994610567246714</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'audio_image_features':</span><span class="w"> </span><span class="err">&lt;base</span><span class="mi">64</span><span class="w"> </span><span class="err">encoded</span><span class="w"> </span><span class="err">image&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="err">'tag':</span><span class="w"> </span><span class="err">''</span><span class="p">,</span><span class="w">
+    </span><span class="err">'model':</span><span class="w"> </span><span class="err">'SM-A</span><span class="mi">530</span><span class="err">F'</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint returns information about a specific recording. The information refects the data captured from the when requesting the <code>liveness_score</code> via the <code>/liveness_receiver</code> endpoint.</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>GET https://liveness.eyn.ninja/records/{record_id}</code></p>
+
+<aside class="notice">
+You must replace <code>{record_id}</code> with a valid record id (e.g. retrieved via <a href="#retrieve-liveness-score" style="text-decoration: none"><code>/liveness_receiver</code></a>).
+</aside>
+<h3 id='header-4'>Header</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>Authorization</em></strong> identifies the requester and allows the requester to retrieve records information. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>record_id</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>record_id</em></strong> for that specific information is requested. An <code>record_id</code> can be retrieved via <a href="#retrieve-liveness-score" style="text-decoration: none"><code>/liveness_receiver</code></a>.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-11'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>record_id</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>record_id</em></strong> is a unique UUID for each recording.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td style="text-align: center">number</td>
+<td>The <strong><em>created_at</em></strong> is a timestamp that records when the recording was processed.</td>
+</tr>
+<tr>
+<td>audio</td>
+<td style="text-align: center">base64 string</td>
+<td>The <strong><em>audio</em></strong> is a base64 encoded string of the audio recording in <code>wav</code> format. This is the audio response recording of the object in front of the smartphone.</td>
+</tr>
+<tr>
+<td>video</td>
+<td style="text-align: center">base64 string</td>
+<td>The <strong><em>video</em></strong> is a base64 encoded string of the video recording in <code>mp4</code> format. This is the video recording of the object in front of the smartphone.</td>
+</tr>
+<tr>
+<td>ref_image</td>
+<td style="text-align: center">base64 string</td>
+<td>The <strong><em>ref_image</em></strong> is a base64 encoded string of a reference image in <code>jpeg</code> format. The reference image is used to perform face matching to the face detected in the video.</td>
+</tr>
+<tr>
+<td>liveness_score</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>liveness_score</em></strong> is a probabilistic score indicating the probability of the recording being classified as <code>genuine</code> or <code>attack</code>.  <code>genuine</code> hereby refers to a live human face being presented at the time of recording, while <code>attack</code> refers to an inanimate spoof artifact has been presented.</td>
+</tr>
+<tr>
+<td>audio_image_features</td>
+<td style="text-align: center">array of base64 strings</td>
+<td>The <strong><em>audio_image_features</em></strong> is an array of images of the spectrograms of the audio recording.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>tag</em></strong> is an optional value in order to &quot;tag&quot; certain recordings with a particular theme.</td>
+</tr>
+<tr>
+<td>model</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>model</em></strong> is a string indicative of the smartphone model on which the recording has taken place.</td>
 </tr>
 </tbody></table>
 <h1 id='covid-free-certificates'>Covid-free Certificates</h1><h2 id='issue-a-covid-free-certificate'>Issue a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -1738,7 +1946,7 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <h3 id='testing-2'>Testing</h3>
 <p>Try our webflow <a href="https://enrol.immunity.eyn.vision">here.</a>
 The enrol API response usually takes 5 seconds.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_enrol</code></p>
 <h3 id='payload-4'>Payload</h3>
 <table><thead>
@@ -1858,7 +2066,7 @@ The enrol API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-10'>Response Parameters</h3>
+<h3 id='response-parameters-12'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1970,7 +2178,7 @@ The enrol API response usually takes 5 seconds.</p>
 <h3 id='testing-3'>Testing</h3>
 <p>Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
 The verify API response usually takes 5 seconds.</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_verify</code></p>
 <h3 id='payload-5'>Payload</h3>
 <table><thead>
@@ -2036,7 +2244,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-11'>Response Parameters</h3>
+<h3 id='response-parameters-13'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2147,7 +2355,7 @@ The verify API response usually takes 5 seconds.</p>
   <li> verifies the signature of the certifcate </li>
   <li> verifies if the certificate has been revoked </li>
 </ol></p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h3 id='http-request-14'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/verify_signature</code></p>
 <h3 id='payload-6'>Payload</h3>
 <table><thead>
@@ -2291,7 +2499,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-12'>Response Parameters</h3>
+<h3 id='response-parameters-14'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
