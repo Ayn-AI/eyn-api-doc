@@ -690,6 +690,91 @@ surname  |  String | The ***surname***  is the last name of the document holder.
 session_id  |  uuid | The ***session_id*** uniquely identifies an enrolment. 
 
 
+# LiveProof
+
+## Retrieve Liveness Score
+
+```python
+import requests
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+headers = {
+    'Authorization': 'Basic %s' % API_SECRET
+}
+payload = {
+    'audio': 'base64 encoded audio signal',
+    'video': 'base64 encoded audio signal',
+    'ref_image': '<base64 encoded image>',
+    'enforce_model_check': True,
+    'model': 'Google Pixel 4a',
+    'app_version': '0.0.0', 
+    'tag': None 
+}
+response = requests.post('https://liveness.eyn.ninja/liveness_receiver',
+                         json=payload, headers=headers)
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    'record_id': '97b1bca5-a49d-4dbf-b778-ced0ec8bd210',
+    'created_at': 1615373298,
+    'liveness_score': 0.9994610567246714,
+    'liveness_result': 'genuine',
+    'face_matching': {
+        'face_matched': True,
+        'face_similarity': 100.0,
+        'vectors': {
+            'vector_selfie': [-0.082368403673172, 0.027224931865930557, ...]
+        }, 
+        'face_recognition_model': {
+            'dlib': '19.7',
+            'model': 'resnet_model_v1'
+        }
+    }
+}
+```
+
+This API endpoint processes the submitted recorded audio, video and image signals and returns a liveness score indicating if the physical presence of a human being (ie. a human face) was detected and not of an inanimate spoof artifact (eg. an image or video presentation of a real human face). Further, this endpoint stores the recording for future reference.
+
+### HTTP Request
+
+`POST https://liveness.eyn.ninja/liveness_receiver`
+
+### Header
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+Authorization | - | Required | The ***Authorization*** identifies the requester and allows to perform a liveness detection. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
+
+### Payload
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+audio | - | Required | The ***audio*** is a base64 encoded string of the audio recording in `wav` format. This is the audio response recording of the object in front of the camera.
+video | - | Optional | The ***video*** is a base64 encoded string of the video recording in `mp4` format. This is the video recording of the object in front of the camera.
+ref_image | - | Optional | The ***ref_image*** is a base64 encoded string of a reference image in `jpeg` format. The reference image is used to perform face matching to the face detected in the video.
+enforce_model_check | True | Optional | The ***enforce_model_check*** is a flag to enforce checking of the smartphone model. The flag is set by default to `True` and should only be set to `False` when testing on a new non-supported model.
+model | - | Required | The ***model*** is a string indicative of the smartphone model on which the recording has taken place. If the model is not supported, an error message is returned.
+app_version | - | Optional | The ***app_version*** is a string of the LiveProof SDK version for tracking and debugging purposes.
+tag | - | Optional | The ***tag*** is an optional value in order to "tag" certain recordings with a particular theme.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+record_id | string | The ***record_id*** is a unique UUID for each recording, which can be used in the `/records/{id}` endpoint to receive detailed information about the recording.
+created_at | number | The ***created_at*** is a timestamp that records when the recording was processed.
+liveness_score | float | The ***liveness_score*** is a probabilistic score indicating the probability of the recording being classified as `genuine` or `attack`.  `genuine` hereby refers to a live human face being presented at the time of recording, while `attack` refers to an inanimate spoof artifact has been presented.
+liveness_result | string | The ***liveness_result*** is an interpretation of the `liveness_score` and can take the following values:  `genuine`, `attack`, `invalid_input` (e.g. on air), or `not_implemented`. 
+face_matching | - | The ***face_matching*** summarise the matching of the face from the `ref_image` and a face image extracted from the supplied `video`.
+face_matched | boolean | The ***face_matched*** indicates if the faces are matched or not.
+face_similarity | float | The ***face_similarity*** is a probabilistic score indicating the similarity of the two faces.
+vector_selfie | array | The ***vector_selfie*** is the array representation of the face image.
+face_recognition_model | - | The ***face_recognition_model*** summarises information on the face recognition model used. 
+dlib | string | The ***dlib*** indicates the version used for the face recognition model.
+model | string | The ***model*** detailes the model used for face recognition.
+
 # Covid-free Certificates
 
 ## Issue a Covid-free Certificate
