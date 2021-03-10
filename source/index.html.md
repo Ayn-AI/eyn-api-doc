@@ -870,6 +870,69 @@ Parameter |  Type |  Description
 --------- | :-----------: | -----------
 record_id |  uuid | An ***record_id*** uniquely identifies a recording. 
 
+## Get Information about a Specific Recording
+
+```python
+import requests
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+headers = {
+    'Authorization': 'Basic %s' % API_SECRET
+}
+response = requests.get('https://liveness.eyn.vision/records/{record_id}',
+                        headers=headers)
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    'record_id': '1388ac7f-2e11-4d53-ba44-13e2cb4d1ab7',
+    'created_at': 1608231266,
+    'audio': <base64 encoded audio signal>,
+    'video': <base64 encoded video signal>,
+    'ref_image': <base64 encoded image>, 
+    'liveness_score': '0.9994610567246714',
+    'audio_image_features': <base64 encoded image>,
+    'tag': '',
+    'model': 'SM-A530F'
+}
+```
+This endpoint returns information about a specific recording. The information refects the data captured from the when requesting the `liveness_score` via the `/liveness_receiver` endpoint.
+
+### HTTP Request
+
+`GET https://liveness.eyn.ninja/records/{record_id}`
+
+<aside class="notice">
+You must replace <code>{record_id}</code> with a valid record id (e.g. retrieved via <a href="#retrieve-liveness-score" style="text-decoration: none"><code>/liveness_receiver</code></a>).
+</aside>
+
+### Header
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+Authorization | - | Required | The ***Authorization*** identifies the requester and allows the requester to retrieve records information. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
+
+### Query Parameters
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+record_id | - | Required | The ***record_id*** for that specific information is requested. An `record_id` can be retrieved via <a href="#retrieve-liveness-score" style="text-decoration: none"><code>/liveness_receiver</code></a>.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+record_id | string | The ***record_id*** is a unique UUID for each recording.
+created_at | number | The ***created_at*** is a timestamp that records when the recording was processed.
+audio | base64 string | The ***audio*** is a base64 encoded string of the audio recording in `wav` format. This is the audio response recording of the object in front of the smartphone.
+video | base64 string | The ***video*** is a base64 encoded string of the video recording in `mp4` format. This is the video recording of the object in front of the smartphone.
+ref_image | base64 string| The ***ref_image*** is a base64 encoded string of a reference image in `jpeg` format. The reference image is used to perform face matching to the face detected in the video.
+liveness_score | string | The ***liveness_score*** is a probabilistic score indicating the probability of the recording being classified as `genuine` or `attack`.  `genuine` hereby refers to a live human face being presented at the time of recording, while `attack` refers to an inanimate spoof artifact has been presented.
+audio_image_features | array of base64 strings | The ***audio_image_features*** is an array of images of the spectrograms of the audio recording.
+tag | string | The ***tag*** is an optional value in order to "tag" certain recordings with a particular theme.
+model | string | The ***model*** is a string indicative of the smartphone model on which the recording has taken place.
 
 # Covid-free Certificates
 
