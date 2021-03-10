@@ -805,13 +805,71 @@ This API endpoint returns the audio stimulus file used to detect the genuine pre
 
 Parameter | Default | Required | Description
 --------- | :-------: | ----------- | -----------
-Authorization | - | Required | The ***Authorization*** identifies the requester and to retrieve the audio stimulus file. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
+Authorization | - | Required | The ***Authorization*** identifies the requester and allows the requester to retrieve the audio stimulus file. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
 
 ### Response Parameters
 
 Parameter |  Type |  Description
 --------- | :-----------: | -----------
 audio | base64 string | The ***audio*** is a base64 encoded string of the audio stimulus file in `wav` format used to detect the genuine presense of the human face in front of the smartphone.
+
+## Get Recordings
+```python
+import requests
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+headers = {
+    'Authorization': 'Basic %s' % API_SECRET
+}
+payload = {
+    'start_time': 0,
+    'end_time': 1554389124,
+    'tag': None
+}
+response = requests.get('https://liveness.eyn.ninja/records',
+                        json=payload, headers=headers)
+```
+
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "record_ids": [
+        {"record_id": <record_id_1>},
+        {"record_id": <record_id_2>},
+        ...
+        {"record_id": <record_id_n>}
+    ]
+}
+```
+
+This endpoint returns a list of records ids. Each record id maps to a specific record which is captured when requesting the `liveness_score` via the `/liveness_receiver` endpoint.
+
+### HTTP Request
+
+`GET https://liveness.eyn.ninja/records`
+
+### Header
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+Authorization | - | Required | The ***Authorization*** identifies the requester and allows the requester to retrieve records information. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
+
+### Request Parameters
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+start_time | 0 | Optional | If ***start_time*** is set, then the response contains all records from this point in time. ***start_time*** should be supplied as a *string* in UTC format in milliseconds.
+end_time | request time | Optional | If ***end_time*** is set, then the response contains all records up to this point in time. ***end_time*** should be supplied as a *string* in UTC format in milliseconds.
+tag  | - | Optional | If ***tag*** is set, then the response is filtered by this tag and contains all records associated with this tag.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+record_id |  uuid | An ***record_id*** uniquely identifies a recording. 
+
 
 # Covid-free Certificates
 
