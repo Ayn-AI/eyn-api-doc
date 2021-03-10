@@ -775,6 +775,44 @@ face_recognition_model | - | The ***face_recognition_model*** summarises informa
 dlib | string | The ***dlib*** indicates the version used for the face recognition model.
 model | string | The ***model*** detailes the model used for face recognition.
 
+## Retrieve Audio Stimulus
+
+```python
+import requests
+API_SECRET = '6e4071cb-656d-4eef-9dfd-93a7093f86b8'
+headers = {
+    'Authorization': 'Basic %s' % API_SECRET
+}
+response = requests.get('https://liveness.eyn.ninja/audio',
+                        headers=headers)
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    'audio': <base64 encoded string of the audio stimulus>
+}
+```
+
+This API endpoint returns the audio stimulus file used to detect the genuine presense of the human face in front of the smartphone.
+
+### HTTP Request
+
+`GET https://liveness.eyn.ninja/audio`
+
+### Header
+
+Parameter | Default | Required | Description
+--------- | :-------: | ----------- | -----------
+Authorization | - | Required | The ***Authorization*** identifies the requester and to retrieve the audio stimulus file. Request your ***Authorization*** secret  <a href="mailto:contact@eyn.vision">now</a>.
+
+### Response Parameters
+
+Parameter |  Type |  Description
+--------- | :-----------: | -----------
+audio | base64 string | The ***audio*** is a base64 encoded string of the audio stimulus file in `wav` format used to detect the genuine presense of the human face in front of the smartphone.
+
 # Covid-free Certificates
 
 ## Issue a Covid-free Certificate
