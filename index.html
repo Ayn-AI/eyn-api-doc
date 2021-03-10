@@ -284,6 +284,14 @@
               </ul>
           </li>
           <li>
+            <a href="#liveproof" class="toc-h1 toc-link" data-title="LiveProof">LiveProof</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#retrieve-liveness-score" class="toc-h2 toc-link" data-title="Retrieve Liveness Score">Retrieve Liveness Score</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#covid-free-certificates" class="toc-h1 toc-link" data-title="Covid-free Certificates">Covid-free Certificates</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1421,6 +1429,179 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <td>The <strong><em>session_id</em></strong> uniquely identifies an enrolment.</td>
 </tr>
 </tbody></table>
+<h1 id='liveproof'>LiveProof</h1><h2 id='retrieve-liveness-score'>Retrieve Liveness Score</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">API_SECRET</span> <span class="o">=</span> <span class="s">'6e4071cb-656d-4eef-9dfd-93a7093f86b8'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'Authorization'</span><span class="p">:</span> <span class="s">'Basic </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">API_SECRET</span>
+<span class="p">}</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'audio'</span><span class="p">:</span> <span class="s">'base64 encoded audio signal'</span><span class="p">,</span>
+    <span class="s">'video'</span><span class="p">:</span> <span class="s">'base64 encoded audio signal'</span><span class="p">,</span>
+    <span class="s">'ref_image'</span><span class="p">:</span> <span class="s">'&lt;base64 encoded image&gt;'</span><span class="p">,</span>
+    <span class="s">'enforce_model_check'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'model'</span><span class="p">:</span> <span class="s">'Google Pixel 4a'</span><span class="p">,</span>
+    <span class="s">'app_version'</span><span class="p">:</span> <span class="s">'0.0.0'</span><span class="p">,</span> 
+    <span class="s">'tag'</span><span class="p">:</span> <span class="bp">None</span> 
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://liveness.eyn.ninja/liveness_receiver'</span><span class="p">,</span>
+                         <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">'record_id':</span><span class="w"> </span><span class="err">'</span><span class="mi">97</span><span class="err">b</span><span class="mi">1</span><span class="err">bca</span><span class="mi">5</span><span class="err">-a</span><span class="mi">49</span><span class="err">d</span><span class="mi">-4</span><span class="err">dbf-b</span><span class="mi">778</span><span class="err">-ced</span><span class="mi">0</span><span class="err">ec</span><span class="mi">8</span><span class="err">bd</span><span class="mi">210</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'created_at':</span><span class="w"> </span><span class="mi">1615373298</span><span class="p">,</span><span class="w">
+    </span><span class="err">'liveness_score':</span><span class="w"> </span><span class="mf">0.9994610567246714</span><span class="p">,</span><span class="w">
+    </span><span class="err">'liveness_result':</span><span class="w"> </span><span class="err">'genuine'</span><span class="p">,</span><span class="w">
+    </span><span class="err">'face_matching':</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">'face_matched':</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w">
+        </span><span class="err">'face_similarity':</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+        </span><span class="err">'vectors':</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="err">'vector_selfie':</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.082368403673172</span><span class="p">,</span><span class="w"> </span><span class="mf">0.027224931865930557</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="err">'face_recognition_model':</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="err">'dlib':</span><span class="w"> </span><span class="err">'</span><span class="mf">19.7</span><span class="err">'</span><span class="p">,</span><span class="w">
+            </span><span class="err">'model':</span><span class="w"> </span><span class="err">'resnet_model_v</span><span class="mi">1</span><span class="err">'</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This API endpoint processes the submitted recorded audio, video and image signals and returns a liveness score indicating if the physical presence of a human being (ie. a human face) was detected and not of an inanimate spoof artifact (eg. an image or video presentation of a real human face). Further, this endpoint stores the recording for future reference.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST https://liveness.eyn.ninja/liveness_receiver</code></p>
+<h3 id='header'>Header</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>Authorization</em></strong> identifies the requester and allows to perform a liveness detection. Request your <strong><em>Authorization</em></strong> secret  <a href="mailto:contact@eyn.vision">now</a>.</td>
+</tr>
+</tbody></table>
+<h3 id='payload-3'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>audio</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>audio</em></strong> is a base64 encoded string of the audio recording in <code>wav</code> format. This is the audio response recording of the object in front of the camera.</td>
+</tr>
+<tr>
+<td>video</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>video</em></strong> is a base64 encoded string of the video recording in <code>mp4</code> format. This is the video recording of the object in front of the camera.</td>
+</tr>
+<tr>
+<td>ref_image</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>ref_image</em></strong> is a base64 encoded string of a reference image in <code>jpeg</code> format. The reference image is used to perform face matching to the face detected in the video.</td>
+</tr>
+<tr>
+<td>enforce_model_check</td>
+<td style="text-align: center">True</td>
+<td>Optional</td>
+<td>The <strong><em>enforce_model_check</em></strong> is a flag to enforce checking of the smartphone model. The flag is set by default to <code>True</code> and should only be set to <code>False</code> when testing on a new non-supported model.</td>
+</tr>
+<tr>
+<td>model</td>
+<td style="text-align: center">-</td>
+<td>Required</td>
+<td>The <strong><em>model</em></strong> is a string indicative of the smartphone model on which the recording has taken place. If the model is not supported, an error message is returned.</td>
+</tr>
+<tr>
+<td>app_version</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>app_version</em></strong> is a string of the LiveProof SDK version for tracking and debugging purposes.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td style="text-align: center">-</td>
+<td>Optional</td>
+<td>The <strong><em>tag</em></strong> is an optional value in order to &quot;tag&quot; certain recordings with a particular theme.</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-8'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align: center">Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>record_id</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>record_id</em></strong> is a unique UUID for each recording, which can be used in the <code>/records/{id}</code> endpoint to receive detailed information about the recording.</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td style="text-align: center">number</td>
+<td>The <strong><em>created_at</em></strong> is a timestamp that records when the recording was processed.</td>
+</tr>
+<tr>
+<td>liveness_score</td>
+<td style="text-align: center">float</td>
+<td>The <strong><em>liveness_score</em></strong> is a probabilistic score indicating the probability of the recording being classified as <code>genuine</code> or <code>attack</code>.  <code>genuine</code> hereby refers to a live human face being presented at the time of recording, while <code>attack</code> refers to an inanimate spoof artifact has been presented.</td>
+</tr>
+<tr>
+<td>liveness_result</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>liveness_result</em></strong> is an interpretation of the <code>liveness_score</code> and can take the following values:  <code>genuine</code>, <code>attack</code>, <code>invalid_input</code> (e.g. on air), or <code>not_implemented</code>.</td>
+</tr>
+<tr>
+<td>face_matching</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>face_matching</em></strong> summarise the matching of the face from the <code>ref_image</code> and a face image extracted from the supplied <code>video</code>.</td>
+</tr>
+<tr>
+<td>face_matched</td>
+<td style="text-align: center">boolean</td>
+<td>The <strong><em>face_matched</em></strong> indicates if the faces are matched or not.</td>
+</tr>
+<tr>
+<td>face_similarity</td>
+<td style="text-align: center">float</td>
+<td>The <strong><em>face_similarity</em></strong> is a probabilistic score indicating the similarity of the two faces.</td>
+</tr>
+<tr>
+<td>vector_selfie</td>
+<td style="text-align: center">array</td>
+<td>The <strong><em>vector_selfie</em></strong> is the array representation of the face image.</td>
+</tr>
+<tr>
+<td>face_recognition_model</td>
+<td style="text-align: center">-</td>
+<td>The <strong><em>face_recognition_model</em></strong> summarises information on the face recognition model used.</td>
+</tr>
+<tr>
+<td>dlib</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>dlib</em></strong> indicates the version used for the face recognition model.</td>
+</tr>
+<tr>
+<td>model</td>
+<td style="text-align: center">string</td>
+<td>The <strong><em>model</em></strong> detailes the model used for face recognition.</td>
+</tr>
+</tbody></table>
 <h1 id='covid-free-certificates'>Covid-free Certificates</h1><h2 id='issue-a-covid-free-certificate'>Issue a Covid-free Certificate</h2><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'api_secret'</span><span class="p">:</span> <span class="s">'e1131458-4664-4da7-855a-7ac3e5b9648d'</span><span class="p">,</span>
@@ -1506,9 +1687,9 @@ ID check API response usually takes between 15 to 25 seconds.</p>
 <h3 id='testing-2'>Testing</h3>
 <p>Try our webflow <a href="https://enrol.immunity.eyn.vision">here.</a>
 The enrol API response usually takes 5 seconds.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_enrol</code></p>
-<h3 id='payload-3'>Payload</h3>
+<h3 id='payload-4'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1626,7 +1807,7 @@ The enrol API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-8'>Response Parameters</h3>
+<h3 id='response-parameters-9'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1738,9 +1919,9 @@ The enrol API response usually takes 5 seconds.</p>
 <h3 id='testing-3'>Testing</h3>
 <p>Try our webflow <a href="https://verify.immunity.eyn.vision">here.</a>
 The verify API response usually takes 5 seconds.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/immunity_verify</code></p>
-<h3 id='payload-4'>Payload</h3>
+<h3 id='payload-5'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1804,7 +1985,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-9'>Response Parameters</h3>
+<h3 id='response-parameters-10'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1915,9 +2096,9 @@ The verify API response usually takes 5 seconds.</p>
   <li> verifies the signature of the certifcate </li>
   <li> verifies if the certificate has been revoked </li>
 </ol></p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://immunity.eyn.ninja/verify_signature</code></p>
-<h3 id='payload-5'>Payload</h3>
+<h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2059,7 +2240,7 @@ The verify API response usually takes 5 seconds.</p>
 <td>The <strong><em>provider</em></strong> of the measured location.</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-10'>Response Parameters</h3>
+<h3 id='response-parameters-11'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
